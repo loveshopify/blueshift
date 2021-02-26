@@ -1,0 +1,33 @@
+{% if template contains 'cart' %}
+<script>
+    var SECOMAPP = SECOMAPP || {};
+    SECOMAPP.ca = SECOMAPP.ca || {};
+
+    SECOMAPP.page = 'cart';
+</script>
+{% endif %}
+
+{% if template contains 'register' %}
+<script>
+    var SECOMAPP = SECOMAPP || {};
+    SECOMAPP.ca = SECOMAPP.ca || {};
+
+    SECOMAPP.page = 'register';
+</script>
+{% endif %}
+
+{% if template contains 'account.edit' %}
+<script>
+    var SECOMAPP = SECOMAPP || {};
+    SECOMAPP.ca = SECOMAPP.ca || {};
+
+    SECOMAPP.page = 'account';
+</script>
+{% endif %}
+
+{% if template contains 'cart' or template contains 'register' or template contains 'account' %}
+    {{ "scm-attribute.js" | asset_url | script_tag }}
+
+    {{ "scm-attribute.css" | asset_url | stylesheet_tag }}
+
+        {% endif %}

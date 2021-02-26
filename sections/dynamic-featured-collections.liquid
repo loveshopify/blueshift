@@ -1,0 +1,146 @@
+<script
+  type="application/json"
+  data-section-type="dynamic-featured-collections"
+  data-section-id="{{ section.id }}">
+</script>
+
+{%- for block in section.blocks -%}
+  <section class="collection-featured" {{ block.shopify_attributes }}>
+    {%- assign collection = collections[block.settings.collection] -%}
+    {%- assign alignment = block.settings.alignment -%}
+
+    {%- assign onboard = false -%}
+
+    {%- if collection == blank -%}
+      {%- assign onboard = true -%}
+    {%- endif -%}
+
+    {%- capture collection_feature_item_info -%}
+      <div class="collection-featured-item-info{% unless block.settings.show_description %} collection-featured-item-info-no-description{% endunless %}">
+        <h4 class="collection-featured-item-title">
+          {%- unless onboard -%}
+            <a href="{{ collection.url }}">{{ collection.title }}</a>
+          {%- else -%}
+            {{ 'collection.item.onboarding.title' | t }}
+          {%- endunless -%}
+        </h4>
+        {%- if block.settings.show_description -%}
+          {%- if block.settings.custom_description != blank or collection.description != blank -%}
+            <p class="collection-featured-item-description">
+              {%- if block.settings.custom_description != blank -%}
+                {{ block.settings.custom_description }}
+              {%- else -%}
+                {{ collection.description }}
+              {%- endif -%}
+            </p>
+          {%- elsif onboard -%}
+            <p class="collection-featured-item-description">{{ 'collection.item.onboarding.description' | t }}</p>
+          {%- endif -%}
+        {%- endif -%}
+        <a class="collection-featured-item-cta" href="{{ collection.url }}">
+          <span class="collection-featured-item-cta-text">{{ 'collection.item.cta' | t }}</span>
+          <span class="collection-featured-item-cta-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+        </a>
+      </div>
+    {%- endcapture -%}
+
+    <article
+      class="collection-featured-item collection-featured-item-alignment-{{ alignment }}">
+      {%- if alignment == 'left' -%}
+        {{ collection_feature_item_info }}
+      {%- endif -%}
+      <figure
+        class="
+          collection-featured-item-image
+          {% if collection.image == blank and collection.products.first.featured_image == blank %}
+            collection-featured-image-no-image
+          {% endif %}">
+        <a href="{{ collection.url }}">
+          {%- if onboard == false and collection.image -%}
+            <img
+              alt="{{ collection.image.alt | escape }}"
+              {% include 'img-src', img: collection.image, size: '600x' %}
+            >
+          {%- elsif onboard == false and collection.products.first.featured_image -%}
+            {%- assign product = collection.products.first -%}
+            <img
+              alt="{{ product.featured_image.alt | escape }}"
+              {% include 'img-src', img: product.featured_image, size: '600x' %}
+            >
+          {%- else -%}
+            {%- capture index -%}
+              {%- cycle '1', '2', '3', '4', '5', '6' -%}
+            {%- endcapture -%}
+            {{ 'collection-' | append: index | placeholder_svg_tag }}
+          {%- endif -%}
+        </a>
+      </figure>
+      {%- if alignment == 'right' -%}
+        {{ collection_feature_item_info }}
+      {%- endif -%}
+    </article>
+  </section>
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "section-featured-collections",
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        },
+        {
+          "id": "alignment",
+          "type": "select",
+          "label": "Text alignment",
+          "options": [
+            { "value": "right", "label": "Right" },
+            { "value": "left", "label": "Left" }
+          ],
+          "default": "right"
+        },
+        {
+          "id": "show_description",
+          "type": "checkbox",
+          "label": "Show description",
+          "default": true
+        },
+        {
+          "id": "custom_description",
+          "type": "richtext",
+          "label": "Custom description"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Collection list",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

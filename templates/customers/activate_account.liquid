@@ -1,0 +1,30 @@
+<div class="page-content template-account-activate">
+  <h1 class="template-account-activate-title">{{ 'customers.activate_account.header' | t }}</h1>
+  {% form 'activate_customer_password' %}
+    {% if form.errors %}
+      <div class="error-message"><span>{{ form.errors | default_errors }}</span></div>
+    {% endif %}
+
+    <div class="input-wrapper">
+      <label for="password">{{ 'general.form.password' | t }}</label>
+      <input
+        id="password"
+        class="input-field"
+        type="password"
+        name="customer[password]" />
+    </div>
+
+    <div class="input-wrapper">
+      <label for="password-repeat">{{ 'general.form.repeat_password' | t }}</label>
+      <input
+        id="password-repeat"
+        class="input-field"
+        type="password"
+        name="customer[password_confirmation]" />
+    </div>
+
+    <input type="submit" value="{{ 'customers.activate_account.submit' | t }}">
+
+    <a href="/">{{ 'customers.activate_account.decline_activation' | t }}</a>
+  {% endform %}
+</div>

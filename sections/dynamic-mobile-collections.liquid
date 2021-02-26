@@ -1,0 +1,239 @@
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="dynamic-mobile-collections">
+</script>
+
+{% assign max_item_count = section.settings.truncate_count | times: 1 %}
+
+{% unless section.settings.truncate %}
+  {% assign max_item_count = 99 %}
+{% endunless %}
+
+{% if section.settings.type == 'titles' %}{% assign max_item_count = 0 %}{% endif %}
+
+<div class="meganav-index">
+  {% if section.settings.title != blank %}
+    <h4 class="mobile-collections-title">{{ section.settings.title | escape }}</h4>
+  {% endif %}
+
+  <nav
+    class="
+      meganav-menu
+      meganav-menu-{{ section.blocks.size }}
+      {% if section.settings.show_images %}meganav-show-images{% endif %}
+    ">
+
+    <div class="meganav-menu-panel">
+      <div class="meganav-menu-panel-contents">
+        {% for block in section.blocks %}
+          {% assign collection = collections[block.settings.collection] %}
+          {% assign item_count = 0 %}
+
+          {% if collection != blank and section.settings.type == "tags" %}
+            {% assign item_count = collection.tags.size %}
+          {% endif %}
+
+          {% if collection != blank and section.settings.type == "products" %}
+            {% assign item_count = collection.all_products_count %}
+          {% endif %}
+
+          {% capture header_tag %}{% if collection == blank %}div{% else %}a{% endif %}{% endcapture %}
+
+          <div class="meganav-menu-group" {{ block.shopify_attributes }}>
+            <{{ header_tag }}
+              href="{{ collection.url }}"
+              class="
+                meganav-menu-header
+                {% if max_item_count == 0 %}meganav-menu-empty{% endif %}
+              ">
+
+              {% if section.settings.show_images %}
+                {% assign image = block.settings.image %}
+                {% if image == blank %}{% assign image = collection.image %}{% endif %}
+                {% if image == blank %}{% assign image = collection.products.first.featured_image %}{% endif %}
+
+                <div class="meganav-menu-image">
+                  {% if image != blank %}
+                    <img src="{{ image | img_url: '520x' }}">
+                  {% else %}
+                    {% capture index %}{% cycle '1', '2', '3', '4', '5', '6' %}{% endcapture %}
+                    {{ 'collection-' | append: index | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <h2 class="meganav-menu-title">
+                {% if collection != blank %}
+                  {{ collection.title }}
+                {% else %}
+                  {{ 'onboarding.collection' | t }}
+                {% endif %}
+              </h2>
+            </{{ header_tag }}>
+
+            {% comment %}
+              Tags
+            {% endcomment %}
+            {% if section.settings.type == "tags" %}
+              <div class="meganav-menu-items">
+                {% for tag in collection.tags limit: max_item_count %}
+                  <div class="meganav-menu-item">
+                    {% assign tag_url = tag | handleize | prepend:'/' | within: collection %}
+                    <a class="meganav-menu-link" href="{{ tag_url }}">{{ tag }}</a>
+                  </div>
+                {% endfor %}
+
+                {% if collection == blank %}
+                  {% for i in (1..max_item_count) limit: 15 %}
+                    <div class="meganav-menu-item">
+                      <a class="meganav-menu-link">{{ 'onboarding.tag' | t: i: i }}</a>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+                {% if collection != blank and max_item_count != 0 %}
+                  <div class="meganav-menu-item">
+                    <a class="meganav-menu-link" href="{{ collection.url }}">{{ 'all_products' | t }}</a>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% comment %}
+              Products
+            {% endcomment %}
+            {% if section.settings.type == "products" %}
+              <div class="meganav-menu-items">
+                {% for product in collection.products limit: max_item_count %}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+                  <div class="meganav-menu-item">
+                    <a class="meganav-menu-link" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+                  </div>
+                {% endfor %}
+
+                {% if collection == blank %}
+                  {% for i in (1..max_item_count) limit: 15 %}
+                    <div class="meganav-menu-item">
+                      <a class="meganav-menu-link">{{ 'onboarding.product' | t: i: i }}</a>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+                {% if collection != blank and max_item_count != 0 %}
+                  <div class="meganav-menu-item">
+                    <a class="meganav-menu-link" href="{{ collection.url }}">{{ 'all_products' | t }}</a>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </nav>
+
+</div>
+
+{% schema %}
+{
+  "name": "Mobile collections",
+  "class": "section-mobile-collections",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Note: this is only visible on mobile screens. Use the screen selector in the bottom-left of the Theme Editor to preview."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Browse by"
+    },
+    {
+      "id": "show_images",
+      "type": "checkbox",
+      "label": "Show images",
+      "default": true
+    },
+    {
+      "id": "type",
+      "type": "select",
+      "label": "Display",
+      "options": [
+        { "value": "tags", "label": "Tags" },
+        { "value": "products", "label": "Products" },
+        { "value": "titles", "label": "Titles only" }
+      ],
+      "default": "tags"
+    },
+    {
+      "id": "truncate",
+      "type": "checkbox",
+      "label": "Truncate list",
+      "default": true
+    },
+    {
+      "id": "truncate_count",
+      "type": "range",
+      "label": "Truncate list after",
+      "min": 1,
+      "max": 15,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Custom image",
+          "info": "Pick an image to show instead of the collection's image. 400 x 400px .jpeg recommended"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Mobile collections",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {}
+        },
+        {
+          "type": "collection",
+          "settings": {}
+        },
+        {
+          "type": "collection",
+          "settings": {}
+        }
+      ]
+    }
+  ],
+  "locales": {
+    "en": {
+      "all_products": "Show all",
+      "onboarding": {
+        "collection": "Collection name",
+        "tag": "Tag {{ i }}",
+        "product": "Product {{ i }}"
+      }
+    }
+  }
+}
+
+{% endschema %}

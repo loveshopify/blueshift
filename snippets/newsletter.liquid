@@ -1,0 +1,35 @@
+<div class="newsletter">
+  {% form 'customer' %}
+    {% if form.posted_successfully? %}
+      <p class="newsletter-success">{{ 'newsletter.success' | t }}</p>
+
+      <div class="newsletter-modal">
+        <a class="newsletter-modal-close" href="/">{% include 'icon', id: 'close' %}</a>
+        <h1 class="newsletter-modal-title">{{ 'newsletter.success_title' | t }}</h1>
+        <p class="newsletter-modal-success">{{ 'newsletter.success' | t }}</p>
+      </div>
+
+      <a class="newsletter-modal-overlay" href="/"></a>
+    {% else %}
+      <input
+        class="newsletter-input"
+        name="contact[email]"
+        type="email"
+        placeholder="{{ 'newsletter.placeholder' | t }}"
+        value="">
+
+      <input
+        type="hidden"
+        id="contact_tags"
+        name="contact[tags]"
+        value="prospect,newsletter">
+
+      <button
+        class="newsletter-submit"
+        name="subscribe"
+        type="submit">{{ 'newsletter.go' | t }}</button>
+    {% endif %}
+
+    {{ form.errors | default_errors }}
+  {% endform %}
+</div>

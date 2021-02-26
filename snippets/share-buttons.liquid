@@ -1,0 +1,76 @@
+{% assign social_image = false %}
+{% assign social_title = false %}
+
+{% if template contains 'article' or template contains 'blog' %}
+  {% capture social_url %}{{ shop.url }}{{ article.url }}{% endcapture %}
+  {% assign social_title = article.title | url_param_escape %}
+  {% assign social_image = article | img_url: 'original' %}
+{% elsif template contains 'product' %}
+  {% capture social_url %}{{ shop.url }}{{ product.url }}{% endcapture %}
+  {% assign social_title = product.title | url_param_escape %}
+  {% assign social_image = product | img_url: 'original' %}
+{% elsif template == 'password' %}
+  {% assign social_url = shop.url %}
+  {%- capture social_title -%}
+    {%- unless shop.description == blank -%}
+      {{ shop.description | url_param_escape }}
+    {%- else -%}
+      {{ shop.name | url_param_escape }}
+    {%- endunless -%}
+  {%- endcapture -%}
+{% endif %}
+
+{% assign platforms = 0 %}
+{% assign social_platforms = 'facebook|twitter|pinterest|google_plus|email' | split: '|' %}
+
+{% for platform in social_platforms %}
+  {% capture setting %}share_widget_{{ platform }}{% endcapture %}
+  {% assign platform_enabled = settings[setting] %}
+  {% if platform_enabled %}{% assign platforms = platforms | plus: 1 %}{% endif %}
+{% endfor %}
+
+{% if platforms > 0 %}
+  <div class="share-buttons-wrapper">
+    <span class="share-buttons-label">
+      {% if template == 'password' %}
+        {{ 'general.password_page.share_label' | t }}
+      {% else %}
+        {{ 'general.social.share' | t }}
+      {% endif %}
+    </span>
+
+    <div class="share-buttons">
+
+      {% if settings.share_widget_facebook %}
+        <a target="_blank" href="//www.facebook.com/sharer.php?u={{ social_url }}">
+          {%- include 'social-icon', id: 'facebook' -%}
+        </a>
+      {% endif %}
+
+      {% if settings.share_widget_twitter %}
+        <a target="_blank" href="//twitter.com/share?url={{ social_url }}">
+          {%- include 'social-icon', id: 'twitter' -%}
+        </a>
+      {% endif %}
+
+      {% if settings.share_widget_pinterest and social_image %}
+        <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ social_url }}&amp;media={{ social_image }}&amp;description={{ social_title }}">
+          {%- include 'social-icon', id: 'pinterest' -%}
+        </a>
+      {% endif %}
+
+      {% if settings.share_widget_google_plus %}
+        <a target="_blank" href="//plus.google.com/share?url={{ social_url }}">
+          {%- include 'social-icon', id: 'google' -%}
+        </a>
+      {% endif %}
+
+      {% if settings.share_widget_email %}
+        <a target="_blank" href="mailto:?subject={{ social_title }}&amp;body={{ 'general.social.email_body' | t: link: social_url }}">
+          {%- include 'social-icon', id: 'email' -%}
+        </a>
+      {% endif %}
+
+    </div>
+  </div>
+{% endif %}

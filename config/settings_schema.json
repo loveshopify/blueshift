@@ -1,0 +1,442 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Handy",
+    "theme_author": "Pixel Union",
+    "theme_version": "1.3.0",
+    "theme_documentation_url": "http:\/\/support.pixelunion.net\/category\/354-handy",
+    "theme_support_email": "support@pixelunion.net"
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "32 x 32px .png required"
+      }
+    ]
+  },
+  {
+    "name": "Color",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "info": "Button backgrounds, calls-to-action, and some icons"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_highlighted_menu",
+        "label": "Use highlighted bottom bar",
+        "info": "Applies accent color to background on bottom bar on collection, product, and cart pages on larger screens",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "color_title_text",
+        "label": "Headings & menu links"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body text"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Button text"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "font_title",
+        "label": "Headings",
+        "options": [
+          {
+            "group": "custom",
+            "label": "Lato",
+            "value": "Google_Lato:400,400i,700,700i,900"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Cabin",
+            "value": "Google_Cabin:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Dosis",
+            "value": "Google_Dosis:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Karla",
+            "value": "Google_Karla:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Montserrat",
+            "value": "Google_Montserrat:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Muli",
+            "value": "Google_Muli:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Oswald",
+            "value": "Google_Oswald:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Poppins",
+            "value": "Google_Poppins:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Raleway",
+            "value": "Google_Raleway:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Roboto Condensed",
+            "value": "Google_Roboto+Condensed:400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Bitter",
+            "value": "Google_Bitter:400,400i,700"
+          },
+          {
+            "group": "Serif",
+            "label": "Lora",
+            "value": "Google_Lora:400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Merriweather",
+            "value": "Google_Merriweather:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Playfair Display",
+            "value": "Google_Playfair+Display:400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Prata",
+            "value": "Google_Prata"
+          }
+        ],
+        "default": "Google_Prata"
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Body text",
+        "options": [
+          {
+            "group": "custom",
+            "label": "Lato",
+            "value": "Google_Lato:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Cabin",
+            "value": "Google_Cabin:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Dosis",
+            "value": "Google_Dosis:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Karla",
+            "value": "Google_Karla:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Poppins",
+            "value": "Google_Poppins:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Raleway",
+            "value": "Google_Raleway:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Roboto",
+            "value": "Google_Roboto:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Source Sans Pro",
+            "value": "Google_Source+Sans+Pro:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Bitter",
+            "value": "Google_Bitter:400,400i,700"
+          },
+          {
+            "group": "Serif",
+            "label": "Libre Baskerville",
+            "value": "Google_Libre+Baskerville:400,400i,700"
+          },
+          {
+            "group": "Serif",
+            "label": "Old Standard TT",
+            "value": "Google_Old+Standard+TT:400,400i,700"
+          },
+          {
+            "group": "Serif",
+            "label": "PT Serif",
+            "value": "Google_PT+Serif:400,400i,700,700i"
+          }
+        ],
+        "default": "Google_Karla:400,400i,700,700i"
+      },
+      {
+        "type": "select",
+        "id": "font_label",
+        "label": "Buttons & labels",
+        "options": [
+          {
+            "group": "custom",
+            "label": "Lato",
+            "value": "Google_Lato:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Cabin",
+            "value": "Google_Cabin:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Dosis",
+            "value": "Google_Dosis:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Karla",
+            "value": "Google_Karla:400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Montserrat",
+            "value": "Google_Montserrat:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Muli",
+            "value": "Google_Muli:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Oswald",
+            "value": "Google_Oswald:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Poppins",
+            "value": "Google_Poppins:300,400,700"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Raleway",
+            "value": "Google_Raleway:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Sans-serif",
+            "label": "Roboto",
+            "value": "Google_Roboto:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Bitter",
+            "value": "Google_Bitter:400,400i,700"
+          },
+          {
+            "group": "Serif",
+            "label": "Lora",
+            "value": "Google_Lora:400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Merriweather",
+            "value": "Google_Merriweather:300,300i,400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Playfair Display",
+            "value": "Google_Playfair+Display:400,400i,700,700i"
+          },
+          {
+            "group": "Serif",
+            "label": "Prata",
+            "value": "Google_Prata"
+          }
+        ],
+        "default": "Google_Karla:400,400i,700,700i"
+      }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_currency_converter",
+        "label": "Enable currency conversion",
+        "default": true,
+        "info": "Even though prices are displayed in different currencies, orders will still be processed in your store's currency."
+      },
+      {
+        "type": "select",
+        "id": "currency_display_format",
+        "label": "Format",
+        "options": [
+          {
+            "value": "money_format",
+            "label": "Without currency ($10.00)"
+          },
+          {
+            "value": "money_with_currency_format",
+            "label": "With currency ($10.00 CAD)"
+          }
+        ],
+        "default": "money_with_currency_format"
+      },
+      {
+        "type": "text",
+        "id": "currency_converter_currencies",
+        "label": "Supported currencies",
+        "default": "INR GBP CAD USD AUD EUR JPY",
+        "info": "Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
+      },
+      {
+        "type": "text",
+        "id": "currency_converter_default",
+        "label": "Default currency",
+        "default": "USD"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook",
+        "info": "https:\/\/facebook.com\/pixelunion"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter",
+        "info": "https:\/\/twitter.com\/pixelunion"
+      },
+      {
+        "type": "text",
+        "id": "social_google",
+        "label": "Google+",
+        "info": "https:\/\/plus.google.com\/+shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest",
+        "info": "https:\/\/pinterest.com\/pixelunion\/"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram",
+        "info": "https:\/\/instagram.com\/pixelunion"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo",
+        "label": "Vimeo",
+        "info": "https:\/\/vimeo.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube",
+        "info": "https:\/\/youtube.com\/user\/PixelUnionThemes"
+      },
+      {
+        "type": "text",
+        "id": "social_medium",
+        "label": "Medium",
+        "info": "https:\/\/medium.com\/@shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_rss",
+        "label": "RSS",
+        "info": "https:\/\/www.pixelunion.net\/feed\/"
+      },
+      {
+        "type": "text",
+        "id": "social_email",
+        "label": "Email Address",
+        "info": "info@example.com"
+      },
+      {
+        "type": "header",
+        "content": "Sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_widget_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_widget_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_widget_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_widget_google_plus",
+        "label": "+1 on Google Plus",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_widget_email",
+        "label": "Send as an e-mail",
+        "default": true
+      }
+    ]
+  }
+]

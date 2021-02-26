@@ -1,0 +1,38 @@
+
+{% if template contains 'product' %}
+<div class="location-product">{{ product.metafields.accentuate.town }}</div>
+<div class="tagline"> {{ product.metafields.accentuate.tagline }}</div>
+<div class="product-rte rte">
+  {{ product.description }}
+</div>
+{% else %}
+<div class="location">{{ product.metafields.accentuate.town }}</div>
+<div class="tagline"> {{ product.metafields.accentuate.tagline }}</div>
+{% endif %}
+<div class="shortdesc">{{ product.metafields.accentuate.shortdesc }} </div>
+<div class="deets">
+  <span>Price:</span>
+  {% if product.price_varies %}
+  {{ product.price_min | money | remove: '.00' }} to {{ product.price_max | money | remove: '.00' }}
+  {% else %}
+ {{ product.price_min | money | remove: '.00' }}
+ {% endif %}
+</div>
+<div class="deets">
+  <span>Ages:</span>
+  {{ product.metafields.accentuate.ages }}
+</div>
+<div class="deets">
+  <span>Location:</span>
+  {{ product.metafields.accentuate.location }}
+</div>
+<div class="deets">
+  <span>Dates:</span>
+  {{ product.metafields.accentuate.date }}
+</div>
+{% if template == 'product' %}
+{% else %}
+  <div class="btnbtn">
+    <a class="btn" href="{{ product.url }}">Add to cart</a>
+  </div>
+{% endif %}

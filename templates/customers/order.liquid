@@ -1,0 +1,140 @@
+<div class="template-account-order">
+  <h1 class="template-account-order-title">{{ 'customers.order.header' | t: order_number: order.name }}</h1>
+  <p class="template-account-order-subtitle"><a href="/account">{{ 'customers.account.header' | t }}</a></p>
+
+  <div class="template-account-order-history">
+    <div class="template-account-order-shipping-info">
+      {%- if order.shipping_address -%}
+        <div class="account-address account-shipping-address">
+          <h2>{{ 'customers.order.shipping_address' | t }}</h2>
+          <p>
+            <span>{{ order.shipping_address.first_name }} {{ order.shipping_address.last_name }}</span><br>
+            {% if order.shipping_address.company != blank %}
+              <span>{{ order.shipping_address.company }}</span><br>
+            {% endif %}
+            {% if order.shipping_address.street != blank %}
+              <span>{{ order.shipping_address.street }}</span><br>
+            {% endif %}
+            {% if order.shipping_address.city != blank or order.shipping_address.province_code != blank %}
+              <span>{{ order.shipping_address.city }}
+                {% if order.shipping_address.province_code %}
+                  , {{ order.shipping_address.province_code }}
+                {% endif %}</span><br>
+            {% endif %}
+            {% if order.shipping_address.country != blank or order.shipping_address.zip != blank %}
+              <span>{{ order.shipping_address.country }} {{ order.shipping_address.zip }}</span><br>
+            {% endif %}
+            {% if order.shipping_address.phone != blank %}
+              <span>{{ order.shipping_address.phone }}</span><br>
+            {% endif %}
+          </p>
+        </div>
+      {%- endif -%}
+
+      <div class="account-address account-shipping-address">
+        <h2>{{ 'customers.order.billing_address' | t }}</h2>
+        <p>
+          <span>{{ order.billing_address.first_name }} {{ order.billing_address.last_name }}</span><br>
+          {% if order.billing_address.company != blank %}
+            <span>{{ order.billing_address.company }}</span><br>
+          {% endif %}
+          {% if order.billing_address.street != blank %}
+            <span>{{ order.billing_address.street }}</span><br>
+          {% endif %}
+          {% if order.billing_address.city != blank or order.billing_address.province_code != blank %}
+            <span>{{ order.billing_address.city }}
+              {% if order.billing_address.province_code %}
+                , {{ order.billing_address.province_code }}
+              {% endif %}
+            </span><br>
+          {% endif %}
+          {% if order.billing_address.country != blank or order.billing_address.zip != blank %}
+            <span>{{ order.billing_address.country }} {{ order.billing_address.zip }}</span><br>
+          {% endif %}
+          {% if order.billing_address.phone != blank %}
+            <span>{{ order.billing_address.phone }}</span><br>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <table class="account-order">
+      <thead>
+        <tr>
+          <th class="order-item-image-title first">{{ 'customers.order.item' | t }}</th>
+          <th class="order-item-title-title"></th>
+          <th class="order-item-price-title">{{ 'customers.order.price' | t }}</th>
+          <th class="order-item-quantity-title">{{ 'customers.order.quantity' | t }}</th>
+          <th class="order-item-total-title last">{{ 'customers.order.total' | t }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for line_item in order.line_items %}
+          <tr class="{% if order.cancelled %}cancelled_order{% endif %}">
+            <td class="order-item-image first">
+              <a href="{{ line_item.product.url }}">
+                {%- if line_item.image -%}
+                  <img alt="{{ line_item.title | escape }}" src="{{ line_item | img_url: 'small' }}">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </a>
+            </td>
+            <td class="order-item-title">
+              <a href="{{ line_item.url }}">
+                {%- if line_item.gift_card -%}
+                  {{ line_item.title }}
+                {%- else -%}
+                  {{ line_item.product.title }}
+                {%- endif -%}
+              </a>
+              {%- unless line_item.variant.title == 'Default Title' or line_item.gift_card -%}
+                <span>{{ line_item.variant.title }}</span>
+              {%- endunless -%}
+            </td>
+            <td class="order-item-price"><span class="money" data-money>{{ line_item.price | money }}</span></td>
+            <td class="order-item-quantity"><span>{{ line_item.quantity }}</span></td>
+            <td class="order-item-total last">
+              <span class="money" data-money>{{ line_item.line_price | money }}</span>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="account-order-totals">
+      <ul class="account-order-sub-total">
+        {% for discount in order.discounts %}
+          <li class="account-order-subtotal">
+            <span class="account-order-subtotal-label">{{ 'customers.order.discounts' | t, code: discount.code }}</span>
+            <span class="account-order-subtotal-value money" data-money>{{ discount.savings | money }}</span>
+          </li>
+        {% endfor %}
+        <li class="account-order-subtotal">
+          <span class="account-order-subtotal-label">{{ 'customers.order.subtotal' | t }}</span>
+          <span class="account-order-subtotal-value money" data-money>{{ order.subtotal_price | money }}</span>
+        </li>
+        {% for shipping_method in order.shipping_methods %}
+          <li class="account-order-shipping">
+            <span class="account-order-subtotal-label">{{ 'customers.order.shipping' | t }} ({{ shipping_method.title }})</span>
+            <span class="account-order-subtotal-value money" data-money>{{ shipping_method.price | money }}</span>
+          </li>
+        {% endfor %}
+        {% for tax_line in order.tax_lines %}
+          <li class="account-order-order-tax">
+            <span class="account-order-subtotal-label">{{ 'customers.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</span>
+            <span class="account-order-subtotal-value money" data-money>{{ tax_line.price | money }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <ul class="account-order-order-total">
+        <li>
+          <span class="account-order-subtotal-label">{{ 'customers.order.total' | t }}</span>
+          <span class="account-order-subtotal-value money" data-money>{{ order.total_price | money }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

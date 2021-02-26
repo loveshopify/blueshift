@@ -1,0 +1,186 @@
+<style>
+  .testimonial-section-{{section.id}} {
+    background: #28819E;
+  }
+  .testimonial-section-{{section.id}} .inner-block-gd {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .testimonial-section-{{section.id}}  .main-block-gd.columngd-4 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background: #28819E;
+  }
+  .testimonial-section-{{section.id}} .section-title {
+    text-align: center;
+    color: #fff;
+  }
+  .testimonial-section-{{section.id}}  .columngd-4 .block-gd {
+    display:inline-block;
+    width: 25%;
+    padding: 0px 15px;
+    color: #fff;
+  }
+
+  .testimonial-section-{{section.id}} {
+    color: #fff;
+  }
+
+  .testimonial-section-{{section.id}} .text-content {
+    text-align: center
+  }
+
+  .testimonial-section-{{section.id}} .text-content p {
+    font-size: 24px;
+  }
+
+  .testimonial-section-{{section.id}} .testmo-heading {
+    text-align: center;
+  }
+  .owl-nav {
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+  }
+  .item.block-gd {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+  }
+  .slick-arrow svg path {
+    fill: #fff;
+  }
+  .testimonial-section-{{section.id}} .slick-arrow svg{
+    width: 39px;
+    height: 39px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  .testimonial-section-{{section.id}} .slick-prev:before, .testimonial-section-{{section.id}} .slick-next:before{
+    display:none;
+  }
+  .testimonial-section-{{section.id}} .slideshow-slide {
+    padding: 00px 0px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+  }
+  .testimonial-section-{{section.id}} button.slick-next {
+    right: 2%;
+    bottom: 9%;
+    width: 7%;
+    height: 0;
+    padding-bottom: 7%;
+    cursor: pointer;
+    background-color: transparent;
+    transform: none;
+    z-index: 999;
+    top: 40%;
+  }
+  .testimonial-section-{{section.id}} .slick-prev{
+    bottom: 9%;
+    left: 0%;
+    width: 7%;
+    height: 0;
+    padding-bottom: 7%;
+    cursor: pointer;
+    background-color: transparent;
+    transform: none;
+    z-index: 999;
+    top: 40%;
+  }
+  @media only screen and (max-width:767px){
+    .testimonial-section-{{section.id}} .inner-block-gd {
+      width: 70%;
+      margin: 0 auto;
+    }
+    .testimonial-section-{{section.id}} button.slick-next{
+      width: 15%;
+      padding-bottom: 15%;
+    }
+    .testimonial-section-{{section.id}} .slick-prev{
+      right: 15%;
+      width: 8%;
+      padding-bottom: 15%;
+    }
+    .slideshow-slide{
+      width:100%;
+      margin:0px;
+    }
+  }
+</style>
+<section data-section-id="{{section.id}}" class="testimonial-section-{{section.id}}">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+  <div class="slideshow-slide main-block-gd columngd-{{ section.blocks.size }}" data-slideshow-slide>
+    {% for block in section.blocks %}
+    {% if block.settings.title != blank %}
+    <div class="item block-gd {% if forloop.first %}first-gd{% endif %} {% if forloop.last %}last-gd{% endif %}">
+      <div class="inner-block-gd" >
+        <div class="text-content">
+          <p>{{block.settings.quote}}</p>
+          <h3 class="testmo-heading">- {{block.settings.title}}</h3>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+"name": "Testimonial",
+"class": "section-testimonial",
+"settings": [
+{
+"id": "title",
+"type": "text",
+"label": "Section titile",
+"default":"Testimonial"
+}
+],
+"blocks": [
+{
+"type": "testimonial",
+"name": "Testimonial",
+"settings": [
+{
+"id":"quote",
+"label":"Quote",
+"type":"textarea"
+},
+{
+"id":"title",
+"label":"Name",
+"type":"text"
+}
+]
+}
+],
+"max_blocks": 100,
+"presets": [
+{
+"category": "Other",
+"name": "Testimonial slider"
+}
+]
+}
+{% endschema %}

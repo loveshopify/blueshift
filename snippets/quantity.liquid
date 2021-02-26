@@ -1,0 +1,55 @@
+{% comment %}
+
+  A quantity control, with increment and decrement buttons.
+
+  @param value (optional)
+         The current quantity. Defaults to 1.
+
+  @param min (optional)
+         The smallest number allowed.
+
+  @param max (optional)
+         The largest number allowed.
+
+{% endcomment %}
+
+{% assign val = value | default: 1 %}
+
+{% if min != blank and val < min %}
+  {% assign val = min %}
+{% endif %}
+
+{% if max != blank and val > max %}
+  {% assign val = max %}
+{% endif %}
+
+<div class="quantity" data-quantity>
+  <button
+    class="quantity-decrement"
+    type="button"
+    aria-label="{{ 'general.form.decrement' | t }}"
+    data-quantity-decrement
+  >
+    &minus;
+  </button>
+
+  <input
+    class="quantity-input"
+    type="number"
+    name="quantity"
+    {% if min != blank %}min="{{ min | escape }}"{% endif %}
+    {% if max != blank %}max="{{ max | escape }}"{% endif %}
+    value="{{ val | escape }}"
+    aria-label="{{ 'general.form.input_quantity' | t }}"
+    data-quantity-input
+  >
+
+  <button
+    class="quantity-increment"
+    type="button"
+    aria-label="{{ 'general.form.increment' | t }}"
+    data-quantity-increment
+  >
+    &plus;
+  </button>
+</div>

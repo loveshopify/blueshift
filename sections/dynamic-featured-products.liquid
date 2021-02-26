@@ -1,0 +1,81 @@
+<script
+  type="application/json"
+  data-section-type="dynamic-featured-products"
+  data-section-id="{{ section.id }}">
+</script>
+
+{%- assign product_count = section.settings.product-count | times: 1 -%}
+
+<h4 class="section-title">{{ section.settings.title | escape }}</h4>
+{%- include 'product-highlights',
+  collection: collections[section.settings.collection],
+  product_item_style: section.settings.product_item_style,
+  use_quickshop: section.settings.enable_product_quickshop,
+  product_count: product_count,
+  product_emphasize: section.settings.product_emphasize
+-%}
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "section-featured-products",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "id": "product_item_style",
+      "type": "select",
+      "label": "Product aspect ratio",
+      "info": "Using an uncropped setting will generate white space around the image to create a uniform grid without cropping your image. The background in the editor indicates the applied white space, but will not appear on your storefront.",
+      "options": [
+        { "group": "Uncropped", "value": "natural", "label": "Natural" },
+        { "group": "Uncropped", "value": "small", "label": "Short (4:3)" },
+        { "group": "Uncropped", "value": "medium", "label": "Square (1:1)" },
+        { "group": "Uncropped", "value": "large", "label": "Tall (2:3)" },
+        { "group": "Cropped", "value": "cropped-small", "label": "Short (4:3)" },
+        { "group": "Cropped", "value": "cropped-medium", "label": "Square (1:1)" },
+        { "group": "Cropped", "value": "cropped-large", "label": "Tall (2:3)" }
+      ],
+      "default": "natural"
+    },
+    {
+      "id": "enable_product_quickshop",
+      "type": "checkbox",
+      "label": "Enable product quickshop",
+      "default": false
+    },
+    {
+      "id": "product-count",
+      "type": "range",
+      "label": "Products",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "id": "product_emphasize",
+      "type": "checkbox",
+      "label": "Emphasize product",
+      "info": "Creates an alternate layout on larger screens",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Featured collection"
+    }
+  ]
+}
+
+{% endschema %}

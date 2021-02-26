@@ -1,0 +1,196 @@
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="static-contactbar"
+  data-section-data>
+  {
+    "trigger": {{ section.settings.trigger | handleize | json }},
+    "api_key": {{ section.settings.api_key | json }}
+  }
+</script>
+
+{%- capture directions_address -%}
+  {{-
+    section.settings.directions_value
+    | strip_html
+    | json
+    | strip
+    | replace: '"', ''
+    | replace: '\n', ' '
+    | replace: '\r', ' '
+    | replace: '&nbsp;', ' '
+    | replace: '  ', ' '
+    | replace: '  ', ' '
+    | replace: ' ', '+'
+    | escape
+  -}}
+{% endcapture %}
+
+{%- capture directions_url -%}
+  https://maps.google.com/?saddr=Current+Location&daddr={{- directions_address -}}
+{%- endcapture -%}
+
+<div class="contactbar-layout" data-contactbar-clone-source data-nav-trigger>
+
+  {% if section.settings.directions_map %}
+    {% assign has_map = true %}
+
+    <div class="contactbar-map">
+      {%- include 'map', local_settings: section.settings -%}
+    </div>
+  {% endif %}
+
+  <div class="contactbar-items {% if has_map %}contactbar-hasmap{% endif %}">
+    <div class="contactbar-items-layout">
+      {% if section.settings.phone_value != blank %}
+        {%- capture phone_url -%}
+          tel:{{ section.settings.phone_value | strip_newlines | remove: ' ' | escape }}
+        {%- endcapture -%}
+
+        <div class="contactbar-item">
+          <a class="contactbar-item-link" href="{{ phone_url }}">
+            <div class="contactbar-item-icon">{% include 'icon', id: 'contact-phone' %}</div>
+            <div class="contactbar-item-label">{{ 'phone_title' | t }}</div>
+            <div class="contactbar-item-value">{{ section.settings.phone_value | escape }}</div>
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.email_value != blank %}
+        <div class="contactbar-item">
+          <a class="contactbar-item-link" href="mailto:{{ section.settings.email_value | escape }}">
+            <div class="contactbar-item-icon">{% include 'icon', id: 'contact-email' %}</div>
+            <div class="contactbar-item-label">{{ 'email_title' | t }}</div>
+            <div class="contactbar-item-value">{{ section.settings.email_value | escape }}</div>
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.hours_value != blank %}
+        <div class="contactbar-item">
+          <a class="contactbar-item-link" href="#" data-contactbar-info-trigger>
+            <div class="contactbar-item-icon">{% include 'icon', id: 'contact-hours' %}</div>
+            <div class="contactbar-item-label">{{ 'hours_title' | t }}</div>
+            <div class="contactbar-item-value">{{ section.settings.hours_value }}</div>
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.directions_value != blank %}
+        <div class="contactbar-item">
+          <a class="contactbar-item-link" href="{{ directions_url }}" target="_blank">
+            <div class="contactbar-item-icon">{% include 'icon', id: 'contact-directions' %}</div>
+            <div class="contactbar-item-label">{{ 'directions_title' | t }}</div>
+            <div class="contactbar-item-value">{{ section.settings.directions_value }}</div>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.hours_value != blank %}
+    <div class="contactbar-info">
+      <a href="#" class="contactbar-info-close" data-contactbar-info-close>
+        {% include 'icon', id: 'close' %}
+      </a>
+
+      {% if section.settings.directions_value != blank %}
+        <div class="contactbar-info-address">
+          {{ section.settings.directions_value }}
+        </div>
+      {% endif %}
+
+      <div class="contactbar-info-hours">
+        {{ section.settings.hours_value }}
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+
+{% schema %}
+{
+  "name": "Contact bar",
+  "class": "contactbar",
+  "settings": [
+    {
+      "id": "trigger",
+      "type": "text",
+      "label": "Parent link name",
+      "info": "Enter the exact name of the link in your main menu that will act as the top-level link for your contact bar."
+    },
+
+    {
+      "type": "header",
+      "content": "Contact information"
+    },
+    {
+      "id": "phone_value",
+      "type": "text",
+      "label": "Phone number",
+      "default": "+1 111 111 1111"
+    },
+    {
+      "id": "email_value",
+      "type": "text",
+      "label": "Email address",
+      "default": "shop@example.com"
+    },
+    {
+      "id": "hours_value",
+      "type": "richtext",
+      "label": "Hours/store information",
+      "default": "<p>Mon-Fri, 9am-5pm</p>"
+    },
+    {
+      "id": "directions_value",
+      "type": "richtext",
+      "label": "Street address",
+      "default": "<p>1005 Langley St</p><p>Victoria, BC V8W 1V7</p>"
+    },
+    {
+      "id": "directions_map",
+      "type": "checkbox",
+      "label": "Show map",
+      "default": false
+    },
+    {
+      "id": "api_key",
+      "type": "text",
+      "label": "Google Maps API key",
+      "info": "You'll need to enable both [JavaScript](https://developers.google.com/maps/documentation/javascript/get-api-key) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/get-api-key) API keys ([instructions](http://support.pixelunion.net/article/361-setting-up-your-homepage-with-handy#cb)) but only input one of them."
+    },
+    {
+      "id": "directions-map-zoom",
+      "type": "range",
+      "label": "Map zoom level",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "x",
+      "default": 2
+    },
+    {
+      "id": "directions_map_color_fg",
+      "type": "color",
+      "label": "Map foreground color",
+      "default": "#292929"
+    },
+    {
+      "id": "directions_map_color_bg",
+      "type": "color",
+      "label": "Map background color",
+      "default": "#ffffff"
+    }
+  ],
+  "locales": {
+    "en": {
+      "phone_title": "Call",
+      "email_title": "Contact",
+      "directions_title": "Directions",
+      "hours_title": "Store info"
+    }
+  }
+}
+
+{% endschema %}

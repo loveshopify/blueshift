@@ -1,0 +1,43 @@
+{% if section.settings.show_this_section %}
+  <div class="schools-bottom">
+    <div class="schools-bottom__inner">
+      <div class="schools-bottom__content">
+        {% if section.settings.title != blank %}
+          <h2 class="schools-bottom__title">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.sut_title != blank %}
+          <div class="schools-bottom__sub-title">
+            {{ section.settings.sut_title }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Schools bottom",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_this_section",
+      "label": "Show this section",
+      "default": true 
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "sut_title",
+      "label": "Content"
+    }
+  ]
+}
+{% endschema %}

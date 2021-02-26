@@ -1,0 +1,56 @@
+<section class="cart-menu-container{% if settings.use_highlighted_menu %} cart-menu-highlight{% endif %}" data-cart-menu-container>
+  <div class="cart-menu-slideout" tabindex="-1" data-cart-menu-slideout>
+    <div class="cart-menu-slideout-header">
+      <span class="cart-menu-slideout-header-title">{{ 'cart.button_calculate_shipping_title' | t }}</span>
+
+      <span>
+        <button
+          class="cart-menu-slideout-button-dimiss"
+          type="button"
+          aria-label="{{ 'general.form.close' | t }}"
+          data-cart-menu-slideout-button-dismiss>
+          {%- include 'icon', id: 'close' -%}
+        </button>
+      </span>
+    </div>
+
+    <section class="cart-menu-slideout-content">
+      {%- include 'shipping-calculator' -%}
+    </section>
+  </div>
+
+  <div class="cart-menu">
+    <div
+      class="cart-menu-buttons cart-menu-buttons-slideout-closed"
+      data-cart-menu-buttons-default>
+      {% comment %}
+      <button
+        class="cart-menu-button cart-menu-button-calculate-shipping"
+        type="button"
+        data-cart-menu-button-calculate-shipping>
+        {{ 'cart.button_calculate_shipping_title' | t }}
+      </button>
+      {% endcomment %}
+      <button class="cart-menu-button cart-menu-button-checkout" type="submit" name="checkout" data-cart-menu-button-checkout>
+        <span class="cart-menu-button-checkout-text">{{ 'cart.button_checkout_title' | t }}</span>
+        <span class="cart-menu-button-checkout-price money" data-cart-subtotal>{{ cart.original_total_price | money }}</span>
+      </button>
+    </div>
+
+    <div
+      class="cart-menu-buttons cart-menu-buttons-slideout-open"
+      data-cart-menu-buttons-shipping-calculator>
+      <button
+        class="cart-menu-button cart-menu-button-cancel-shipping"
+        type="button"
+        data-cart-menu-button-cancel-shipping>
+        {{ 'cart.button_cancel_shipping_title' | t }}
+      </button>
+      <input
+        type="button"
+        class="cart-menu-button cart-menu-button-update-shipping get-rates btn button"
+        value="{{ 'cart.button_update_shipping_title' | t }}"
+        data-cart-menu-button-update-shipping/>
+    </div>
+  </div>
+</div>

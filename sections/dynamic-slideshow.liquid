@@ -1,0 +1,137 @@
+<script
+  type="application/json"
+  data-section-type="dynamic-slideshow"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "should_autoplay": {{ section.settings.should_autoplay | json }},
+    "autoplay": {{ section.settings.slide_autoplay | json }},
+    "slide_count": {{ section.blocks.size | json }}
+  }
+</script>
+
+<div class="slideshow slideshow-slides-{{ section.blocks.size }}" data-slideshow>
+  {%- for block in section.blocks -%}
+    {%- include 'slideshow-slide' -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "class": "section-slideshow",
+  "settings": [
+    {
+      "id": "should_autoplay",
+      "type": "checkbox",
+      "label": "Auto-rotate slides",
+      "default": false
+    },
+    {
+      "id": "slide_autoplay",
+      "type": "range",
+      "label": "Autoplay delay",
+      "min": 3,
+      "max": 10,
+      "unit": "sec",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+        {
+          "id": "layout",
+          "type": "select",
+          "label": "Text layout",
+          "info": "Only affects desktop devices and tablets in landscape mode",
+          "options": [
+            {
+              "group": "Default",
+              "value": "default-left",
+              "label": "Left"
+            },
+            {
+              "group": "Default",
+              "value": "default-right",
+              "label": "Right"
+            },
+            {
+              "group": "Full width",
+              "value": "full-width-left",
+              "label": "Left"
+            },
+            {
+              "group": "Full width",
+              "value": "full-width-center",
+              "label": "Center"
+            },
+            {
+              "group": "Full width",
+              "value": "full-width-right",
+              "label": "Right"
+            }
+          ],
+          "default": "default-left"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "info": "Only affects desktop devices and tablets in landscape mode",
+          "default": "#292929"
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Heading",
+          "default": "Slide"
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Text",
+          "default": "<p>Introduce customers to your shop with lifestyle imagery and product photography.</p>"
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "label": "Link"
+        },
+        {
+          "id": "link_text",
+          "type": "text",
+          "label": "Link text",
+          "default": "Slide link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Slideshow",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "layout": "default-right"
+          }
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

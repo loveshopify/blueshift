@@ -1,0 +1,80 @@
+{% if section.settings.show_this_section and section.blocks.size > 0 %}
+  <div class="school__info">
+    {% if section.settings.title != blank %}
+      <h2 class="school__info-heading">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <ul class="school__info-list">
+      {% for block in section.blocks %}
+        <li class="school__info-item">
+          <div class="school__info-item-inner">
+            <div class="school__info-icon-wrap">
+              <img src="{{ block.settings.icon  |  img_url: 'x100' }}" 
+                   srcset="{{ block.settings.icon  | img_url: 'x100' }} 1x, {{ block.settings.icon  | img_url: 'x100', scale: 2 }} 2x"
+                   alt="" 
+                   class="school__info-icon">
+            </div>
+            <div class="school__info-content">
+              <h3 class="school__info-content-ttl" style="color: {{ block.settings.color }}">
+                {{ block.settings.title }}
+              </h3>
+              <div class="school__info-content-txt">
+                {{ block.settings.text }}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>  
+{% endif %}
+
+{% schema %}
+{
+  "name": "Schools info",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_this_section",
+      "label": "Show this section",
+      "default": true 
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Our credentials"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Item",
+      "type": "item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color title",
+          "default": "#1A3856"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

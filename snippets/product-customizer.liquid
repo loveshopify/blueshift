@@ -1,0 +1,187 @@
+{%- comment -%} version: 1.9.1 {%- endcomment -%}
+{%- comment -%} PLEASE DO NOT MODIFY THIS FILE, DOING SO MAY BREAK YOUR PRODUCT OPTIONS {%- endcomment -%}
+{%- if product.metafields.product_customizer != empty -%}
+  {%- unless only_js_init -%}
+  {%- comment -%}
+  Check if the first metafield starts with position, which would indicate a v4 metafield
+  {%- endcomment -%}
+  {%- if product.metafields.product_customizer.first.last contains '"position":' -%}
+    {%- assign sort_by_position = true -%}
+    {%- capture metafield_values -%}{%- for metafield in product.metafields.product_customizer -%}{{ metafield.last }}||||{%- endfor -%}{%- endcapture -%}
+    {%- assign sorted_mf_len = metafield_values | size | minus: 4 -%}
+    {%- assign sorted_metafields = metafield_values | slice: 0, sorted_mf_len | split: '||||' | sort -%}
+  {%- else -%}
+    {%- assign sorted_metafields = product.metafields.product_customizer -%}
+  {%- endif -%}
+  <div class="product-customizer-options" data-product-id="{{ product.id }}" data-product-price="{{ product.price }}" data-version="1.9.1">
+    {%- assign option_price_found = false -%}
+    {%- for option_metafield in sorted_metafields -%}
+      {%- capture whitespace -%}
+      {%- if sort_by_position -%}
+        {%- assign metafield_value = option_metafield -%}
+      {%- else -%}
+        {%- assign metafield_value = option_metafield[1] -%}
+      {%- endif -%}
+        {%- if sort_by_position -%}
+          {%- assign option_name = null -%}
+          {%- assign option_label = null -%}
+        {%- else -%}
+          {%- assign metafield_key = option_metafield.first | split: '_' -%}
+          {%- capture option_name -%}{{ metafield_key[1] }}{%- endcapture -%}
+          {%- if option_name == empty -%}{%- assign option_name = option_metafield.first -%}{%- endif -%}
+        {%- endif -%}
+
+        {%- capture option_id -%}{{ product.id }}_option_{{ forloop.index }}{%- endcapture -%}
+
+        {%- assign option_label = option_name -%}
+        {%- assign option_type = null -%}
+        {%- assign option_description = null -%}
+        {%- assign option_placeholder = null -%}
+        {%- assign option_maxlength = null -%}
+        {%- assign option_values = null -%}
+        {%- assign option_required = false -%}
+        {%- assign option_price = null -%}
+        {%- assign option_configs_len = metafield_value | size | minus: 4 -%}
+        {%- assign option_configs = metafield_value | slice: 2, option_configs_len | split: '","' -%}
+        {%- assign option_min_selections = null -%}
+        {%- assign option_max_selections = null -%}
+        {%- assign remote_option_id = null -%}
+        {%- assign remote_product_option_id = null -%}
+
+        {%- for option_config in option_configs -%}
+          {%- assign name_value = option_config | split: '":"' -%}
+          {%- if name_value[0] == 'name' -%}
+            {%- assign option_name = name_value[1] | replace: '\"', '"' | replace: '\\', '\' | replace: '\u', '&#x' -%}
+            {%- if option_label == null -%}
+              {%- assign option_label = option_name -%}
+            {%- endif -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'label' and name_value[1] != null -%}
+            {%- assign option_label = name_value[1] | replace: '\"', '"' | replace: '\\', '\' | replace: '\u', '&#x' -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'type' and name_value[1] != null -%}
+            {%- assign option_type = name_value[1] -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'options' and name_value[1] -%}
+            {%- assign option_values = name_value[1] | replace: '\"', '"' | replace: '\\', '\' | replace: '\u', '&#x' | split: ',' -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'description' and name_value[1] != null -%}
+            {%- assign option_description = name_value[1] | replace: '\"', '"' | replace: '\\', '\' | replace: '\u', '&#x' | replace: '\n', '<br/>' -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'placeholder' and name_value[1] != null -%}
+            {%- assign option_placeholder = name_value[1] | replace: '\"', '&#x0022;' | replace: '\\', '\' | replace: '\u', '&#x' -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'char_count' and name_value[1] != null -%}
+            {%- assign option_maxlength = name_value[1] | plus: 0 -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'required' and name_value[1] == '1' -%}
+            {%- assign option_required = true -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'min_selections' and name_value[1] != null -%}
+            {%- assign option_min_selections = name_value[1] | plus: 0 -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'max_selections' and name_value[1] != null -%}
+            {%- assign option_max_selections = name_value[1] | plus: 0 -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'option_prices' and name_value[1] != null -%}
+            {%- assign option_price = name_value[1] | split: ',' -%}
+            {%- assign option_price_found = true -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'price' and name_value[1] != null -%}
+            {%- assign option_price = name_value[1] | plus: 0 -%}
+            {%- assign option_price_found = true -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'option_id' and name_value[1] != null -%}
+            {%- assign remote_option_id = name_value[1] | plus: 0 -%}
+          {%- endif -%}
+          {%- if name_value[0] == 'product_option_id' and name_value[1] != null -%}
+            {%- assign remote_product_option_id = name_value[1] | plus: 0 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      <div class="product-customizer-option option-type-{{ option_type }} {%- if option_required -%}option-required{%- endif -%}" data-option-id="{{ remote_option_id }}" data-product-option-id="{{ remote_product_option_id }}" data-option-name="{{ option_name | downcase | handleize }}" {% if option_max_selections %}data-max-selections="{{ option_max_selections }}"{% endif %} {% if option_min_selections %}data-min-selections="{{ option_min_selections }}"{% endif %}>
+        {%- unless option_type == 'checkbox' -%}
+          <label for="{{ option_id }}">{{ option_label }}{% if option_price and option_values == null %} <span class="option-amount">(+{{ option_price | money }})</span>{% endif %}</label>
+          <div>
+          {%- if option_description -%}
+            <div class="product-customizer-option-description">{{ option_description }}</div>
+          {%- endif -%}
+        {%- endunless -%}
+        {%- case option_type -%}
+        {%- when 'select' -%}
+          <span class="product-customizer-select-wrap">
+            <select id="{{ option_id }}" name="properties[{{ option_name }}]" {% if option_required %}required="required"{% endif %}>
+              {%- if option_placeholder -%}<option value="">{{ option_placeholder }}</option>{%- endif -%}
+              {%- for option_value in option_values -%}
+                <option value="{{ option_value }}" data-index="{{ forloop.index0 }}">{{ option_value }}{% if option_price != null and option_price[forloop.index0] != null and option_price[forloop.index0] != empty %} (+{{ option_price[forloop.index0] | money }}){% endif %}</option>
+              {%- endfor -%}
+            </select>
+          </span>
+        {%- when 'text' -%}
+          <input type="text" id="{{ option_id }}" name="properties[{{ option_name }}]" maxlength="{{ option_maxlength }}" placeholder="{{ option_placeholder }}" {% if option_required %}required="required"{%- endif -%} />
+        {%- when 'file' -%}
+          <input type="file" id="{{ option_id }}" name="properties[{{ option_name }}]" {% if option_required %}required="required"{% endif %} />
+        {%- when 'multiline' -%}
+          <textarea id="{{ option_id }}" name="properties[{{ option_name }}]" maxlength="{{ option_maxlength }}" placeholder="{{ option_placeholder }}" {% if option_required %}required="required"{% endif %}></textarea>
+        {%- when 'checkbox' -%}
+          <input type="checkbox" id="{{ option_id }}" value="&#x2713;" name="properties[{{ option_name }}]" {% if option_required %}required="required"{% endif %} />
+          <div>
+          <label for="{{ option_id }}">{{ option_label }}{% if option_price %} <span class="option-amount">(+{{ option_price | money }})</span>{% endif %}</label>
+          {%- if option_description -%}
+            <div class="product-customizer-option-description">{{ option_description }}</div>
+          {%- endif -%}
+        {%- when 'checkbox_group' -%}
+          <ul>
+            {%- for option_value in option_values -%}
+              {%- capture option_value_id -%}{{ option_id }}_{{ forloop.index0 }}{%- endcapture -%}
+              <li>
+                <input type="checkbox" id="{{ option_value_id }}" value="{{ option_value }}" />
+                <label for="{{ option_value_id }}">{{ option_value }}{% if option_price != null and option_price[forloop.index0] != null and option_price[forloop.index0] != empty %} <span class="option-amount">(+{{ option_price[forloop.index0] | money }})</span>{% endif %}</label>
+              </li>
+            {%- endfor -%}
+          </ul>
+          <input type="hidden" id="{{ option_id }}" name="properties[{{ option_name }}]" value="" />
+        {%- when 'radio' -%}
+          <ul id="{{ option_id }}">
+            {%- for option_value in option_values -%}
+              {%- capture option_value_id -%}{{ option_id }}_{{ forloop.index0 }}{%- endcapture -%}
+              <li>
+                <input type="radio" id="{{ option_value_id }}" name="properties[{{ option_name }}]" value="{{ option_value }}" {% if option_required %}required="required"{% endif %} />
+                <label for="{{ option_value_id }}">{{ option_value }}{% if option_price != null and option_price[forloop.index0] != null and option_price[forloop.index0] != empty %} <span class="option-amount">(+{{ option_price[forloop.index0] | money }})</span>{% endif %}</label>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endcase -%}
+
+        {%- if option_max_selections > 0 and option_min_selections == null -%}
+          <div class="product-customizer-selections-message">Please choose up to <span>{{ option_max_selections }}</span> {{ option_max_selections | pluralize: 'option', 'options' }}</div>
+        {%- elsif option_min_selections > 0 and option_max_selections == null -%}
+          <div class="product-customizer-selections-message">Please choose <span>{{ option_min_selections }}</span> or more options</div>
+        {%- elsif option_max_selections != null and option_max_selections == option_min_selections -%}
+          <div class="product-customizer-selections-message">Please choose <span>{{ option_min_selections }}</span> {{ option_min_selections | pluralize: 'option', 'options' }}</div>
+        {%- elsif option_max_selections != null and option_min_selections != null and option_min_selections < option_max_selections -%}
+          <div class="product-customizer-selections-message">Please choose <span>{{ option_min_selections }}</span> to <span>{{ option_max_selections }}</span> options</div>
+        {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if option_price_found -%}
+    <p class="product-customizer-customizations-total" data-product-id="{{ product.id }}">Customizations Total: <span>{{ 0 | money }}</span></p>
+    <noscript><input type="hidden" name="properties[_js_disabled]" value="yes" /></noscript>
+    <noscript><p>NOTICE: This order won't be fulfilled because the customizations require JavaScript to be enabled. Please enable JavaScript to continue shopping.</p></noscript>
+  {%- endif -%}
+  {%- endunless -%}
+
+  {%- if skip_js_init == blank or only_js_init -%}
+    {% assign discount_percentage = product.metafields.subscriptions.discount_percentage | round: 2 %}
+    <script>
+      {%- include 'product-customizer-helper' with 'product-customizer-js-init' -%}
+      shopstorm.apps.productCustomizer.options.push({ id: {{ product.id }}, title: "{{ product.title | replace: '"', '\"' }}", data: {{ product.metafields.product_customizer | json }}, discount: {{ discount_percentage }} });
+      shopstorm.ConditionalLogic.rules = (shopstorm.ConditionalLogic.rules || []).concat({{ product.metafields.product_customizer_x.conditional_logic | default: '[]' }});
+      shopstorm.jsSection = 'product-customizer:product-init';
+    </script>
+    {{ 'shopstorm-apps.js' | asset_url | script_tag }}
+    {%- include 'product-customizer-helper' with 'product-customizer-script', skip_js_init: true -%}
+  {%- endif -%}
+{%- endif -%}

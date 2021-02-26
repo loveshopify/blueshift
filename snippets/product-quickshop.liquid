@@ -1,0 +1,89 @@
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+<div
+  class="product-quickshop-backdrop"
+  data-quickshop>
+  <script
+    type="application/json"
+    data-quickshop-data>
+    {
+      "product": {{ product | json }},
+      "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }},
+      "money_format": {{ shop.money_format | json }},
+      "text": {
+        "product_available": {{ 'product.add_to_cart.available' | t | json }},
+        "product_unavailable": {{ 'product.add_to_cart.unavailable' | t | json }}
+      }
+    }
+  </script>
+  <section class="product-quickshop">
+    <div class="product-quickshop-details-container" data-quickshop-container>
+      <button
+        class="product-quickshop-button-dismiss"
+        type="button"
+        aria-label="{{ 'general.form.close' | t }}"
+        data-product-quickshop-button-dismiss>
+        {%- include 'icon', id: 'close' -%}
+      </button>
+      {%- if product.images.size > 1 -%}
+        <section class="product-quickshop-image-thumbnails">
+          <button
+            class="product-quickshop-image-thumbnails-button-up"
+            type="button"
+            aria-label="{{ 'general.form.close' | t }}"
+            data-product-quickshop-image-thumbnails-button-up>
+            {%- include 'icon', id: 'arrow' -%}
+          </button>
+          <div class="product-quickshop-image-thumbnails-slide" data-product-quickshop-image-thumbnails-slide>
+            {%- for image in product.images -%}
+              <figure
+                class="
+                  product-quickshop-image-thumbnail
+                  {% if variant.featured_image.id == image.id %}product-quickshop-image-thumbnail-selected{% endif %}
+                ">
+                <img
+                  alt="{{ image.alt | escape }}"
+                  {% include 'img-src',
+                    img: image,
+                    size: '145x',
+                    data_size: '1050x'
+                  %}
+                  data-product-image-thumb
+                  data-product-image-id="{{ image.id }}"
+                >
+              </figure>
+            {%- endfor -%}
+          </div>
+          <button
+            class="product-quickshop-image-thumbnails-button-down"
+            type="button"
+            aria-label="{{ 'general.form.close' | t }}"
+            data-product-quickshop-image-thumbnails-button-down>
+            {%- include 'icon', id: 'arrow' -%}
+          </button>
+        </section>
+      {%- endif -%}
+      <section class="product-quickshop-featured-image">
+        {%- assign image = variant.image -%}
+        {%- if image == blank -%}
+          {%- assign image = product.featured_image -%}
+        {%- endif -%}
+        <figure class="product-quickshop-image" >
+          <img
+            alt="{{ image.alt | escape }}"
+            {% include 'img-src', img: image, size: '1050x' %}
+            data-product-image-featured>
+        </figure>
+      </section>
+      <section class="product-quickshop-details">
+        <h1 class="product-title">{{ product.title }}</h1>
+        {%- include 'product-price', variant: product.selected_or_first_available_variant -%}
+
+        <div class="product-rte">
+          {{ product.description }}
+        </div>
+      </section>
+      {%- include 'product-menu', product: product -%}
+    </div>
+  </section>
+</div>

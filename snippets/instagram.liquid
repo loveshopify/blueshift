@@ -1,0 +1,31 @@
+{% comment %}
+  A instagram photo set template.
+
+  @param onboarding
+{% endcomment %}
+
+<article class="instagram-photos instagram-photo-count-8" data-instagram-photos>
+  {%- if onboarding -%}
+    {%- for i in (1..8) -%}
+      <figure class="instagram-photo" data-instagram-photo>
+        {{ 'image' | placeholder_svg_tag: 'placeholder-image' }}
+      </figure>
+    {%- endfor -%}
+  {%- else -%}
+    {%- for i in (1..8) -%}
+      <figure class="instagram-photo instagram-content-placeholder{% if section.settings.access_token != blank %} content-placeholder-animate{% endif %}" data-instagram-content-placeholder>
+        {{ 'image' | placeholder_svg_tag: 'placeholder-image' }}
+      </figure>
+    {%- endfor -%}
+    <figure class="instagram-photo" data-instagram-photo-template>
+      <div class="instagram-overlay">
+        <div class="instagram-likes-wrapper">
+          <span class="instagram-likes-icon">{%- include 'icon', id: 'heart' -%}</span>
+          <span class="instagram-likes" data-instagram-photo-template-likes></span>
+        </div>
+        <p class="instagram-caption" data-instagram-photo-template-caption></p>
+        <span class="instagram-timestamp" data-instagram-photo-template-timestamp></span>
+      </div>
+    </figure>
+  {%- endif -%}
+</article>

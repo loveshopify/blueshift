@@ -1,0 +1,57 @@
+{%- comment -%}
+  A shared collection item component
+
+  @param collection
+    The collection to display
+
+  @param display_description
+    Whether to display the collection description
+{%- endcomment -%}
+
+{%- assign onboard = false -%}
+
+{%- if collection == blank -%}
+  {%- assign onboard = true -%}
+{%- endif -%}
+
+<article
+  class="collection-item"
+  data-collection-item>
+  <figure class="collection-item-image" data-collection-item-image>
+    <a href="{{ collection.url }}">
+      {%- if onboard == false and collection.image -%}
+        <img
+          alt="{{ collection.image.alt | escape }}"
+          {% include 'img-src', img: collection.image, size: '350x' %}
+        >
+      {%- elsif onboard == false and collection.products.first.featured_image -%}
+        {%- assign product = collection.products.first -%}
+        <img
+          alt="{{ product.featured_image.alt | escape }}"
+          {% include 'img-src', img: product.featured_image, size: '350x' %}
+        >
+      {%- else -%}
+        {%- capture index -%}
+          {%- cycle '1', '2', '3', '4', '5', '6' -%}
+        {%- endcapture -%}
+        {{ 'collection-' | append: index | placeholder_svg_tag }}
+      {%- endif -%}
+    </a>
+  </figure>
+  <div class="collection-item-info" data-collection-item-info>
+    <span class="collection-item-title">
+      {%- unless onboard -%}
+        <a href="{{ collection.url }}">{{ collection.title }}</a>
+      {%- else -%}
+        {{ 'collection.item.onboarding.title' | t }}
+      {%- endunless -%}
+    </span>
+    {%- if display_description -%}
+      {%- if onboard -%}
+        <p class="collection-item-description">{{ 'collection.item.onboarding.description' | t }}</p>
+      {%- elsif collection.description != blank -%}
+        <div class="collection-item-description">{{ collection.description }}</div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</article>

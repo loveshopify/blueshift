@@ -1,0 +1,1942 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/rocket_32px_d19c5153-7516-4cb4-862b-9a6bd7f6ad59.png",
+    "color_background": "#ffffff",
+    "color_accent": "#27cad3",
+    "use_highlighted_menu": false,
+    "color_title_text": "#042855",
+    "color_text": "#292929",
+    "color_button_text": "#ffffff",
+    "font_title": "Google_Lato:400,400i,700,700i,900",
+    "font_body": "Google_Lato:400,400i,700,700i",
+    "font_label": "Google_Lato:400,400i,700,700i",
+    "enable_currency_converter": false,
+    "currency_display_format": "money_format",
+    "currency_converter_currencies": "GBP",
+    "currency_converter_default": "GBP",
+    "social_facebook": "https:\/\/www.facebook.com\/blueshiftcoding\/",
+    "social_twitter": "https:\/\/twitter.com\/blueshiftcoding",
+    "social_google": "",
+    "social_pinterest": "",
+    "social_instagram": "https:\/\/www.instagram.com\/blueshiftcoding\/",
+    "social_vimeo": "",
+    "social_youtube": "",
+    "social_medium": "",
+    "social_rss": "",
+    "social_email": "hello@blueshiftcoding.com",
+    "share_widget_facebook": true,
+    "share_widget_twitter": true,
+    "share_widget_pinterest": true,
+    "share_widget_google_plus": true,
+    "share_widget_email": true,
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Lato",
+    "checkout_body_font": "Lato",
+    "checkout_accent_color": "#1990c6",
+    "checkout_button_color": "#6fbb98",
+    "checkout_error_color": "#ff6d6d",
+    "kensington": "<p>Eaton Square Kensington, 24 Elvaston Place, SW7 5NL<\/p>",
+    "notting-hill": "<p>Colville School, Lonsdale Road, W11 2DF<\/p>",
+    "hampsted": "<p>King Alfred School, North End Road, NW11 7HY<\/p>",
+    "sections": {
+      "section-3": {
+        "type": "dynamic-featured-products",
+        "disabled": true,
+        "settings": {
+          "title": "",
+          "collection": "",
+          "product_item_style": "natural",
+          "enable_product_quickshop": false,
+          "product-count": 5,
+          "product_emphasize": false
+        }
+      },
+      "static-header": {
+        "type": "static-header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/bs-logo_12893ae9-4fd9-4746-abd9-c3d4a929b71f.png",
+          "logo_width": "",
+          "mobile_logo": "shopify:\/\/shop_images\/Logo_gradient_No_caption.jpg",
+          "mobile_logo_width": "",
+          "phone": "020 3176 4660",
+          "email": "hello@blueshiftcoding.com",
+          "menu": "main-menu-1"
+        }
+      },
+      "site-footer": {
+        "type": "site-footer",
+        "blocks": {
+          "1521460588520": {
+            "type": "addressblock",
+            "settings": {
+              "title": "Get in touch",
+              "content": "<p>Phone:&nbsp;0203 176 4660<\/p>\n<p>Email: hello@blueshiftcoding.com<\/p>\n<p>blue{shift} education registered address: Great Western Studios, 65 Alfred Road, London W2 5EU<\/p>",
+              "social-media": false
+            }
+          },
+          "1512402251598": {
+            "type": "menu",
+            "settings": {
+              "menu": "footer"
+            }
+          },
+          "1521455327129": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu"
+            }
+          },
+          "1521455502945": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Newsletter",
+              "content": "<p>For all the latest updates and exclusive offers, follow us on&nbsp;social media&nbsp;and subscribe to&nbsp;our newsletter.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "1521460588520",
+          "1512402251598",
+          "1521455327129",
+          "1521455502945"
+        ],
+        "settings": {
+          "enable_newsletter": false,
+          "enable_social": true,
+          "enable_payment_icons": true,
+          "enable_patrers": true,
+          "partner_title": "Working in partnership with over 20 schools & organisations:",
+          "background-image": "shopify:\/\/shop_images\/clouds-footer.jpg",
+          "partner_icon_1": "shopify:\/\/shop_images\/thomas-battersea_857e7ecf-940d-433d-9228-70a404603dcd.png",
+          "partner_icon_2": "shopify:\/\/shop_images\/SPGS-logo-colour.jpg",
+          "partner_icon_3": "shopify:\/\/shop_images\/queens-college.png",
+          "partner_icon_4": "shopify:\/\/shop_images\/knightsbridge.png",
+          "partner_icon_5": "shopify:\/\/shop_images\/Asset_3_2x_2be6d324-5c0d-4d18-bc90-ee97309896e9.png",
+          "partner_icon_6": "shopify:\/\/shop_images\/notting-hill-prep.png",
+          "partner_icon_7": "shopify:\/\/shop_images\/sussex-house-1.png",
+          "partner_icon_8": "shopify:\/\/shop_images\/wandsworth.png",
+          "partner_icon_9": "shopify:\/\/shop_images\/wetherby-school.png",
+          "partner_icon_10": ""
+        }
+      },
+      "static-collection": {
+        "type": "static-collection",
+        "settings": {
+          "products-per-page": 12,
+          "product_item_style": "natural",
+          "enable_product_quickshop": false,
+          "show_product_vendors": false
+        }
+      },
+      "static-product": {
+        "type": "static-product",
+        "settings": {
+          "enable_menu_form": false,
+          "show_product_vendor": false,
+          "enable_social_sharing": false
+        }
+      },
+      "static-article": {
+        "type": "static-article",
+        "settings": {
+          "enable_social_sharing": false
+        }
+      },
+      "static-meganav": {
+        "type": "static-meganav",
+        "blocks": {
+          "static-meganav-0": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "image": ""
+            }
+          },
+          "static-meganav-1": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "image": ""
+            }
+          },
+          "static-meganav-2": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "image": ""
+            }
+          },
+          "static-meganav-3": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "image": ""
+            }
+          }
+        },
+        "block_order": [
+          "static-meganav-0",
+          "static-meganav-1",
+          "static-meganav-2",
+          "static-meganav-3"
+        ],
+        "settings": {
+          "trigger": "",
+          "show_images": true,
+          "type": "tags",
+          "truncate": true,
+          "truncate_count": 5
+        }
+      },
+      "static-contactbar": {
+        "type": "static-contactbar",
+        "settings": {
+          "trigger": "Get in touch",
+          "phone_value": "0203 176 4660",
+          "email_value": "hello@blueshiftcoding.com",
+          "hours_value": "<p>Mon-Fri, 9.30am-6pm<\/p>",
+          "directions_value": "<p>Great Western studios, 65 Alfred road, london w2 5EU<\/p>",
+          "directions_map": false,
+          "api_key": "",
+          "directions-map-zoom": 2,
+          "directions_map_color_fg": "#292929",
+          "directions_map_color_bg": "#ffffff"
+        }
+      },
+      "static-cart": {
+        "type": "static-cart",
+        "settings": {
+          "show_notes": true,
+          "notes_placeholder": "Please add any special instructions for your booking here",
+          "shipping_calculator_default_country": "United States"
+        }
+      },
+      "1520566196685": {
+        "type": "rocket-launch",
+        "disabled": true,
+        "settings": {
+          "message": ""
+        }
+      },
+      "1520566484268": {
+        "type": "text-block",
+        "blocks": {
+          "1520566664121": {
+            "type": "text",
+            "settings": {
+              "titlegd": "<p>NEW: Easter Tuition<\/p>",
+              "sub_titlegd": "<p>Flexible coding lessons&nbsp;that suit you<\/p>",
+              "background": "#7ec2a2",
+              "hover_background": "#c6e1d2",
+              "color": "#ffffff",
+              "font_size": "24",
+              "line_height": "30",
+              "link": "shopify:\/\/pages\/easter-holidays-private-tuition"
+            }
+          },
+          "1520566618889": {
+            "type": "text",
+            "settings": {
+              "titlegd": "<p>Book now<\/p>",
+              "sub_titlegd": "<p>School holiday coding camps<\/p>",
+              "background": "#f5c644",
+              "hover_background": "#fbe2aa",
+              "color": "#ffffff",
+              "font_size": "24",
+              "line_height": "30",
+              "link": "shopify:\/\/pages\/easter-camps"
+            }
+          },
+          "1520566491007": {
+            "type": "text",
+            "settings": {
+              "titlegd": "<p>Coronavirus Update<\/p>",
+              "sub_titlegd": "<p>Learn of&nbsp;our changes &amp; refund policy<\/p>",
+              "background": "#5cc0c7",
+              "hover_background": "#bce1e4",
+              "color": "#ffffff",
+              "font_size": "24",
+              "line_height": "30",
+              "link": "shopify:\/\/pages\/coronavirus-update"
+            }
+          },
+          "1520566711094": {
+            "type": "text",
+            "settings": {
+              "titlegd": "<p>Childcare Vouchers<\/p>",
+              "sub_titlegd": "<p>Find out more here<\/p>",
+              "background": "#ea5461",
+              "hover_background": "#f6b2ae",
+              "color": "#ffffff",
+              "font_size": "24",
+              "line_height": "30",
+              "link": "shopify:\/\/products\/childcare-vouchers"
+            }
+          }
+        },
+        "block_order": [
+          "1520566664121",
+          "1520566618889",
+          "1520566491007",
+          "1520566711094"
+        ],
+        "settings": {
+          "section-title": ""
+        }
+      },
+      "1521454716636": {
+        "type": "text-with-icons",
+        "blocks": {
+          "1521454724134": {
+            "type": "text",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Asset_9_2x_fac91405-4f6a-4468-9f0a-d44a260588d7.png",
+              "title": "Creative",
+              "content": "We encourage children to learn to code through making while flexing their creative muscles, learning resilience and problem solving.",
+              "color_title": "#ea5461"
+            }
+          },
+          "1521454780862": {
+            "type": "text",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Asset_10_2x_fa34dbe5-5874-4bc0-8175-9d7b4303d961.png",
+              "title": "Collaborative",
+              "content": "In our clubs and camps, coding becomes a social activity. We encourage children to collaborate and work together.",
+              "color_title": "#f5c644"
+            }
+          },
+          "1521454827544": {
+            "type": "text",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Asset_11_2x_4a8750a7-0087-4d34-a281-273c504c7272.png",
+              "title": "World skills",
+              "content": "We believe every child should learn to code and gain digital literacy skills. These skills will equip them to be well-educated citizens in a rapidly changing world.",
+              "color_title": "#7ec2a2"
+            }
+          },
+          "1521454844389": {
+            "type": "text",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Asset_12_2x_50c8b620-3145-4884-905f-94a6b43acff1.png",
+              "title": "Fun",
+              "content": "Our clubs are a balance of hard work, thinking, play, and online and offline activities. Children come away loving coding and robotics and delighted by the things they make.",
+              "color_title": "#84547d"
+            }
+          }
+        },
+        "block_order": [
+          "1521454724134",
+          "1521454780862",
+          "1521454827544",
+          "1521454844389"
+        ],
+        "settings": {
+          "title": "Reasons to choose blue{shift}"
+        }
+      },
+      "page-slider": {
+        "type": "page-slider",
+        "blocks": {
+          "1521531885458": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/girl_happy_laptop_5-min.jpeg",
+              "layout": "default-right",
+              "text_color": "#042855",
+              "title": "Our Mission",
+              "text": "<p>Our aim is to enable and encourage children aged 5 to 14 to be digital creators and support their parents and teachers. We want to inspire all children, whether they're naturally inclined to learn to code or not, about the things they can make and do with code.<\/p>",
+              "link": "#",
+              "link_text": "Slide link"
+            }
+          },
+          "1521532649090": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/boy_ipad_teacher_A_C_28-min.jpeg",
+              "layout": "default-left",
+              "text_color": "#042855",
+              "title": "Our vision",
+              "text": "<p>We believe that if taught with a focus on creativity, learning to code will not only equip children with the technical skills they need to excel in the future, but will also teach them critical problem solving skills.<\/p>",
+              "link": "",
+              "link_text": ""
+            }
+          },
+          "1524497579450": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/boy_MINIS_22-min.jpeg",
+              "layout": "default-right",
+              "text_color": "#042855",
+              "title": "Our services",
+              "text": "<p>We run after-school clubs at a growing roster of schools, workshops and camps. Our courses have looked at everything from designing wearables to 3D printing to creating VR experiences with code.<\/p>",
+              "link": "",
+              "link_text": "Slide link"
+            }
+          }
+        },
+        "block_order": [
+          "1521531885458",
+          "1521532649090",
+          "1524497579450"
+        ],
+        "settings": {
+          "should_autoplay": false,
+          "slide_autoplay": 4
+        }
+      },
+      "icon-block": {
+        "type": "icon-block",
+        "blocks": {
+          "1521532210872": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Heather1_2d4ecc3e-e13e-4a7f-a36a-d8066643d457.jpg",
+              "title": "Heather Lyons",
+              "subtitle": "Founder & Director",
+              "content": "Heather was bitten by the tech bug early and began building websites as a young adult. Heather has an MA in Architecture from Princeton University &amp; has done advanced study in Computer Science at UCL. She taught computer-based design at the Architectural Association &amp; has worked in digital media since 1999, before founding blue{shift} in 2013. Heather is also a local mum with three young children."
+            }
+          },
+          "1521532430380": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Laura_i_c9b8758c-2586-437d-8783-88ec435ffcc4.jpeg",
+              "title": "Laura Satkauskaite",
+              "subtitle": "Operations & Communications",
+              "content": "Laura is the go-to operations person at all of our camps, looking after all matters related to the smooth running of each. She manages the planning, staffing, &amp; delivery of our main products - keeping students, parents, and teachers alike in the loop at all times! Laura holds a degree in Media and Communications from Bournemouth University. She is also an avid Love Island fan!"
+            }
+          },
+          "1521532360685": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Jordan.jpeg",
+              "title": "Jordan Wu",
+              "subtitle": "Curriculum & Content",
+              "content": "With a background in creative technology, Jordan has a BsC in Digital Arts and Computing from Goldsmiths University. Originally joining blue{shift} as a teacher, he now creates our curriculum &amp; other educational content (as well as occasionally teaching). Other than art, Jordan has a keen interest in virtual reality, developing new kinds of immersive experiences through programmes and games."
+            }
+          },
+          "1521532432181": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/IMG_1959_2850477b-8934-40fc-a868-0e7eaf3db958.jpg",
+              "title": "Uvie Pereira",
+              "subtitle": "Operations & Policy",
+              "content": "Uvie's role at blue{shift} focuses on facilitating logistics and policy for camps and events, particularly looking at future-facing strategy. Having studied at Cambridge—where she received a BA in Social and Political Sciences—Uvie will be studying a part-time masters in Human-Computer Interaction at City University. Outside of her passion for working in Ed-Tech, she enjoys creative writing and learning about zen philosophy."
+            }
+          },
+          "1521532428088": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/IMG_1935_2.jpg",
+              "title": "Adam Crowther",
+              "subtitle": "Marketing & Partnerships",
+              "content": "Adam is responsible for spreading the word about blue{shift} to both school partners and parents. With a social science background, he enjoys capturing the creativity and imagination of our students as well as communicating with all kinds of people. Adam has a BA in Social Anthropology from the London School of Economics. He also can't help but wear bright colours around the office."
+            }
+          },
+          "1562227389490": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/IMG_1926_2.jpg",
+              "title": "Katie Alphey",
+              "subtitle": "Operations & Events",
+              "content": "With a background in education, Katie has experience with primary school age children with SEN and behavioural difficulties. She now ensures that blue{shift}'s after-school clubs, private tuition, and camps run effortlessly. Katie has a BSc in Psychology from the University of Birmingham. With a love for music Katie has previously organised a charity festival which helped to raise over £70,000!"
+            }
+          }
+        },
+        "block_order": [
+          "1521532210872",
+          "1521532430380",
+          "1521532360685",
+          "1521532432181",
+          "1521532428088",
+          "1562227389490"
+        ],
+        "settings": {
+          "title": "In the office"
+        }
+      },
+      "dynamic-block": {
+        "type": "dynamic-block",
+        "blocks": {
+          "1522068488832": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-35_3fd28ef5-1263-49da-b84f-aba20022ec88.jpg",
+              "title": "Our Teachers",
+              "text": "Our superstar teachers come from a diverse range of academic and creative backgrounds - from digital artists to software engineers. Find out more about them here!",
+              "url": "shopify:\/\/pages\/our-teachers",
+              "linktext": "Read more"
+            }
+          },
+          "1522068493582": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/28514597_1435562533239980_3233188272373433183_o.jpg",
+              "title": "The blue{shift} Story",
+              "text": "We have been offering clubs, camps, and workshops in West London for over five years - learn about how we got started and why we do what we do here.",
+              "url": "shopify:\/\/pages\/the-blue-shift-story",
+              "linktext": "Read more"
+            }
+          }
+        },
+        "block_order": [
+          "1522068488832",
+          "1522068493582"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "mission-blocks": {
+        "type": "mission-blocks",
+        "settings": {}
+      },
+      "dynamic-list": {
+        "type": "dynamic-list",
+        "settings": {
+          "section-title": "",
+          "section-desc": ""
+        }
+      },
+      "services": {
+        "type": "services",
+        "blocks": {
+          "1522071466056": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-79.jpg",
+              "title": "Nick",
+              "content": "With previous experience in EdTech and other tech start-ups, Nick has been living and working in London for eight years. For him, learning to code gives a person the ability to create powerful tools that positively impact the lives of others. He also particularly enjoys teaching our youngest learners. It is for these reasons that Nick is currently in the process of developing a language-learning game aimed at younger students."
+            }
+          },
+          "1522071671064": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-57.jpg",
+              "title": "Daniel",
+              "content": "For Daniel coding combines problem solving with creative ways of thinking. This approach to tech has allowed him to marry programming with another of his passions - music. He often uses code to build his own software and interfaces for creating and performing music, and he has led workshops on music computing, acoustics, and sound design. This control over the creative process, he says, is what makes it so liberating to be a coder."
+            }
+          },
+          "1522071680421": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-49.jpg",
+              "title": "Johanna",
+              "content": "Johanna is originally from Sweden and is a digital artist when she isn’t teaching. She uses technology as a key part of her art. For her physical computing, specifically microprocessors, allows her art practice to become more interactive and participatory. This ability to incorporate coding into everyday life, in novel and creative ways, is a key reason why Johanna enjoys programming so much."
+            }
+          },
+          "1522071708481": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-76.jpg",
+              "title": "Mathieu",
+              "content": ""
+            }
+          },
+          "1522071719210": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-73.jpg",
+              "title": "Jinia",
+              "content": ""
+            }
+          },
+          "1522071727067": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-74.jpg",
+              "title": "Jack",
+              "content": ""
+            }
+          },
+          "1567160618882": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-75.jpg",
+              "title": "Sam",
+              "content": ""
+            }
+          },
+          "1567160656232": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-68.jpg",
+              "title": "Mary",
+              "content": ""
+            }
+          },
+          "1567160686717": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-80.jpg",
+              "title": "William",
+              "content": ""
+            }
+          },
+          "1567769017477": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/IMG_2490_2.JPG",
+              "title": "Calum",
+              "content": ""
+            }
+          }
+        },
+        "block_order": [
+          "1522071466056",
+          "1522071671064",
+          "1522071680421",
+          "1522071708481",
+          "1522071719210",
+          "1522071727067",
+          "1567160618882",
+          "1567160656232",
+          "1567160686717",
+          "1567769017477"
+        ],
+        "settings": {
+          "title": "Our Teachers"
+        }
+      },
+      "new-collection": {
+        "type": "new-collection",
+        "settings": {
+          "products-per-page": 16,
+          "product_item_style": "natural",
+          "enable_product_quickshop": false,
+          "show_product_vendors": false
+        }
+      },
+      "1530608464938": {
+        "type": "dynamic-block",
+        "blocks": {
+          "1530611784575": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-107.2.jpg",
+              "title": "Easter Holiday Tuition",
+              "text": "Equip your child with lifelong skills in the comfort of your own home. Taught by an experienced tutor at a time and place that suits you, our easy and flexible holiday tuition is an ideal option for all kids this Easter.",
+              "url": "shopify:\/\/pages\/easter-holidays-private-tuition",
+              "linktext": "find out more"
+            }
+          },
+          "1530608485726": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/36.jpeg",
+              "title": "The four skills coding develops",
+              "text": "We believe that learning to code is about more than just developing tech skills. Instead, it can be helpful in developing key characteristics that are also vital in other school subjects.  Click below to read more on our blog.",
+              "url": "shopify:\/\/blogs\/news\/can-learning-to-code-help-my-child-in-other-subjects",
+              "linktext": "read here"
+            }
+          }
+        },
+        "block_order": [
+          "1530611784575",
+          "1530608485726"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "school-dynamic-block": {
+        "type": "school-dynamic-block",
+        "blocks": {
+          "1531204714763": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/boy_happy_3D_print_model_30-min.jpeg",
+              "title": "Workshops",
+              "text": "We offer bespoke coding and robotics workshops which can take place over a single day or an entire week. Find out what a blue{shift} workshop looks like here.",
+              "url": "",
+              "linktext": "Read more"
+            }
+          },
+          "1531204738611": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/boy_happy_laptop_31-min_c44a8fa5-956f-4058-980b-78098a278f12.jpg",
+              "title": "After School Clubs",
+              "text": "We offer four levels of clubs and classes for children in Reception to Year 8. More details on our after school club curriculum can be found here.",
+              "url": "shopify:\/\/pages\/after-school-clubs",
+              "linktext": "Read more"
+            }
+          }
+        },
+        "block_order": [
+          "1531204714763",
+          "1531204738611"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "new-page-slider": {
+        "type": "new-page-slider",
+        "blocks": {
+          "1531225246973": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-28.2.jpg",
+              "layout": "right",
+              "text_color": "#042855",
+              "title": "Experienced",
+              "text": "<p>All blue{shift}&nbsp;teachers are experienced and passionate computer scientists in their own right. With a variety of interests our educators have experience coding and designing across many industries - from ship engineering and instrument design, to digital art, language acquisition and the development of AI.&nbsp;<\/p>",
+              "link": "shopify:\/\/blogs\/news\/edtech-teacher-feature-chris-moss-blue-shift-blog",
+              "link_text": "Read Our Teacher Interview"
+            }
+          },
+          "1531225373965": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/IMG_2201_ee4ba974-b02a-474c-90f4-daa053e2154e.JPG",
+              "layout": "left",
+              "text_color": "#042855",
+              "title": "Passionate",
+              "text": "<p>All of our teaching staff are passionate about learning. With experience of teaching at our&nbsp;<\/p>",
+              "link": "shopify:\/\/pages\/after-school-clubs",
+              "link_text": "after school clubs"
+            }
+          },
+          "1531225478749": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-107.2.jpg",
+              "layout": "right",
+              "text_color": "#042855",
+              "title": "Innovative",
+              "text": "<p>With new and innovative&nbsp;computing and robotics products, our teachers are able to engage students in exciting projects such as 3D printing, virtual reality, and e-textiles.<\/p>",
+              "link": "shopify:\/\/pages\/after-school-clubs",
+              "link_text": "After School clubs"
+            }
+          }
+        },
+        "block_order": [
+          "1531225246973",
+          "1531225373965",
+          "1531225478749"
+        ],
+        "settings": {}
+      },
+      "mission-page-slider": {
+        "type": "mission-page-slider",
+        "blocks": {
+          "1531227111407": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-92.jpg",
+              "layout": "right",
+              "text_color": "#042855",
+              "title": "Our Mission",
+              "text": "<p>Our aim is to enable and encourage children aged 5 to 16 to be digital creators, and to support their parents and teachers every step of the way. We want to teach all children, whether they're naturally inclined to learn to code or not, about the things they can make and do with code.<\/p>",
+              "link": "shopify:\/\/pages\/the-blue-shift-story",
+              "link_text": "The blue{shift} story"
+            }
+          },
+          "1531227173568": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-28.jpg",
+              "layout": "right",
+              "text_color": "#042855",
+              "title": "Our Services",
+              "text": "<p>We run after-school clubs, private tuition, workshops, and holiday camps. Our courses have looked at everything from designing wearables and 3D printing to creating VR experiences, games, and movies with code.<\/p>",
+              "link": "shopify:\/\/pages\/may-camps",
+              "link_text": "view courses"
+            }
+          },
+          "1531227132072": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-106.jpg",
+              "layout": "right",
+              "text_color": "#042855",
+              "title": "Our Vision",
+              "text": "<p>We believe that if taught with a focus on creativity, learning to code will not only equip children with the technical skills they need to excel in the future, but will also teach them critical problem solving skills.<\/p>",
+              "link": "shopify:\/\/pages\/the-blue-shift-story",
+              "link_text": "Learn More"
+            }
+          }
+        },
+        "block_order": [
+          "1531227111407",
+          "1531227173568",
+          "1531227132072"
+        ],
+        "settings": {}
+      },
+      "static-product-pt": {
+        "type": "static-product-pt",
+        "blocks": {
+          "static-product-pt-0": {
+            "type": "related_products",
+            "settings": {
+              "product_item_style": "natural",
+              "enable_product_quickshop": false,
+              "product-count": 5,
+              "product_emphasize": true
+            }
+          }
+        },
+        "block_order": [
+          "static-product-pt-0"
+        ],
+        "settings": {
+          "enable_menu_form": false,
+          "show_product_vendor": false,
+          "enable_social_sharing": false
+        }
+      },
+      "static-product-noform": {
+        "type": "static-product-noform",
+        "blocks": {
+          "static-product-noform-0": {
+            "type": "related_products",
+            "settings": {
+              "product_item_style": "natural",
+              "enable_product_quickshop": false,
+              "product-count": 5,
+              "product_emphasize": true
+            }
+          }
+        },
+        "block_order": [
+          "static-product-noform-0"
+        ],
+        "settings": {
+          "enable_menu_form": false,
+          "show_product_vendor": false,
+          "enable_social_sharing": false
+        }
+      },
+      "top-banner": {
+        "type": "top-banner",
+        "settings": {
+          "banner_title": "COMING SOON: Online coding classes for children aged 7 to 14",
+          "banner_image": "shopify:\/\/shop_images\/top-banner.jpg",
+          "banner_image_mobile": "shopify:\/\/shop_images\/top-banner-mobile.jpg",
+          "btn_link": "shopify:\/\/pages\/contact",
+          "btn_text": "Register interest"
+        }
+      },
+      "1554123167715": {
+        "type": "video-with-text",
+        "settings": {
+          "show_this_section": true,
+          "video_url": "https:\/\/youtu.be\/YsyvK0s8RRw",
+          "image": "shopify:\/\/shop_images\/Asset_7_2x-100.jpg",
+          "title": "WATCH: 2020 HOLIDAY CAMPS",
+          "text": "<p>With courses in <em>coding, robotics, animation, game design, electronics<\/em>&nbsp;&amp;&nbsp;<em>more we have something for every child's&nbsp;creativity!&nbsp;<\/em>Watch the video to get an idea of what to expect&nbsp;from our 2020 holiday coding camps.&nbsp;<\/p>",
+          "link": "shopify:\/\/pages\/easter-camps",
+          "btn_text": "Browse Courses"
+        }
+      },
+      "1554288379220": {
+        "type": "slider-image-with-text",
+        "blocks": {
+          "1554288397339": {
+            "type": "slide",
+            "settings": {
+              "text": "<p>\"My son says blue{shift}&rsquo;s Minecraft camp was the best thing he has ever done, ever!&rdquo;<\/p>",
+              "sub_text": "Andrew C, Parent",
+              "image": "shopify:\/\/shop_images\/Minecraft_close_up9-min.jpeg",
+              "color-1": "#7ec2a2",
+              "color-2": "#84547d"
+            }
+          },
+          "1554295426250": {
+            "type": "slide",
+            "settings": {
+              "text": "<p>\"By all accounts, the day went really well.&nbsp;The children's feedback has been great - some even want to come and work here&nbsp;now!\"<\/p>",
+              "sub_text": "Colin, Simply Business",
+              "image": "shopify:\/\/shop_images\/D7099gXWkAMjA_Z_2.jpg",
+              "color-1": "#7ec2a2",
+              "color-2": "#84547d"
+            }
+          },
+          "1560865722205": {
+            "type": "slide",
+            "settings": {
+              "text": "<p>\"The blue{shift} teachers are incredibly knowledgeable and&nbsp;we&nbsp;were impressed with how they delivered inspiring content\"<\/p>",
+              "sub_text": "Ms. Watt, Deputy Head, Eaton Square Kensington",
+              "image": "shopify:\/\/shop_images\/wehjfbwjhf.jpeg",
+              "color-1": "#7ec2a2",
+              "color-2": "#84547d"
+            }
+          }
+        },
+        "block_order": [
+          "1554288397339",
+          "1554295426250",
+          "1560865722205"
+        ],
+        "settings": {
+          "show_this_section": true
+        }
+      },
+      "courses": {
+        "type": "courses",
+        "settings": {
+          "bg-top": "shopify:\/\/shop_images\/Asset_5_4x-100.jpg",
+          "bg-top-mobile": ""
+        }
+      },
+      "static-list-collections": {
+        "type": "static-list-collections",
+        "settings": {
+          "collections-per-page": 9,
+          "collection_item_display_description": false
+        }
+      },
+      "video-with-text": {
+        "type": "video-with-text",
+        "settings": {
+          "show_this_section": true,
+          "video_url": "https:\/\/youtu.be\/YsyvK0s8RRw",
+          "image": "shopify:\/\/shop_images\/Asset_7_2x-100.jpg",
+          "title": "VIDEO | Holiday Camps",
+          "text": "<p>We think that our camps are super fun. But you shouldn't just take our word for it. We recently spoke to some of the blue{shift} teachers and students to find out more; watch our video to get a better idea of what makes a blue{shift} camp such a great adventure!&nbsp;<\/p>",
+          "link": "",
+          "btn_text": "Watch now"
+        }
+      },
+      "slider-image-with-text": {
+        "type": "slider-image-with-text",
+        "blocks": {
+          "1555076648357": {
+            "type": "slide",
+            "settings": {
+              "text": "<p>&ldquo;The things I liked most about camp were proper teaching, creative approach and the fact that my daughter really learnt something while having fun&rdquo;<\/p>",
+              "sub_text": "Rebecca",
+              "image": "shopify:\/\/shop_images\/Asset_9_2x-100.jpg",
+              "color-1": "#ea5461",
+              "color-2": "#f5c644"
+            }
+          }
+        },
+        "block_order": [
+          "1555076648357"
+        ],
+        "settings": {
+          "show_this_section": true
+        }
+      },
+      "product-info": {
+        "type": "product-info",
+        "settings": {
+          "show_this_section": true,
+          "title": "Three types of tuition",
+          "bottom_content": "<p>All of our teaching staff undergo a rigorous application and on-boarding process. Each teacher&nbsp;is then vetted by the Disclosure and Barring Service (DBS).<\/p>\n<p><\/p>\n<p>We provide training and support for all our teachers, and many of our teaching staff have taught at some of London's most prestigious schools. To read more, <a href=\"\/pages\/our-teachers\" title=\"Our Teachers\">click here<\/a>.<\/p>",
+          "bottom_img_txt": "Teachers at blue{shift}",
+          "bottom_img": "shopify:\/\/shop_images\/Asset_10_2x_fa34dbe5-5874-4bc0-8175-9d7b4303d961.png"
+        }
+      },
+      "daily-camp-overview": {
+        "type": "daily-camp-overview",
+        "settings": {
+          "show_this_section": true,
+          "title": "",
+          "form_text": "<p>If you would like to&nbsp;download a series of example camp schedules, please enter your details below:<\/p>",
+          "icon": "shopify:\/\/shop_images\/Asset_3_2x_e591cccb-9a49-475c-a4b6-4f1ba339faea.png",
+          "form_content_title": "Stay Connected",
+          "form_content_txt": ""
+        }
+      },
+      "product-faqs": {
+        "type": "product-faqs",
+        "blocks": {
+          "1555925407895": {
+            "type": "faq",
+            "settings": {
+              "title": "Can I use my childcare vouchers to pay for this course?",
+              "answer": "<p>Yes! If you would like to use your childcare vouchers to book this course, head on over to our <a href=\"https:\/\/blueshiftcoding.com\/products\/childcare-vouchers\" title=\"https:\/\/blueshiftcoding.com\/products\/childcare-vouchers\">childcare voucher page<\/a>. This page will walk you through our childcare voucher process and allow you to reserve your child&rsquo;s space on their chosen course whilst you process your payment.<\/p>"
+            }
+          },
+          "1555925417207": {
+            "type": "faq",
+            "settings": {
+              "title": "Which Creative Coding level should I sign my child up for?",
+              "answer": "<p>Each of our courses have a recommended age group. However, if your child has done coding before, they might be ready to go to a more advanced class. We suggest following the stated age range for each course, and to contact us for advice if you feel your child has more experience than that age range suggests. Click the chat icon in the bottom right of your screen if you'd like to get in touch.<\/p>"
+            }
+          },
+          "1555925390223": {
+            "type": "faq",
+            "settings": {
+              "title": "My child doesn't have a laptop - will an iPad or tablet suffice instead?",
+              "answer": "<p>Unfortunately the programs and tools we use in our classes do not run adequately on tablet devices at the moment. We use iPads in the Mini Coders and Animation courses, but we will provide these devices.<\/p>"
+            }
+          },
+          "1555925422947": {
+            "type": "faq",
+            "settings": {
+              "title": "Is there any specific software I should install in advance?",
+              "answer": "<p>Our Junior students will need Scratch on their laptops and we also recommend having a bookmark to the&nbsp;<a href=\"https:\/\/scratch.mit.edu\/\">Scratch website<\/a>&nbsp;ready, as sometimes we do work online.&nbsp;<\/p>\n<p>For Minecraft Modders students, you should install Minecraft and the&nbsp;<a href=\"https:\/\/www.learntomod.com\/\">LearnToMod<\/a>program (note you will also need a Minecraft license - these can be bought via us when booking). We recommend that you also install the&nbsp;<a href=\"https:\/\/www.google.com\/chrome\/index.html\">Google Chrome<\/a>&nbsp;web browser.<\/p>"
+            }
+          },
+          "1560354390421": {
+            "type": "faq",
+            "settings": {
+              "title": "",
+              "answer": ""
+            }
+          }
+        },
+        "block_order": [
+          "1555925407895",
+          "1555925417207",
+          "1555925390223",
+          "1555925422947",
+          "1560354390421"
+        ],
+        "settings": {
+          "show_this_section": true,
+          "title": "FAQs:"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {}
+      },
+      "product-interested": {
+        "type": "product-interested",
+        "settings": {
+          "show_this_section": false,
+          "url": ""
+        }
+      },
+      "template-schools": {
+        "type": "template-schools",
+        "blocks": {
+          "1559563545623": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/chepstow-house_f38dfb73-2729-40b9-9214-db2da7821d27.png",
+              "title": "Chepstow House School",
+              "school_address": "<p>108A Lancaster Road, W11 1QS<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563576649": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/colville.png",
+              "title": "Colville Primary School",
+              "school_address": "<p>Lonsdale Road, W11 2DF<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563598489": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/Asset_3_2x_2be6d324-5c0d-4d18-bc90-ee97309896e9.png",
+              "title": "Eaton Square, Belgravia",
+              "school_address": "<p>79 Eccleston Square, SW1V 1PP<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563617998": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/Asset_1_2x_0adf750c-5af8-47e6-88ec-f2e219371771.png",
+              "title": "Falcons School for Boys",
+              "school_address": "<p>2 Burnaby Gardens, Chiswick, W4 3DT<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563636129": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/Asset_4_2x_bba4a4dd-7e9f-4763-aa7f-931a43f81daa.png",
+              "title": "Falcons School for Girls",
+              "school_address": "<p>11 Woodborough Road, SW15 6PY<\/p>",
+              "school_link": ""
+            }
+          },
+          "1579172812305": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/fox_primary_97bb21aa-71cf-424a-b957-d1f69d60958c.png",
+              "title": "Fox Primary School",
+              "school_address": "<p>Kensington Place, Kensington, W8 7PP<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563655949": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/ibstock-place_09eac4e0-22f5-47e3-a760-dfa8df77107b.png",
+              "title": "Ibstock Place School",
+              "school_address": "<p>Clarence Lane, SW15 5PY<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563679785": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/king-alfred.png",
+              "title": "King Alfred School",
+              "school_address": "<p>149 North End Road, NW11 7HY<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563696696": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/knightsbridge_ab4184d5-22cd-4587-841b-fe709052cd4d.png",
+              "title": "Knightsbridge School",
+              "school_address": "<p>67 Pont St, Chelsea, SW1X 0BD<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563721840": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/lyceum.png",
+              "title": "The Lyceum School",
+              "school_address": "<p>65 Worship Street, Shoreditch, EC2A 2DU<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563743494": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/notting-hill-prep_b0a9807c-acdc-4bce-91f1-c8e94e94eb1a.png",
+              "title": "Notting Hill Preparatory School",
+              "school_address": "<p>95 Lancaster Rd, Notting Hill, W11 1QQ<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563759766": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/queens-college.png",
+              "title": "Queen’s College Preparatory School",
+              "school_address": "<p>61 Portland Pl, Marylebone, W1B 1QP<\/p>",
+              "school_link": ""
+            }
+          },
+          "1570710032177": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/sussex_house.jpeg",
+              "title": "Sussex House School",
+              "school_address": "<p>68 Cadogan Square, Chelsea, SW1X 0EA<\/p>",
+              "school_link": ""
+            }
+          },
+          "1579172907126": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/SPGS-logo-colour.jpg",
+              "title": "St. Paul's Girls' School",
+              "school_address": "<p>Brook Green, Hammersmith, W6 7BS<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563782858": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/Thomass-London-Day-Schools-Logo.jpg",
+              "title": "Thomas’s Battersea",
+              "school_address": "<p>Battersea High St, Battersea, SW11 3JB<\/p>",
+              "school_link": "shopify:\/\/pages\/thomas-battersea"
+            }
+          },
+          "1579172586815": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/Thomass-London-Day-Schools-Logo.jpg",
+              "title": "Thomas's Kensington",
+              "school_address": "<p>Cottesmore Gardens, Kensington, W8 5PR<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563796711": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/twickenham-prep_eecb9c28-7617-45c7-9cc3-76d45914673d.png",
+              "title": "Twickenham Preparatory School",
+              "school_address": "<p>43 High Street, Hampton, TW12 2SA<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563821038": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/wetherby_09707f53-538a-4ace-bc7c-6712ec6a5d3d.png",
+              "title": "Wetherby Kensington School",
+              "school_address": "<p>4 Wetherby Gardens, Kensington, SW5 0JN<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563836327": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/wetherby_09707f53-538a-4ace-bc7c-6712ec6a5d3d.png",
+              "title": "Wetherby Preparatory School",
+              "school_address": "<p>Bryanston Square, Marylebone, W1H 2EA<\/p>",
+              "school_link": ""
+            }
+          },
+          "1559563855446": {
+            "type": "school",
+            "settings": {
+              "school_logo": "shopify:\/\/shop_images\/wetherby_09707f53-538a-4ace-bc7c-6712ec6a5d3d.png",
+              "title": "Wetherby Pre-Preparatory School",
+              "school_address": "<p>11 Pembridge Square, Bayswater, W2 4ED<\/p>",
+              "school_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1559563545623",
+          "1559563576649",
+          "1559563598489",
+          "1559563617998",
+          "1559563636129",
+          "1579172812305",
+          "1559563655949",
+          "1559563679785",
+          "1559563696696",
+          "1559563721840",
+          "1559563743494",
+          "1559563759766",
+          "1570710032177",
+          "1579172907126",
+          "1559563782858",
+          "1579172586815",
+          "1559563796711",
+          "1559563821038",
+          "1559563836327",
+          "1559563855446"
+        ],
+        "settings": {
+          "schools_top_bg": "shopify:\/\/shop_images\/1-17.jpg",
+          "schools_top_title": "After-school coding clubs",
+          "schools_title": "We teach over 500 children at more than 45 clubs every week!",
+          "schools_text": "<p>As trusted provider of coding education in over 20 schools, we offer after school clubs, holiday camps, workshops, private tuition and in-school classes at some of London's most prestigious schools. Below is a list of the schools we currently work alongside but we are always looking for new schools to add to our portfolio.<\/p>\n<p>If&nbsp; you are a computing teacher or club coordinator and would like to know more please get in touch, we&rsquo;d love to hear from you.<\/p>",
+          "schools_btn_link": "shopify:\/\/pages\/contact",
+          "schools_btn_text": "Get in touch"
+        }
+      },
+      "school-slider": {
+        "type": "school-slider",
+        "blocks": {
+          "1559631628066": {
+            "type": "slide",
+            "settings": {
+              "bg_color": "#84547d",
+              "text": "<p>\"The blue{shift} teachers are incredibly knowledgeable and the Eaton Square teaching team were impressed with how they delivered inspiring course content to the children. Pupils were engaged, enjoying their lessons and making huge strides in their technical ability throughout the course of their club.\"<\/p>",
+              "content_color": "#f5c644",
+              "address": "<p><em>Ms. Watt - Principal, Eaton Square<\/em><\/p>",
+              "address_color": "#fff"
+            }
+          },
+          "1559631661852": {
+            "type": "slide",
+            "settings": {
+              "bg_color": "#84547d",
+              "text": "<p>\"It was well planned and resourced fantastically. Every girl&nbsp;was&nbsp;fully engaged and the knowledgeable staff were&nbsp;fantastic at guiding the girls to make good progress in their knowledge of coding. Great communication before also meant the timetabling of events worked seamlessly. I hope to continue working with blue{shift} in the future!\"<\/p>",
+              "content_color": "#f5c644",
+              "address": "<p><em>Mr Tillett - Principal,&nbsp;Queen's College Preparatory School<\/em><\/p>",
+              "address_color": "#fff"
+            }
+          }
+        },
+        "block_order": [
+          "1559631628066",
+          "1559631661852"
+        ],
+        "settings": {
+          "show_this_section": true
+        }
+      },
+      "school-info": {
+        "type": "school-info",
+        "blocks": {
+          "1559639670449": {
+            "type": "item",
+            "settings": {
+              "icon": "shopify:\/\/shop_images\/Asset_1_2x_4ab30912-6665-46ea-a1e1-81365cbbc0b7.png",
+              "color": "#f5c644",
+              "title": "Teaching",
+              "text": "<p>Partnerships with leading universities&nbsp;ensure top students &amp; graduates join our faculty.<\/p>\n<p>All teachers are fully trained, with experience teaching at a variety of schools<\/p>\n<p><\/p>"
+            }
+          },
+          "1559639724577": {
+            "type": "item",
+            "settings": {
+              "icon": "shopify:\/\/shop_images\/Asset_2_2x_a6ced2e0-f428-47b3-9c6b-72991bf6625f.png",
+              "color": "#7ec2a2",
+              "title": "Curriculum",
+              "text": "<p>Curriculum devised in conjunction&nbsp;with UCL Department of Education.&nbsp;&nbsp;<\/p>\n<p>Industry leaders&nbsp;within the coding education field, providing the latest technologies and teaching pedagogy<\/p>"
+            }
+          },
+          "1559639767408": {
+            "type": "item",
+            "settings": {
+              "icon": "shopify:\/\/shop_images\/Asset_3_2x_00d2cdeb-18f9-4667-bf5e-618211cb2f81.png",
+              "color": "#ea5461",
+              "title": "Our Service",
+              "text": "<p>Bespoke and tailored to each partnership, our club service is flexible to each schools needs.<\/p>\n<p>Our graduates go on to study computer science at leading secondary schools and universities.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "1559639670449",
+          "1559639724577",
+          "1559639767408"
+        ],
+        "settings": {
+          "show_this_section": true,
+          "title": "Our Credentials"
+        }
+      },
+      "section-interested-courses": {
+        "type": "section-interested-courses",
+        "blocks": {
+          "1559648078644": {
+            "type": "courses",
+            "settings": {
+              "link": "\/pages\/summer-camps",
+              "image": "shopify:\/\/shop_images\/Asset_9_2x-100.jpg",
+              "title": "Holiday Camps",
+              "color": "#7ec2a2"
+            }
+          },
+          "1559648108602": {
+            "type": "courses",
+            "settings": {
+              "link": "shopify:\/\/pages\/our-teachers",
+              "image": "shopify:\/\/shop_images\/IMG_2201_ee4ba974-b02a-474c-90f4-daa053e2154e.JPG",
+              "title": "Our Teachers",
+              "color": "#ea5461"
+            }
+          }
+        },
+        "block_order": [
+          "1559648078644",
+          "1559648108602"
+        ],
+        "settings": {
+          "show_this_section": true,
+          "title": "You may also be interested in..."
+        }
+      },
+      "schools-bottom": {
+        "type": "schools-bottom",
+        "settings": {
+          "show_this_section": false,
+          "title": "Interested in becoming a blue{shift} school partner?",
+          "sut_title": "<p>If you would like to know more please&nbsp;<a href=\"\/pages\/contact\" title=\"Contact\">get in touch.<\/a><\/p>"
+        }
+      },
+      "template-school-details": {
+        "type": "template-school-details",
+        "settings": {}
+      },
+      "1566300921281": {
+        "type": "slider-image-with-text",
+        "disabled": true,
+        "blocks": {
+          "1566300949188": {
+            "type": "slide",
+            "settings": {
+              "text": "",
+              "sub_text": "of teachers DBS checked and fully trained",
+              "image": "shopify:\/\/shop_images\/IMG_2067_2.JPG",
+              "color-1": "#7ec2a2",
+              "color-2": "#84547d"
+            }
+          },
+          "1566300968909": {
+            "type": "slide",
+            "settings": {
+              "text": "",
+              "sub_text": "",
+              "image": "shopify:\/\/shop_images\/IMG_2009_3.JPG",
+              "color-1": "#f5c644",
+              "color-2": "#ff6d6d"
+            }
+          },
+          "1566301360497": {
+            "type": "slide",
+            "settings": {
+              "text": "",
+              "sub_text": "",
+              "image": "shopify:\/\/shop_images\/IMG_2201.JPG",
+              "color-1": "#7ec2a2",
+              "color-2": "#f5c644"
+            }
+          }
+        },
+        "block_order": [
+          "1566300949188",
+          "1566300968909",
+          "1566301360497"
+        ],
+        "settings": {
+          "show_this_section": true
+        }
+      },
+      "1584389800539": {
+        "type": "dynamic-block",
+        "disabled": true,
+        "blocks": {
+          "1584389834144": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/28514597_1435562533239980_3233188272373433183_o.jpg",
+              "title": "Title",
+              "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.",
+              "url": "",
+              "linktext": "Click here"
+            }
+          },
+          "1584389846601": {
+            "type": "select",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/1-107.2.jpg",
+              "title": "Title",
+              "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.",
+              "url": "",
+              "linktext": "Click here"
+            }
+          }
+        },
+        "block_order": [
+          "1584389834144",
+          "1584389846601"
+        ],
+        "settings": {
+          "title": ""
+        }
+      }
+    },
+    "content_for_index": [
+      "1520566196685",
+      "1520566484268",
+      "section-3",
+      "1554123167715",
+      "1530608464938",
+      "1554288379220",
+      "1521454716636",
+      "1566300921281",
+      "1584389800539"
+    ]
+  },
+  "presets": {
+    "Light": {
+      "color_background": "#FFFFFF",
+      "color_accent": "#292929",
+      "use_highlighted_menu": false,
+      "color_title_text": "#292929",
+      "color_text": "#292929",
+      "color_button_text": "#FFFFFF",
+      "font_title": "Google_Prata",
+      "font_body": "Google_Karla:400,400i,700,700i",
+      "font_label": "Google_Karla:400,400i,700,700i",
+      "enable_currency_converter": true,
+      "currency_display_format": "money_with_currency_format",
+      "currency_converter_currencies": "INR GBP CAD USD AUD EUR JPY",
+      "currency_converter_default": "CAD",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "medium",
+      "checkout_body_background_color": "#fff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_color": "#fafafa",
+      "checkout_heading_font": "Helvetica Neue",
+      "checkout_body_font": "Helvetica Neue",
+      "checkout_accent_color": "#1990C6",
+      "checkout_button_color": "#1990C6",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "section-1": {
+          "type": "dynamic-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-left",
+                "text_color": "#000000"
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-right",
+                "text_color": "#000000"
+              }
+            },
+            "slide-3": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-left",
+                "text_color": "#292929"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2",
+            "slide-3"
+          ],
+          "settings": {
+            "slide_autoplay": 3
+          }
+        },
+        "section-2": {
+          "type": "dynamic-featured-collections",
+          "blocks": {
+            "collection-1": {
+              "type": "collection",
+              "settings": {
+                "alignment": "right",
+                "show_description": true
+              }
+            },
+            "collection-2": {
+              "type": "collection",
+              "settings": {
+                "alignment": "left",
+                "show_description": true
+              }
+            },
+            "collection-3": {
+              "type": "collection",
+              "settings": {
+                "alignment": "right",
+                "show_description": true
+              }
+            }
+          },
+          "block_order": [
+            "collection-1",
+            "collection-2",
+            "collection-3"
+          ],
+          "settings": {}
+        },
+        "section-3": {
+          "type": "dynamic-featured-products",
+          "settings": {
+            "product_item_style": "natural",
+            "product-count": 5,
+            "product_emphasize": true
+          }
+        },
+        "section-4": {
+          "type": "dynamic-blog-posts",
+          "settings": {}
+        },
+        "section-5": {
+          "type": "dynamic-instagram",
+          "settings": {}
+        },
+        "section-6": {
+          "type": "dynamic-twitter",
+          "settings": {}
+        },
+        "static-header": {
+          "type": "static-header",
+          "settings": {}
+        },
+        "site-footer": {
+          "type": "site-footer",
+          "blocks": {
+            "customer": {
+              "type": "customer",
+              "settings": {}
+            },
+            "richtext": {
+              "type": "richtext",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "customer",
+            "richtext"
+          ],
+          "settings": {
+            "enable_newsletter": true
+          }
+        },
+        "static-collection": {
+          "type": "static-collection",
+          "settings": {
+            "product_item_style": "natural"
+          }
+        },
+        "static-product": {
+          "type": "static-product",
+          "blocks": {
+            "related-products": {
+              "type": "related_products",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "related-products"
+          ],
+          "settings": {}
+        },
+        "static-article": {
+          "type": "static-article",
+          "settings": {}
+        },
+        "static-blog": {
+          "type": "static-blog",
+          "settings": {
+            "posts-per-page": 4
+          }
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-2",
+        "section-3",
+        "section-4",
+        "section-5",
+        "section-6"
+      ]
+    },
+    "Cool": {
+      "color_background": "#FFFFFF",
+      "color_accent": "#32818e",
+      "use_highlighted_menu": true,
+      "color_title_text": "#32818e",
+      "color_text": "#292929",
+      "color_button_text": "#FFFFFF",
+      "font_title": "Google_Poppins:300,400,700",
+      "font_body": "Google_Karla:400,400i,700,700i",
+      "font_label": "Google_Karla:400,400i,700,700i",
+      "enable_currency_converter": true,
+      "currency_display_format": "money_format",
+      "currency_converter_currencies": "CAD USD GBP AUD EUR JPY",
+      "currency_converter_default": "CAD",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "medium",
+      "checkout_body_background_color": "#fff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_color": "#fafafa",
+      "checkout_heading_font": "Helvetica Neue",
+      "checkout_body_font": "Helvetica Neue",
+      "checkout_accent_color": "#1990C6",
+      "checkout_button_color": "#1990C6",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "section-1": {
+          "type": "dynamic-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-right",
+                "text_color": "#32818e"
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-left",
+                "text_color": "#32818e"
+              }
+            },
+            "slide-3": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-right",
+                "text_color": "#32818e"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2",
+            "slide-3"
+          ],
+          "settings": {
+            "slide_autoplay": 3
+          }
+        },
+        "section-2": {
+          "type": "dynamic-featured-collections",
+          "blocks": {
+            "collection-1": {
+              "type": "collection",
+              "settings": {
+                "alignment": "left",
+                "show_description": true
+              }
+            },
+            "collection-2": {
+              "type": "collection",
+              "settings": {
+                "alignment": "right",
+                "show_description": true
+              }
+            }
+          },
+          "block_order": [
+            "collection-1",
+            "collection-2"
+          ],
+          "settings": {}
+        },
+        "section-3": {
+          "type": "dynamic-featured-products",
+          "settings": {
+            "title": "Featured Products",
+            "collection": "featured-products",
+            "product_item_style": "cropped-medium",
+            "product-count": 3,
+            "product_emphasize": true
+          }
+        },
+        "section-4": {
+          "type": "dynamic-blog-posts",
+          "settings": {}
+        },
+        "section-5": {
+          "type": "dynamic-instagram",
+          "settings": {}
+        },
+        "section-6": {
+          "type": "dynamic-twitter",
+          "settings": {}
+        },
+        "static-header": {
+          "type": "static-header",
+          "settings": {}
+        },
+        "site-footer": {
+          "type": "site-footer",
+          "blocks": {
+            "customer": {
+              "type": "customer",
+              "settings": {}
+            },
+            "richtext": {
+              "type": "richtext",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "customer",
+            "richtext"
+          ],
+          "settings": {
+            "enable_newsletter": true
+          }
+        },
+        "static-collection": {
+          "type": "static-collection",
+          "settings": {
+            "products-per-page": 12,
+            "product_item_style": "natural"
+          }
+        },
+        "static-product": {
+          "type": "static-product",
+          "settings": {}
+        },
+        "static-article": {
+          "type": "static-article",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-3",
+        "section-2",
+        "section-4",
+        "section-5",
+        "section-6"
+      ]
+    },
+    "Fresh": {
+      "color_background": "#f6f6f6",
+      "color_accent": "#657461",
+      "use_highlighted_menu": false,
+      "color_title_text": "#474c46",
+      "color_text": "#6b6b6b",
+      "color_button_text": "#FFFFFF",
+      "font_title": "Google_Roboto+Condensed:400,400i,700,700i",
+      "font_body": "Google_Roboto:300,300i,400,400i,700,700i",
+      "font_label": "Google_Muli:300,300i,400,400i,700,700i",
+      "enable_currency_converter": true,
+      "currency_display_format": "money_format",
+      "currency_converter_currencies": "INR GBP CAD USD AUD EUR JPY",
+      "currency_converter_default": "CAD",
+      "share_widget_facebook": true,
+      "share_widget_twitter": true,
+      "share_widget_pinterest": true,
+      "share_widget_google_plus": true,
+      "share_widget_email": true,
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "medium",
+      "checkout_body_background_color": "#fff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_color": "#fafafa",
+      "checkout_heading_font": "Helvetica Neue",
+      "checkout_body_font": "Helvetica Neue",
+      "checkout_accent_color": "#1990C6",
+      "checkout_button_color": "#1990C6",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "section-1": {
+          "type": "dynamic-slideshow",
+          "blocks": {
+            "slide-1-1": {
+              "type": "slide",
+              "settings": {
+                "layout": "full-width-right",
+                "text_color": "#ffffff"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1-1"
+          ],
+          "settings": {
+            "slide_autoplay": 3
+          }
+        },
+        "section-2": {
+          "type": "dynamic-mobile-collections",
+          "settings": {
+            "title": "Browse By",
+            "show_images": false,
+            "type": "tags",
+            "truncate_count": 5
+          }
+        },
+        "section-3": {
+          "type": "dynamic-featured-products",
+          "settings": {
+            "title": "Our Best Sellers",
+            "collection": "frontpage",
+            "product_item_style": "cropped-large",
+            "enable_product_quickshop": true,
+            "product-count": 4,
+            "product_emphasize": false
+          }
+        },
+        "section-4": {
+          "type": "dynamic-slideshow",
+          "blocks": {
+            "slide-4-1": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-right",
+                "text_color": "#474c46"
+              }
+            },
+            "slide-4-2": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-right",
+                "text_color": "#474c46"
+              }
+            },
+            "slide-4-3": {
+              "type": "slide",
+              "settings": {
+                "layout": "default-right",
+                "text_color": "#474c46"
+              }
+            }
+          },
+          "block_order": [
+            "slide-4-1",
+            "slide-4-2",
+            "slide-4-3"
+          ],
+          "settings": {
+            "slide_autoplay": 3
+          }
+        },
+        "section-5": {
+          "type": "dynamic-twitter",
+          "settings": {
+            "title": "Twitter",
+            "username": "pixelunion"
+          }
+        },
+        "section-6": {
+          "type": "dynamic-instagram",
+          "settings": {}
+        },
+        "static-article": {
+          "type": "static-article",
+          "settings": {
+            "enable_social_sharing": true
+          }
+        },
+        "static-blog": {
+          "type": "static-blog",
+          "settings": {
+            "posts-per-page": 4
+          }
+        },
+        "static-collection": {
+          "type": "static-collection",
+          "settings": {
+            "products-per-page": 12,
+            "product_item_style": "cropped-large",
+            "enable_product_quickshop": true
+          }
+        },
+        "static-contactbar": {
+          "type": "static-contactbar",
+          "settings": {
+            "directions_map_color_fg": "#292929",
+            "directions_map_color_bg": "#ffffff"
+          }
+        },
+        "site-footer": {
+          "type": "site-footer",
+          "settings": {
+            "enable_newsletter": true,
+            "enable_social": true,
+            "enable_payment_icons": true
+          }
+        },
+        "static-header": {
+          "type": "static-header",
+          "settings": {}
+        },
+        "static-meganav": {
+          "type": "static-meganav",
+          "settings": {
+            "trigger": "",
+            "show_images": true,
+            "type": "titles",
+            "truncate_count": 1
+          }
+        },
+        "static-product": {
+          "type": "static-product",
+          "settings": {
+            "enable_social_sharing": true
+          }
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-2",
+        "section-3",
+        "section-4",
+        "section-5",
+        "section-6"
+      ]
+    }
+  }
+}

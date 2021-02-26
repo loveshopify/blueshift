@@ -1,0 +1,43 @@
+<div class="social">
+  {%- if settings.social_facebook != blank -%}
+    {% include 'social-link', id: 'facebook', title: 'Facebook', url: settings.social_facebook %}
+  {%- endif -%}
+
+  {%- if settings.social_twitter != blank -%}
+    {% include 'social-link', id: 'twitter', title: 'Twitter', url: settings.social_twitter %}
+  {%- endif -%}
+
+  {%- if settings.social_google != blank -%}
+    {% include 'social-link', id: 'google', title: 'Google+', url: settings.social_google %}
+  {%- endif -%}
+
+  {%- if settings.social_pinterest != blank -%}
+    {% include 'social-link', id: 'pinterest', title: 'Pinterest', url: settings.social_pinterest %}
+  {%- endif -%}
+
+  {%- if settings.social_instagram != blank -%}
+    {% include 'social-link', id: 'instagram', title: 'Instagram', url: settings.social_instagram %}
+  {%- endif -%}
+
+  {%- if settings.social_vimeo != blank -%}
+    {% include 'social-link', id: 'vimeo', title: 'Vimeo', url: settings.social_vimeo %}
+  {%- endif -%}
+
+  {%- if settings.social_youtube != blank -%}
+    {% include 'social-link', id: 'youtube', title: 'YouTube', url: settings.social_youtube %}
+  {%- endif -%}
+
+  {%- if settings.social_medium != blank -%}
+    {% include 'social-link', id: 'medium', title: 'Medium', url: settings.social_medium %}
+  {%- endif -%}
+
+  {%- if settings.social_email != blank -%}
+    {% assign url = 'mailto:' | append: settings.social_email %}
+    {% capture email_title %}{{ 'general.social.email' | t }}{% endcapture %}
+    {% include 'social-link', id: 'email', title: email_title, url: url %}
+  {%- endif -%}
+
+  {%- if settings.social_rss != blank -%}
+    {% include 'social-link', id: 'rss', title: 'RSS', url: settings.social_rss %}
+  {%- endif -%}
+</div>

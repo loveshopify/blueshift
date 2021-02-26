@@ -1,0 +1,47 @@
+{%- assign display_info = false -%}
+
+{%- if block.settings.title != blank or block.settings.text != blank -%}
+  {%- assign display_info = true -%}
+{%- endif -%}
+
+{%- if display_info or block.settings.link_text != blank -%}
+  {%- assign display_info = true -%}
+{%- endif -%}
+
+<article
+  class="
+    slideshow-slide
+    slideshow-slide-layout-{{ block.settings.layout }}
+    {%- unless block.settings.image -%}slideshow-slide-no-image{%- endunless -%}"
+  data-slideshow-slide
+  data-slideshow-slide-layout="{{ block.settings.layout }}"
+  {{ block.shopify_attributes }}>
+  <figure class="slideshow-slide-image" data-slideshow-slide-image data-slideshow-layout="{{ block.settings.layout }}">
+    {%- if block.settings.image -%}
+      <img
+        alt="{{ block.settings.image.alt | escape }}"
+        {% include 'img-src', img: block.settings.image, size: '1280x' %}
+      >
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </figure>
+  {%- if display_info -%}
+    <div class="slideshow-slide-info">
+      <h2
+        class="slideshow-slide-title"{% if block.settings.text_color != blank %}
+        style="color: {{ block.settings.text_color }};"{% endif %}
+      >{{ block.settings.title | escape }}</h2>
+      <div
+        class="slideshow-slide-text"{% if block.settings.text_color != blank %}
+        style="color: {{ block.settings.text_color }};"{% endif %}
+      >{{ block.settings.text }}</div>
+      {%- if block.settings.link_text != blank -%}
+        <a class="slideshow-slide-link" href="{{ block.settings.link }}"{% if block.settings.text_color != blank %} style="color: {{ block.settings.text_color }};"{% endif %}>
+          <span class="slideshow-slide-link-text">{{ block.settings.link_text | escape }}</span>
+          <span class="slideshow-slide-link-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</article>

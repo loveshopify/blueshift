@@ -1,0 +1,156 @@
+
+<div class="upsell-grid">
+{% if product.metafields.accentuate.disable_product_1 %}
+  {% else %}
+{% if product.metafields.accentuate.productupsell1 %}
+  {% assign selected_handles = product.metafields.accentuate.productupsell1 | split: '|'  %}
+  {% for selected_handle in selected_handles %}
+  {% assign meta_product = all_products[selected_handle] %}
+  {% assign meta_featured_image = meta_product.selected_or_first_available_variant.featured_image | default: meta_product.featured_image %}
+    <div class="single-grid">
+      <span class = "upsell_image">
+          <img class="product-single__thumbnail-image" src="{{ meta_product.featured_image.src | img_url:'medium', scale: product_image_scale }}" alt="{{ meta_product.featured_image.alt | escape }}">
+      </span>
+      <span class = "upsell_title">
+          {{ meta_product.title }}
+      </span>
+      <div class="shorttext">
+        {{ product.metafields.accentuate.p1text }}
+      </div>
+      <span id="ProductPrice" class="h2 upsell_price" itemprop="price">
+        {{ meta_product.price | money  }}
+        {% if meta_product.compare_at_price_max > meta_product.price %}
+        <strike>{{ meta_product.compare_at_price | money }}</strike>
+        {% endif %}
+      </span>
+      <span class = "upsell_variants swatch clearfix">
+        {% comment %}
+        <div class="swatch swatch-element color {{ variant.title | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+          <div class="tooltip">{{ variant.title }}</div>
+          <input title="{{ variant.title }}" type="checkbox" class="meta_variant v-{{ variant.id}}" value="{{ variant.id }}">
+          <label data-val="{{variant.id}}">
+            <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+          </label>
+        </div>
+        {% endcomment %}
+        <div class="option-values">
+          <div class="option-select">
+            <select class="option-select-input" name="id" id="product-select-{{meta_product.id}}">
+              <option></option>
+              {% for variant in meta_product.variants %}
+              <option value="{{variant.id}}">{{variant.title}} - {{variant.price | money }} </option>
+              {% endfor %}
+            </select>
+            <span class="option-select-arrow"><svg height="10" style="visibility: visible;" viewBox="0 0 6 10" width="6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535" fill="currentColor" fill-rule="evenodd"></path></svg></span>
+          </div>
+        </div>
+      </span>
+
+    </div>
+    {% endfor %}
+{% endif %}
+  {% endif %}
+  {% if product.metafields.accentuate.disable_product_2 %}
+  {% else %}
+{% if product.metafields.accentuate.productupsell2 %}
+  {% assign selected_handles = product.metafields.accentuate.productupsell2 | split: '|'  %}
+  {% for selected_handle in selected_handles %}
+  {% assign meta_product = all_products[selected_handle] %}
+  {% assign meta_featured_image = meta_product.selected_or_first_available_variant.featured_image | default: meta_product.featured_image %}
+    <div class="single-grid">
+      <span class = "upsell_image">
+          <img class="product-single__thumbnail-image" src="{{ meta_product.featured_image.src | img_url:'medium', scale: product_image_scale }}" alt="{{ meta_product.featured_image.alt | escape }}">
+      </span>
+      <span class = "upsell_title">
+          {{ meta_product.title }}
+      </span>
+      <div class="shorttext">
+        {{ product.metafields.accentuate.p2text }}
+      </div>
+      <span id="ProductPrice" class="h2 upsell_price" itemprop="price">
+        {{ meta_product.price | money  }}
+        {% if meta_product.compare_at_price_max > meta_product.price %}
+        <strike>{{ meta_product.compare_at_price | money }}</strike>
+        {% endif %}
+      </span>
+      <span class = "upsell_variants swatch clearfix">
+
+        {% comment %}
+        <div class="swatch swatch-element color {{ variant.title | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+          <div class="tooltip">{{ variant.title }}</div>
+          <input title="{{ variant.title }}" type="checkbox" class="meta_variant v-{{ variant.id}}" value="{{ variant.id }}">
+          <label data-val="{{variant.id}}">
+            <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+          </label>
+        </div>
+        {% endcomment %}
+        <div class="option-values">
+          <div class="option-select">
+            <select class="option-select-input" name="id" id="product-select-{{meta_product.id}}">
+              <option></option>
+              {% for variant in meta_product.variants %}
+              <option value="{{variant.id}}">{{variant.title}} - {{variant.price | money }} </option>
+              {% endfor %}
+            </select>
+            <span class="option-select-arrow"><svg height="10" style="visibility: visible;" viewBox="0 0 6 10" width="6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535" fill="currentColor" fill-rule="evenodd"></path></svg></span>
+          </div>
+        </div>
+
+      </span>
+    </div>
+    {% endfor %}
+{% endif %}
+  {% endif %}
+  {% if product.metafields.accentuate.disable_product_3 %}
+  {% else %}
+{% if product.metafields.accentuate.productupsell3 %}
+  {% assign selected_handles = product.metafields.accentuate.productupsell3 | split: '|'  %}
+  {% for selected_handle in selected_handles %}
+  {% assign meta_product = all_products[selected_handle] %}
+  {% assign meta_featured_image = meta_product.selected_or_first_available_variant.featured_image | default: meta_product.featured_image %}
+    <div class="single-grid">
+      <span class = "upsell_image">
+          <img class="product-single__thumbnail-image" src="{{ meta_product.featured_image.src | img_url:'medium', scale: product_image_scale }}" alt="{{ meta_product.featured_image.alt | escape }}">
+      </span>
+      <span class = "upsell_title">
+          {{ meta_product.title }}
+      </span>
+      <div class="shorttext">
+        {{ product.metafields.accentuate.p3text }}
+      </div>
+      <span id="ProductPrice" class="h2 upsell_price" itemprop="price">
+        {{ meta_product.price | money  }}
+        {% if meta_product.compare_at_price_max > meta_product.price %}
+        <strike>{{ meta_product.compare_at_price | money }}</strike>
+        {% endif %}
+      </span>
+      <span class = "upsell_variants swatch clearfix">
+        {% comment %}
+        <div class="swatch swatch-element color {{ variant.title | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+          <div class="tooltip">{{ variant.title }}</div>
+          <input title="{{ variant.title }}" type="checkbox" class="meta_variant v-{{ variant.id}}" value="{{ variant.id }}">
+          <label data-val="{{variant.id}}">
+            <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+          </label>
+        </div>
+        {% endcomment %}
+        <div class="option-values">
+          <div class="option-select">
+            <select class="option-select-input" name="id" id="product-select-{{meta_product.id}}">
+              <option></option>
+              {% for variant in meta_product.variants %}
+              <option value="{{variant.id}}">{{variant.title}} - {{variant.price | money }} </option>
+              {% endfor %}
+            </select>
+            <span class="option-select-arrow"><svg height="10" style="visibility: visible;" viewBox="0 0 6 10" width="6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535" fill="currentColor" fill-rule="evenodd"></path></svg></span>
+          </div>
+        </div>
+      </span>
+    </div>
+    {% endfor %}
+{% endif %}
+  {% endif %}
+</div>

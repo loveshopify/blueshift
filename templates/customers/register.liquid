@@ -1,0 +1,84 @@
+<div class="page-content template-account-register">
+
+  <h1 class="template-account-register-title">{{ 'customers.register.header' | t }}</h1>
+
+  {% form 'create_customer' %}
+
+    {% if form.errors %}
+      {{ form.errors | default_errors }}
+    {% endif %}
+
+    <div class="input-wrapper">
+      <label class="input-label" for="customer[first_name]">
+        {{ 'general.form.first_name' | t }}
+      </label>
+      <input
+        id="customer_first_name"
+        class="input-field {% if form.errors contains 'first_name' %}error{% endif %}"
+        type="text"
+        value="{{ form.first_name }}"
+        name="customer[first_name]">
+
+      {% if form.errors contains 'first_name' %}
+        <p class="error-message">
+          {{ 'general.form.first_name' | t }} {{ form.errors.messages['first_name'] }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="input-wrapper">
+      <label class="input-label" for="customer[last_name]">{{ 'general.form.last_name' | t }}</label>
+      <input
+        id="customer_last_name"
+        class="input-field {% if form.errors contains 'last_name' %}error{% endif %}"
+        type="text"
+        placeholder=""
+        value="{{ form.last_name }}"
+        name="customer[last_name]">
+
+      {% if form.errors contains 'last_name' %}
+        <p class="error-message">
+          {{ 'general.form.last_name' | t }} {{ form.errors.messages['last_name'] }}
+        </p>
+      {% endif %}
+    </div>
+
+    {% include "scm-attribute-register" %}
+
+    <div class="input-wrapper">
+      <label class="input-label" for="customer[email]">{{ 'general.form.email' | t }}</label>
+      <input
+        id="customer_email"
+        class="input-field {% if form.errors contains 'email' %}error{% endif %}"
+        type="text"
+        value="{{ form.email }}"
+        name="customer[email]">
+
+      {% if form.errors contains 'email' %}
+        <p class="error-message">
+          {{ 'general.form.email' | t }} {{ form.errors.messages['email'] }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="input-wrapper">
+      <label class="input-label" for="customer[password]">{{ 'general.form.password' | t }}</label>
+      <input
+        id="customer_password"
+        class="input-field {% if form.errors contains 'password' %}error{% endif %}"
+        type="password"
+        name="customer[password]">
+
+      {% if form.errors contains 'password' %}
+        <p class="error-message">
+          {{ 'general.form.password' | t }} {{ form.errors.messages['password'] }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="input-wrapper">
+      <input class="button" type="submit" value="{{ 'customers.register.submit' | t }}">
+    </div>
+
+  {% endform %}
+</div>

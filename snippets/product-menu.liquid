@@ -1,0 +1,233 @@
+<div class="product-menu-container{% if settings.use_highlighted_menu %} product-menu-highlight{% endif %}" data-product-menu-container>
+  <form class="product-menu-form" method="post" action="/cart/add" data-product-menu-form>
+  
+    {% comment %}
+      Social sharing slideout.
+    {% endcomment %}
+    {%- if section.settings.enable_social_sharing -%}
+      <section
+        class="product-menu-slideout"
+        tabindex="-1"
+        aria-label="{{ 'product.share_slideout' | t }}"
+        data-product-slideout-share>
+        <div class="product-menu-slideout-header">
+          <span class="product-menu-slideout-header-title">{{ 'product.share' | t }}</span>
+
+          <span>
+            <button
+              class="product-menu-slideout-button product-menu-slideout-button-dimiss"
+              type="button"
+              aria-label="{{ 'general.form.close' | t }}"
+              data-product-menu-slideout-button-dismiss>
+              {%- include 'icon', id: 'close' -%}
+            </button>
+          </span>
+        </div>
+
+        <div class="product-menu-slideout-content">
+          {%- include 'share-buttons' -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {% comment %}
+      Product options slideout.
+    {% endcomment %}
+    <section class="product-menu-slideout"
+      tabindex="-1"
+      aria-label="{{ 'product.select_options_slideout' | t }}"
+      data-product-slideout-atc>
+      <div class="product-menu-slideout-header">
+        <div class="product-menu-slideout-header-title">
+          <span>{{ product.title }}</span>
+          {%- include 'product-price', variant: product.selected_or_first_available_variant -%}
+        </div>
+
+        <span>
+          <button
+            class="product-menu-slideout-button product-menu-slideout-button-dimiss"
+            type="button"
+            aria-label="{{ 'general.form.close' | t }}"
+            data-product-menu-slideout-button-dismiss>
+            {%- include 'icon', id: 'close' -%}
+          </button>
+        </span>
+      </div>
+
+      <div class="product-menu-slideout-content">
+        <p class="product-atc-failure-message" data-product-atc-failure-message></p>
+        {%- include 'product-options' -%}
+      </div>
+    </section>
+
+    {% comment %}
+      Add-to-cart failure slideout.
+    {% endcomment %}
+    <section
+      class="product-menu-slideout"
+      tabindex="-1"
+      aria-label="{{ 'product.atc_failure_slideout' | t }}"
+      data-product-slideout-atc-failure>
+      <div class="product-menu-slideout-header">
+        <span class="product-menu-slideout-header-title">{{ product.title }}</span>
+
+        <span>
+          <button
+            class="product-menu-slideout-button product-menu-slideout-button-dimiss"
+            type="button"
+            aria-label="{{ 'general.form.close' | t }}"
+            data-product-menu-slideout-button-dismiss>
+            {%- include 'icon', id: 'close' -%}
+          </button>
+        </span>
+      </div>
+
+      <div class="product-menu-slideout-content">
+        <p class="product-atc-failure-message" data-product-atc-failure-message></p>
+      </div>
+    </section>
+
+    {% comment %}
+      Add-to-cart success slideout.
+    {% endcomment %}
+    <section
+      class="product-menu-slideout"
+      tabindex="-1"
+      aria-label="{{ 'product.atc_success_slideout' | t }}"
+      data-product-slideout-atc-success>
+      <div class="product-menu-slideout-header">
+        <span class="product-menu-slideout-header-title">{{ product.title }}</span>
+
+        <span>
+          <button
+            class="product-menu-slideout-button product-menu-slideout-button-dimiss"
+            type="button"
+            aria-label="{{ 'general.form.close' | t }}"
+            data-product-menu-slideout-button-dismiss>
+            {%- include 'icon', id: 'close' -%}
+          </button>
+        </span>
+      </div>
+
+      <div class="product-menu-slideout-content">
+        <div class="product-atc-success-message" data-product-atc-success-message>
+          <figure class="product-atc-success-message-image">
+            {%- include 'icon', id: 'cart' -%}
+            <label
+              class="product-atc-success-message-variant-quantity">
+              &plus;
+              <span data-product-atc-success-message-variant-quantity></span>
+            </label>
+          </figure>
+          <span class="product-atc-success-message-title">
+            {{ 'product.added_to_cart' | t }}
+          </span>
+          <span
+            class="product-atc-success-message-product-title"
+            data-product-atc-success-message-product-title>
+            {{ product.title }}
+          </span>
+          <span
+            class="product-atc-success-message-variant-options"
+            data-product-atc-success-message-variant-options>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    {% comment %}
+      Bottom product bar.
+    {% endcomment %}
+    <section class="product-menu" data-product-menu>
+      {%- include 'breadcrumbs' -%}
+      <a class="product-quickshop-link" href="{{ product.url | within: collection }}">{{ 'product.quickshop_cta' | t }}{%- include 'icon', id: 'arrow' -%}</a>
+
+      <div
+        class="
+          product-menu-buttons
+          {% if section.settings.enable_social_sharing %}product-menu-buttons-has-share{% endif %}
+        "
+        data-product-menu-buttons-selectoptions>
+        {%- if section.settings.enable_social_sharing -%}
+          <button
+            class="product-menu-button product-menu-button-share"
+            type="button"
+            data-product-menu-button-share>
+            <div class="product-menu-button-share-text">{{ 'product.share' | t }}</div>
+            <div class="product-menu-button-share-icon">{%- include 'icon', id: 'share' -%}</div>
+          </button>
+        {%- endif -%}
+        <button
+          class="product-menu-button product-menu-button-selectoptions"
+          type="button"
+          data-product-menu-button-selectoptions>
+          {{ 'product.select_options' | t }}
+          <span class="money"
+            data-product-menu-button-selectoptions-variant-price
+            data-variant-price >
+            {{ product.selected_or_first_available_variant.price | money }}
+          </span>
+        </button>
+      </div>
+
+      <div
+        class="product-menu-buttons"
+        data-product-menu-buttons-share
+        data-product-menu-buttons-atc-failure>
+        <button
+          class="product-menu-button product-menu-button-cancel"
+          type="button"
+          aria-label="{{ 'general.form.close' | t }}"
+          data-product-menu-button-cancel>
+          {{ 'general.form.close' | t }}
+        </button>
+      </div>
+
+      <div
+        class="
+          product-menu-buttons
+          {% if section.settings.enable_social_sharing %}product-menu-buttons-has-share{% endif %}
+        "
+        data-product-menu-buttons-atc>
+        {%- if section.settings.enable_social_sharing -%}
+          <button
+            class="product-menu-button product-menu-button-share"
+            type="button"
+            data-product-menu-button-share>
+            <div class="product-menu-button-share-text">{{ 'product.share' | t }}</div>
+            <div class="product-menu-button-share-icon">{%- include 'icon', id: 'share' -%}</div>
+          </button>
+        {%- endif -%}
+
+        {% include 'quantity' %}
+
+        <button
+          class="product-menu-button product-menu-button-atc addToCart"
+          type="button"
+          data-product-menu-button-atc
+          data-product-atc>
+          <span class="product-menu-button-atc-text" data-product-menu-button-atc-text>{{ 'product.add_to_cart.available' | t }}</span>
+          <span class="money"
+            data-product-menu-button-atc-variant-price
+            data-variant-price>
+            {{ product.selected_or_first_available_variant.price | money }}
+          </span>
+        </button>
+      </div>
+
+      <div class="product-menu-buttons" data-product-menu-buttons-atc-success>
+        <a href="{{ collection.url | default: shop.url }}">
+          <button
+            class="product-menu-button product-menu-button-continueshopping"
+            type="button">{{ 'product.continue_shopping' | t }}</button>
+        </a>
+        <a href="/cart">
+          <button
+            class="product-menu-button product-menu-button-viewcart"
+            type="button">{{ 'product.view_cart' | t }}</button>
+        </a>
+      </div>
+    </section>
+
+  </form>
+</div>

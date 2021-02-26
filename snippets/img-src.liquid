@@ -1,0 +1,111 @@
+{%- comment -%}
+  Outputs src and data-src, as well as
+  srcset and data-srcset attributes if appropriate.
+
+  @param img
+    The source image.
+
+  @param size
+    The output src size.
+    Format(s):
+      100x200
+      100x
+      x200
+
+  @param data_size (optional)
+    The output data src size.
+    Note: If 'data_size' is undefined, then 'size' will
+          be applied to data-src and data-srcset.
+    Format(s):
+      100x200
+      100x
+      x200
+
+  @param crop (optional)
+    The output src cropping.
+    One of:
+      top
+      center
+      bottom
+      left
+      right
+      false
+
+  @param data_crop (optional)
+    The output data src cropping.
+    Note: If 'data_crop' is undefined and 'crop' is defined, then 'crop' will
+          be applied to data-src and data-srcset.
+          Use 'false' to remove cropping from data-src and data-srcset
+          when crop is defined.
+    One of:
+      top
+      center
+      bottom
+      left
+      right
+      false
+{%- endcomment -%}
+
+{% assign size_split = size | split: 'x' %}
+{% assign width = size_split[0] %}
+{% assign height = size_split[1] %}
+
+{% if data_size != blank %}
+  {% assign data_size_split = data_size | split: 'x' %}
+  {% assign data_width = data_size_split[0] %}
+  {% assign data_height = data_size_split[1] %}
+{% else %}
+  {% assign data_size = size %}
+  {% assign data_width = width %}
+  {% assign data_height = height %}
+{% endif %}
+
+{% if data_crop == blank and crop != blank %}
+  {% assign data_crop = crop %}
+{% endif %}
+
+{% if width != blank %}
+  {% assign retina_width = width | times: 2 %}
+{% endif %}
+
+{% if height != blank %}
+  {% assign retina_height = height | times: 2 %}
+{% endif %}
+
+{% if data_width != blank %}
+  {% assign data_retina_width = data_width | times: 2 %}
+{% endif %}
+
+{% if data_height != blank %}
+  {% assign data_retina_height = data_height | times: 2 %}
+{% endif %}
+
+{% assign src = img | img_url: size %}
+{% assign data_src = img | img_url: data_size %}
+{% assign srcset = img | img_url: size, scale: 2 %}
+{% assign data_srcset = img | img_url: data_size, scale: 2 %}
+
+{% if crop %}
+  {% assign src = img | img_url: size, crop: crop %}
+  {% assign srcset = img | img_url: size, scale: 2, crop: crop %}
+{% endif %}
+
+{% if data_crop %}
+  {% assign data_src = img | img_url: data_size, crop: data_crop %}
+  {% assign data_srcset = img | img_url: data_size, scale: 2, crop: data_crop %}
+{% endif %}
+
+src="{{ src }}"
+data-src="{{ data_src }}"
+
+{% if width != blank and img.width >= retina_width %}
+  srcset="{{ srcset }} 2x"
+{% elsif height != blank and img.height >= retina_height %}
+  srcset="{{ srcset }} 2x"
+{% endif %}
+
+{% if data_width != blank and img.width >= data_retina_width %}
+  data-srcset="{{ data_srcset }} 2x"
+{% elsif data_height != blank and img.height >= data_retina_height %}
+  data-srcset="{{ data_srcset }} 2x"
+{% endif %}

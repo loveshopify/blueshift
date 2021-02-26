@@ -1,0 +1,63 @@
+{%- capture cart_item_options -%}
+  {%- unless item.variant.title == 'Default Title' -%}
+    <span class="cart-item-options">
+      {%- if item.variant.title != 'Default title' -%}
+        {{ item.variant.title | replace: ' /', ',' }}
+      {%- endif -%}
+    </span>
+  {%- endunless -%}
+{%- endcapture -%}
+
+{% if item.variant.inventory_management != blank and item.variant.inventory_policy == 'deny' %}
+  {% assign max = item.variant.inventory_quantity %}
+{% else %}
+  {% assign max = blank %}
+{% endif %}
+
+<article class="cart-item" data-cart-item data-cart-item-variant-id="{{ item.variant_id }}">
+  <div class="cart-item-column cart-item-column-1">
+    {%- if item.image -%}
+      <figure class="cart-item-image">
+        <a href="{{ item.url }}">
+          <img
+            {% include 'img-src', img: item.image, size: '120x' %}
+          >
+        </a>
+      </figure>
+    {%- endif -%}
+  </div>
+  <div class="cart-item-column cart-item-column-mobile cart-item-column-mobile-2">
+    <div class="cart-item-row cart-item-row-1">
+      <span class="cart-item-title">
+        <a href="{{ item.url }}">{{ item.product.title }}</a>
+      </span>
+    </div>
+    {% include 'product-customizer-helper' %}
+    <div class="cart-item-row cart-item-row-2">
+      {{ cart_item_options }}
+    </div>
+    <div class="cart-item-row cart-item-row-3">
+      <span class="cart-item-price money" data-cart-item-subtotal>{{ item.price | money }}</span>
+    </div>
+    <div class="cart-item-row cart-item-row-4">
+      {% include 'quantity', value: item.quantity, max: max %}
+    </div>
+  </div>
+  <div class="cart-item-column cart-item-column-2">
+    <span class="cart-item-title">
+      <a href="{{ item.url }}">{{ item.product.title }}</a>
+    </span>
+  </div>
+  <div class="cart-item-column cart-item-column-3">
+    {{ cart_item_options }}
+  </div>
+  <div class="cart-item-column cart-item-column-4">
+    <span class="cart-item-price money" data-cart-item-subtotal>{{ item.price | money }}</span>
+  </div>
+  <div class="cart-item-column cart-item-column-5">
+    {% include 'quantity', value: item.quantity, max: max %}
+  </div>
+  <div class="cart-item-column cart-item-column-6">
+    <div class="cart-item-button cart-item-button-dismiss" data-cart-item-button-dismiss>{%- include 'icon', id: 'close' -%}</div>
+  </div>
+</article>

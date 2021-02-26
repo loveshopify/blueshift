@@ -1,0 +1,94 @@
+<section class="collection-menu-container{% if settings.use_highlighted_menu %} collection-menu-highlight{% endif %}" data-collection-menu-container>
+  <div class="collection-menu-slideout collection-menu-slideout-sortby" tabindex="-1" data-collection-slideout-sortby>
+    <div class="collection-menu-slideout-header">
+      <span class="collection-menu-slideout-header-title">{{ 'collection.sort_by.title' | t }}</span>
+
+      <span>
+        <button
+          class="collection-menu-slideout-button collection-menu-slideout-button-dimiss"
+          type="button"
+          aria-label="{{ 'general.form.close' | t }}"
+          data-collection-menu-slideout-button-dismiss>
+          {%- include 'icon', id: 'close' -%}
+        </button>
+      </span>
+    </div>
+
+    <section class="collection-menu-slideout-content">
+      {%- assign sort_by_options_string = 'manual|price-ascending|price-descending|title-ascending|title-descending|created-ascending|created-descending|best-selling' -%}
+      {%- assign sort_by_options = sort_by_options_string | split: '|' -%}
+
+      {%- for sort_by in sort_by_options -%}
+        <div class="collection-sortby-option">
+          <input
+            class="collection-sortby-button"
+            type="radio"
+            name="sort-by"
+            value="{{ sort_by }}"
+            data-sortby-option>
+          <label class="collection-sortby-name">{{ 'collection.sort_by.' | append: sort_by | replace: '-', '_' | t }}</label>
+        </div>
+      {%- endfor -%}
+    </section>
+  </div>
+
+  <div class="collection-menu-slideout collection-menu-slideout-refine" tabindex="-1" data-collection-slideout-refine>
+    <div class="collection-menu-slideout-header">
+      <span class="collection-menu-slideout-header-title">{{ 'collection.refine.title' | t }}</span>
+
+      <span>
+        <button
+          class="collection-menu-slideout-button collection-menu-slideout-button-dimiss"
+          type="button"
+          aria-label="{{ 'general.form.close' | t }}"
+          data-collection-menu-slideout-button-dismiss>
+          {%- include 'icon', id: 'close' -%}
+        </button>
+      </span>
+    </div>
+
+    <section class="collection-menu-slideout-content">
+      {%- for tag in collection.all_tags -%}
+        {%- assign tag_handle = tag | handleize -%}
+        {%- if current_tags contains tag -%}
+          <div class="collection-tag-link" data-collection-tag="{{ tag_handle }}" data-collection-tag-selected>{{ tag | link_to_remove_tag: tag }}</div>
+        {%- else -%}
+          <div class="collection-tag-link" data-collection-tag="{{ tag_handle }}">{{ tag | link_to_add_tag: tag }}</div>
+        {%- endif -%}
+      {%- endfor -%}
+    </section>
+  </div>
+
+  <div class="collection-menu">
+    {%- include 'breadcrumbs' -%}
+
+    <div
+      class="collection-menu-buttons"
+      data-collection-menu-buttons-default>
+      <button class="collection-menu-button collection-menu-button-sortby" type="button" data-collection-menu-button-sortby>
+        {{ 'collection.sort_by.button_title' | t }}
+      </button>
+      <button class="collection-menu-button collection-menu-button-refine" type="button" data-collection-menu-button-refine>
+        {{ 'collection.refine.button_title' | t }}
+      </button>
+    </div>
+
+    <div
+      class="collection-menu-buttons"
+      data-collection-menu-buttons-sortby
+      data-collection-menu-buttons-refine>
+      <button
+        class="collection-menu-button collection-menu-button-cancel"
+        type="button"
+        data-collection-menu-button-cancel>
+        {{ 'general.form.cancel' | t }}
+      </button>
+      <button
+        class="collection-menu-button collection-menu-button-apply"
+        type="button"
+        data-collection-menu-button-apply>
+        {{ 'general.form.apply' | t }}
+      </button>
+    </div>
+  </div>
+</section>

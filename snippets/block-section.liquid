@@ -1,0 +1,33 @@
+<block class="block-excerpt" data-block-excerpt>
+      <figure class="block-excerpt-image">
+        <a href="{{ block.settings.url }}">
+          {%- if block.settings.image -%}
+            <img
+              alt="{{ block.settings.image.alt | escape }}"
+              {% include 'img-src', img: block.settings.image, size: '500x' %}
+            >
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </a>
+      </figure>
+    <div class="block-excerpt-content">
+      <h1 class="block-excerpt-title">
+        <a href="{{ block.settings.url }}">
+          {{ block.settings.title }}
+        </a>
+      </h1>
+      <div class="block-excerpt-rte">
+        {{ block.settings.text }}
+      </div>
+      <a class="block-excerpt-read-more" href="{{ block.settings.url }}">
+        <span class="block-excerpt-read-more-text">
+          {{ block.settings.linktext }}
+        </span>
+        <span class="block-excerpt-read-more-arrow">
+          {%- include 'icon', id: 'arrow' -%}
+        </span>
+      </a>
+    </div>
+</block>
+

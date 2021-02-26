@@ -1,0 +1,69 @@
+{%- assign onboarding = true -%}
+
+{%- if section.settings.username != blank -%}
+  {%- assign onboarding = false -%}
+{%- endif -%}
+
+{%- if onboarding -%}
+  {%- assign username = 'onboarding.username' | t -%}
+{%- elsif section.settings.username != blank and section.settings.username contains '@' -%}
+  {%- assign username = section.settings.username | remove: '@' -%}
+{%- else -%}
+  {%- assign username = section.settings.username -%}
+{%- endif -%}
+
+{%- assign username = username | escape -%}
+
+<script
+  type="application/json"
+  data-section-type="dynamic-twitter"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "onboarding": {{ onboarding | json }},
+    "username": {{ username | json }}
+  }
+</script>
+
+<h4 class="section-twitter-title">
+  {{ section.settings.title | escape }}
+</h4>
+
+{% include 'tweet', onboarding: onboarding, username: username %}
+
+{% schema %}
+{
+  "name": "Twitter feed",
+  "class": "section-twitter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Twitter feed"
+    },
+    {
+      "type": "text",
+      "id": "username",
+      "label": "Username"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Social Media",
+      "name": "Twitter feed"
+    }
+  ],
+  "locales": {
+    "en": {
+      "onboarding": {
+        "title": "Twitter feed",
+        "tweet_html": "Connect your Twitter account to engage customers on and off your site!",
+        "tweet-date": "1 January 1970",
+        "username": "username"
+      }
+    }
+  }
+}
+
+{% endschema %}

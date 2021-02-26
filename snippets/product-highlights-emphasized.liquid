@@ -1,0 +1,199 @@
+{%- comment -%}
+Product highlights emphasized layout
+
+@param products
+The products array to display from
+
+@param product_item_style
+What styling should the product image be given
+
+@param use_quickshop
+Whether to use quickshop or not
+
+@param product_count
+The amount of products available to display
+{%- endcomment -%}
+
+{% if metaprocount > 0 %}
+{% assign product_count = metaprocount %}
+{% endif %}
+{%- assign first_column_count = 0 -%}
+{%- assign second_column_count = 0 -%}
+{%- assign third_column_count = 0 -%}
+
+{%- if product_count > 2 -%}
+{%- assign first_column_count = 2 -%}
+{%- elsif product_count == 2 or product_count == 1 -%}
+{%- assign first_column_count = 1 -%}
+{%- endif -%}
+
+{%- if product_count >= 2 -%}
+{%- assign second_column_count = 1 -%}
+{%- endif -%}
+
+{%- if product_count == 5 -%}
+{%- assign third_column_count = 2 -%}
+{%- elsif product_count == 4 -%}
+{%- assign third_column_count = 1 -%}
+{%- endif -%}
+
+{%- assign loop_offset = 0 -%}
+{%- assign loop_product_count = 0 -%}
+
+
+
+{%- if product_count > 0 -%}
+<div class="product-highlights-emphasized-wrapper" data-product-highlights-emphasized>
+  {%- if first_column_count > 0 -%}
+  <div class="product-highlights-column product-highlights-first-column">
+    {%- assign loop_product_count = 0 -%}
+
+    {%- if products != blank -%}
+
+
+    {% if metaprocount > 0 %}
+    {%- for prohan in relatedmetarr offset: loop_offset -%}
+    {% assign item = all_products[prohan] %}
+    {%- if item.handle != product.handle -%}
+    {%- include 'product-item',
+                product: item,
+    product_style: product_item_style -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- endif -%}
+
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+
+    {%- if loop_product_count == first_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+
+
+
+    {% else %}
+    {%- for item in products offset: loop_offset -%}
+    {%- if item.handle != product.handle -%}
+    {%- include 'product-item',
+                product: item,
+    product_style: product_item_style -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- endif -%}
+
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+
+    {%- if loop_product_count == first_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {% endif %}
+
+    {%- else -%}
+
+    {%- for i in (1..product_count) offset: loop_offset -%}
+    {%- include 'product-item-onboard',
+              product_style: product_item_style,
+    use_quickshop: use_quickshop
+    -%}
+
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+
+    {%- if loop_product_count == first_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+
+
+    {%- endif -%}
+  </div>
+  {%- endif -%}
+  {%- if second_column_count > 0 -%}
+  <div class="product-highlights-column product-highlights-second-column">
+    {%- assign loop_product_count = 0 -%}
+
+    {%- if products != blank -%}
+
+    {% if metaprocount > 0 %}
+    {%- for prohan in relatedmetarr offset: loop_offset -%}
+    {% assign item = all_products[prohan] %}
+    {%- if item.handle != product.handle -%}
+    {%- include 'product-item',
+                product: item,
+    product_style: product_item_style,
+    use_quickshop: use_quickshop
+    -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- endif -%}
+
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+
+    {%- if loop_product_count == second_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+
+    {% endfor %}
+    {% else %}
+    {%- for item in products offset: loop_offset -%}
+    {%- if item.handle != product.handle -%}
+    {%- include 'product-item',
+                product: item,
+    product_style: product_item_style,
+    use_quickshop: use_quickshop
+    -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- endif -%}
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+    {%- if loop_product_count == second_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {% endif %}
+    {%- else -%}
+    {%- for i in (1..product_count) offset: loop_offset -%}
+    {%- include 'product-item-onboard',
+              product_style: product_item_style,
+    use_quickshop: use_quickshop
+    -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+    {%- if loop_product_count == second_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+  </div>
+  {%- endif -%}
+  {%- if third_column_count > 0 -%}
+  <div class="product-highlights-column product-highlights-third-column">
+    {%- assign loop_product_count = 0 -%}
+    {%- if products != blank -%}
+    {%- for item in products offset: loop_offset -%}
+    {%- if item.handle != product.handle -%}
+    {%- include 'product-item',
+                product: item,
+    product_style: product_item_style,
+    use_quickshop: use_quickshop
+    -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- endif -%}
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+    {%- if loop_product_count == third_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {%- else -%}
+    {%- for i in (1..product_count) offset: loop_offset -%}
+    {%- include 'product-item-onboard',
+              product_style: product_item_style -%}
+    {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+    {%- assign loop_offset = loop_offset | plus: 1 -%}
+
+    {%- if loop_product_count == third_column_count -%}
+    {%- break -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+  </div>
+  {%- endif -%}
+</div>
+{%- endif -%}

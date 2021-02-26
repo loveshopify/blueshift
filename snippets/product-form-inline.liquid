@@ -1,0 +1,8 @@
+{% include 'product-options', type: 'select' %}
+{% include 'product-customizer' %}
+<div class="product-form-inline-atc"> 
+  {% comment %}
+  {% include 'quantity' %}
+  {% endcomment %}
+  <a class="js-open-modal btn product-form-inline-atc-button" href="#" data-modal-id="popup1">{{ 'product.add_to_cart.available' | t }}</a>
+</div>

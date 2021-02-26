@@ -1,0 +1,14 @@
+{% comment %}
+  A shared page header, with title and subtitle.
+
+  @param title
+  @param subtitle
+{% endcomment %}
+
+<header class="masthead">
+  <h1 class="masthead-title">{{ title }}</h1>
+
+  {% if subtitle != blank %}
+    <h2 class="masthead-subtitle">{{ subtitle }}</h2>
+  {% endif %}
+</header>

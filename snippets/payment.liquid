@@ -1,0 +1,38 @@
+{% comment %}
+  See: https://help.shopify.com/themes/customization/store/add-credit-card-icons
+{% endcomment %}
+
+{%- capture payment_types -%}
+amazon_payments,
+american_express,
+apple_pay,
+bitcoin,
+cirrus,
+dankort,
+diners_club,
+discover,
+dogecoin,
+dwolla,
+forbrugsforeningen,
+interac,
+jcb,
+litecoin,
+maestro,
+master,
+paypal,
+shopify_pay,
+stripe,
+visa
+{%- endcapture -%}
+
+{% assign payment_types = payment_types | strip_newlines | split: ',' %}
+
+<div class="payment">
+  {%- for type in shop.enabled_payment_types -%}
+    {%- if payment_types contains type -%}
+      <div class="payment-type {{type}}">
+        {%- include 'payment-icon', id: type -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

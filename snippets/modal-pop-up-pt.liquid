@@ -1,0 +1,19 @@
+<div id="popup1" class="modal-box">
+  <header>
+    <h3>Please fill out these details</h3>
+    <a href="#" class="btn btn-small js-modal-close">X</a>
+  </header>
+  <div class="modal-body">
+      {% include 'custom-product-form-pt' %}
+  </div>
+  <footer>
+    <div class="foo_1">
+      <h3 class="error_msg">* All fields are required.</h3>
+      <span class="next_span">
+        <a href="#" id="showfirst">Add to cart</a>
+        <a href="#addtocart" id="shownext">Add to cart</a>
+        <img class="loader_gif" src="{{'loader.gif' | asset_url}}" width="50">
+      </span>      
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,146 @@
+.ca-hide
+{
+    display: none;
+}
+
+.ca-errors
+{
+    display: none;
+    color: red;
+}
+
+.ui-datepicker-year, .ui-datepicker-month
+{
+    display: inline-block !important;
+}
+
+.ca-cart .ca-checkbox, .ca-cart .ca-radio,
+.ca-cart.ca-checkbox, .ca-cart.ca-radio,
+.ca-register .ca-checkbox, .ca-register .ca-radio,
+.ca-register.ca-checkbox, .ca-register.ca-radio,
+.ca-account .ca-checkbox, .ca-account .ca-radio,
+.ca-account.ca-checkbox, .ca-account.ca-radio
+{
+    padding-right: 4px !important;
+}
+
+.ca-label:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-inline, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-inline,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-inline, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-inline,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-radio.ca-inline, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-inline,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-radio.ca-inline, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-inline,
+.ca-label:not(.ca-hide):not(.ca-child).ca-checkbox.ca-inline, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-inline,
+.ca-value:not(.ca-hide):not(.ca-child).ca-checkbox.ca-inline, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-inline,
+.ca-label:not(.ca-hide):not(.ca-child).ca-radio.ca-inline, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-inline,
+.ca-value:not(.ca-hide):not(.ca-child).ca-radio.ca-inline, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-inline,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-inline label, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-inline label,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-inline label, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-inline label,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-radio.ca-inline label, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-inline label,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-radio.ca-inline label, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-inline label,
+.ca-label:not(.ca-hide):not(.ca-child).ca-checkbox.ca-inline label, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-inline label,
+.ca-value:not(.ca-hide):not(.ca-child).ca-checkbox.ca-inline label, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-inline label,
+.ca-label:not(.ca-hide):not(.ca-child).ca-radio.ca-inline label, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-inline label,
+.ca-value:not(.ca-hide):not(.ca-child).ca-radio.ca-inline label, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-inline label,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-checkbox-label, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox-label,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-checkbox-label, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox-label,
+.ca-label:not(.ca-hide):not(.ca-child).ca-checkbox-label, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-checkbox-label,
+.ca-value:not(.ca-hide):not(.ca-child).ca-checkbox-label, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-checkbox-label
+{
+    display: inline-block !important;
+}
+
+.ca-label:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-block, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-block,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-block, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-block,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-radio.ca-block, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-block,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-radio.ca-block, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-block,
+.ca-label:not(.ca-hide):not(.ca-child).ca-checkbox.ca-block, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-block,
+.ca-value:not(.ca-hide):not(.ca-child).ca-checkbox.ca-block, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-block,
+.ca-label:not(.ca-hide):not(.ca-child).ca-radio.ca-block, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-block,
+.ca-value:not(.ca-hide):not(.ca-child).ca-radio.ca-block, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-block,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-block label, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-block label,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-checkbox.ca-block label, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-checkbox.ca-block label,
+.ca-label:not(.ca-hide):not(.ca-child) .ca-radio.ca-block label, .ca-label.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-block label,
+.ca-value:not(.ca-hide):not(.ca-child) .ca-radio.ca-block label, .ca-value.ca-child.ca-child-show:not(.ca-hide) .ca-radio.ca-block label,
+.ca-label:not(.ca-hide):not(.ca-child).ca-checkbox.ca-block label, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-block label,
+.ca-value:not(.ca-hide):not(.ca-child).ca-checkbox.ca-block label, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-checkbox.ca-block label,
+.ca-label:not(.ca-hide):not(.ca-child).ca-radio.ca-block label, .ca-label.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-block label,
+.ca-value:not(.ca-hide):not(.ca-child).ca-radio.ca-block label, .ca-value.ca-child.ca-child-show:not(.ca-hide).ca-radio.ca-block label
+{
+    display: block;
+}
+
+.ca-label:not(.ca-hide):not(.ca-child) input[type="checkbox"] + label, .ca-label.ca-child.ca-child-show:not(.ca-hide) input[type="checkbox"] + label,
+.ca-value:not(.ca-hide):not(.ca-child) input[type="checkbox"] + label, .ca-value.ca-child.ca-child-show:not(.ca-hide) input[type="checkbox"] + label,
+input[type="checkbox"].ca-label:not(.ca-hide):not(.ca-child) + label, input[type="checkbox"].ca-label.ca-child.ca-child-show:not(.ca-hide) + label,
+input[type="checkbox"].ca-value:not(.ca-hide):not(.ca-child) + label, input[type="checkbox"].ca-value.ca-child.ca-child-show:not(.ca-hide) + label
+{
+    display: inline  !important;
+}
+
+.ca-cart input.error, .ca-cart textarea.error, .ca-cart select.error,
+input.ca-cart.error, textarea.ca-cart.error, select.ca-cart.error,
+.ca-register input.error, .ca-register textarea.error, .ca-register select.error,
+input.ca-register.error, textarea.ca-register.error, select.ca-register.error,
+.ca-account input.error, .ca-account textarea.error, .ca-account select.error,
+input.ca-account.error, textarea.ca-account.error, select.ca-account.error
+{
+    border: 1px solid red  !important;
+}
+
+.ca-cart label.error, label.ca-cart.error,
+.ca-register label.error, label.ca-register.error,
+.ca-account label.error, label.ca-account.error
+{
+    color: red  !important;
+}
+
+.ca-cart input.input-full, .ca-cart textarea.input-full, .ca-cart select.input-full,
+input.ca-cart.input-full, textarea.ca-cart.input-full, select.ca-cart.input-full,
+.ca-register input.input-full, .ca-register textarea.input-full, .ca-register select.input-full,
+input.ca-register.input-full, textarea.ca-register.input-full, select.ca-register.input-full,
+.ca-account input.input-full, .ca-account textarea.input-full, .ca-account select.input-full,
+input.ca-account.input-full, textarea.ca-account.input-full, select.ca-account.input-full
+{
+    width: 100%;
+}
+
+.ca-file {
+    color: transparent !important;
+    margin-bottom: 0px !important;
+}
+
+.ca-label-file-status {
+    margin-bottom: 16px;
+}
+
+.ca-helper {
+    color: #737373;
+}
+
+.ca-select .ca-radio {
+    display: inline-block;
+}
+
+    .ca-attr .ca-option[type='radio']
+    {
+        -webkit-appearance: radio;
+        width: initial;
+        height: initial;
+        margin: 0px;
+        display: inline-block;
+    }
+
+    .ca-attr .ca-option[type='checkbox']
+    {
+        -webkit-appearance: checkbox;
+        width: initial;
+        height: initial;
+        margin: 0px;
+        padding: 0px;
+        display: inline-block;
+    }
+
+
+
+.ca-child:not(.ca-child-show) {
+    display: none !important;
+}

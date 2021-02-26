@@ -1,0 +1,138 @@
+<style>
+  .textblock-icon-section-{{section.id}} .main-block-gd.columngd-4 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .textblock-icon-section-{{section.id}} .columngd-4 .block-gd {
+    display:inline-block;
+    width: 25%;
+    padding: 0px 15px;
+  }
+  .textblock-icon-section-{{section.id}} .columngd-4 .block-gd.last-gd {
+    border-right: none;
+  }
+  .textblock-icon-section-{{section.id}} .text-content img {
+    display: block;
+    height: 4.5em;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .textblock-icon-section-{{section.id}} .text-content p {
+    font-size: 14px;
+    color: #666666;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+  }
+  .textblock-icon-section-{{section.id}} .block-heading {
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: 400;
+    text-align: center;
+
+  }
+  .textblock-icon-section-{{section.id}} .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 24px;
+    display: block;
+    color: #5cc0c7;
+    letter-spacing: 0.7px;
+  }
+  @media only screen and (max-width:767px){
+    .textblock-icon-section-{{section.id}} .columngd-4 .block-gd {
+      display:block;
+      width:100%;
+      margin-bottom: 10px;
+      border:none;
+    }
+
+  }
+</style>
+<section data-section-id="{{section.id}}" class="textblock-icon-section-{{section.id}}">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+  <div class="main-block-gd columngd-{{ section.blocks.size }}">
+    {% for block in section.blocks %}{% if block.settings.image != blank %}<div class="block-gd {% if forloop.first %}first-gd{% endif %} {% if forloop.last %}last-gd{% endif %}">
+    <div class="inner-block-gd" >
+      <div class="text-content">
+        {% if block.settings.image %}
+        <img src="{{ block.settings.image | img_url:'x80'}}" 
+        srcset="{{ block.settings.image | img_url: 'x80' }} 1x, {{ block.settings.image | img_url: 'x160', scale: 2 }} 2x"
+        alt="{{block.settings.title}}">
+        {% endif %}
+        {% if block.settings.title %}
+        <h3 class="block-heading" style="color:{{ block.settings.color_title }}">{{block.settings.title}}</h3> 
+        {% endif %}
+        {% if block.settings.content %}
+        <p>{{block.settings.content}}</p>
+        {% endif %}
+      </div>
+    </div>
+    </div>{% endif %}{% endfor %}
+  </div>
+
+</section>
+{% schema %}
+{
+"name": "Text with icons",
+"class": "section-text-icon-block",
+"settings": [
+{
+"id": "title",
+"type": "text",
+"label": "Section titile",
+"default":"reasons to choose blue{shift} "
+}
+],
+"blocks": [
+{
+"type": "text",
+"name": "Text",
+"settings": [
+{
+"type":"image_picker",
+"id":"image",
+"label":"icon"
+},
+{
+"id":"title",
+"label":"Icon title",
+"type":"text"
+},
+{
+"id":"content",
+"label":"Content",
+"type":"html"
+},
+{  
+"type": "color",
+"id": "color_title",
+"label": "Title colors",
+"default": "#5cc0c7" 
+}
+]
+}
+],
+"max_blocks": 4,
+"presets": [
+{
+"category": "Other",
+"name": "Text with icon"
+}
+]
+}
+
+{% endschema %}

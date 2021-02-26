@@ -1,0 +1,86 @@
+<style>
+  .textblock-section-{{section.id}}  .main-block-gd.columngd-4 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  h4.section-title {
+    margin: 0px;
+  }
+  .textblock-section-{{section.id}}  .columngd-4 .block-gd:hover {
+    opacity: 0.7;
+  }
+  .textblock-section-{{section.id}}  .columngd-4 .block-gd {
+    display:inline-block;
+    width: 23.5%;
+  }
+  .textblock-section-{{section.id}}  h3.b-heading a {
+    color: #000;
+    text-transform: lowercase;
+    letter-spacing: 0.7px;
+    text-decoration: none;
+    margin: 0;
+  }
+  .textblock-section-{{section.id}}  h3.b-heading {
+    font-size: 24px;
+    line-height: 35px;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    text-transform: lowercase;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .textblock-section-{{section.id}}  .inner-block-gd {
+    display: table-cell;
+    padding: 0px 10px 0 20px;
+    width: 100%;
+  }
+  .textblock-section-{{section.id}} .main-block-gd.columngd-4 p {
+    margin: 0px;
+  }
+  @media only screen and (max-width:767px){
+    .textblock-section-{{section.id}} .columngd-4 .block-gd {
+      width:48.5%;
+      margin-bottom: 10px;
+    }
+    .textblock-section-{{section.id}} .b-heading {
+      font-size: 18px;
+    }
+  }
+</style>
+<section data-section-id="{{section.id}}" class="textblock-section-{{section.id}}">
+  <div class="main-block-gd columngd-{{ section.blocks.size }}">
+    <h4 class="section-title">{{ section.settings.section-title }}</h4>
+    <p class="section-desc">
+    {{ section.settings.section-desc }}
+    </p>
+    {% for block in section.blocks %}
+      {% if block.settings.titlegd != blank %}
+        <div class="block-gd {% if forloop.first %}first-gd{% endif %} {% if forloop.last %}last-gd{% endif %}">
+        <div class="inner-block-gd" >
+          <div class="text-content">
+            <ul class="listt">
+              {{ block.settings.titlegd }}
+            </ul>
+          </div>
+        </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</section>

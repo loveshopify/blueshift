@@ -1,0 +1,22 @@
+{% assign image = current_product.images[1] | default: current_product.featured_image %}
+
+<div class="product__description-wrap">
+  <div class="product__description-img">
+    <img {% include 'img-src', img: image, size: '800x' %} alt="">
+  </div>
+
+  <div class="product__description"> 
+    {% if product.metafields.detailed.detailed_title != blank %}
+      <h2>{{ product.metafields.detailed.detailed_title }}</h2>
+    {% endif %}
+    {% if product.metafields.detailed.detailed_text != blank %}
+      {{ product.metafields.detailed.detailed_text }}
+    {% endif %}
+    {% if product.metafields.detailed.child_will_learn_title != blank %}
+      <h3>{{ product.metafields.detailed.child_will_learn_title }}</h3>
+    {% endif %}
+    {% if product.metafields.detailed.child_will_learn_text != blank %}
+      {{ product.metafields.detailed.child_will_learn_text }}
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,104 @@
+{% comment %}
+  Display options for a product
+
+  @param product
+         The product to show options for.
+
+  @param type
+         Can be "radio" or "select".
+{% endcomment %}
+
+{% assign _type = type | default: 'radio' %}
+
+{% if product.has_only_default_variant %}
+  <input name="id" type="hidden" value="{{ product.selected_or_first_available_variant.id }}">
+
+{% else %}
+  <div
+    class="
+      product-options
+      product-options-count-{{ product.options.size }}
+      product-options-type-{{ _type }}
+    "
+    data-product-options
+  >
+    {% comment %}
+      Variant select. This is the source-of-truth for which variant to add.
+    {% endcomment %}
+    <select name="id" style="display: none;" data-variants>
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money }}
+        </option>
+      {% endfor %}
+    </select>
+    {% include 'product-customizer' %}
+    {% comment %}
+      Option inputs
+    {% endcomment %}
+    {%- for option in product.options_with_values -%}
+      <div class="option">
+        <div class="option-header">
+          <span class="option-name">{{ option.name }}</span>
+        </div>
+
+        <div class="option-values">
+          {% assign optionIndex = forloop.index %}
+
+          {% comment %}
+            Radio button options
+          {% endcomment %}
+          {% if _type == 'radio' %}
+            {% for value in option.values %}
+              <div
+                class="
+                  option-value
+                  {% if option.selected_value == value %}option-selected{% endif %}
+                "
+              >
+                <input
+                  class="option-value-input"
+                  type="radio"
+                  name="{{ option.name }}"
+                  value="{{ value | escape }}"
+                  tabindex="0"
+                  aria-label="{{ value | escape }}"
+                  {% if option.selected_value == value %}checked{% endif %}
+                  data-product-option="{{ 'option' | append: optionIndex }}"
+                >
+                <label class="option-value-name">{{ value }}</label>
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          {% comment %}
+            Select dropdown options
+          {% endcomment %}
+          {% if _type == 'select' %}
+            <div class="option-select">
+              <select
+                class="option-select-input"
+                name=""
+                tabindex="0"
+                data-product-option="{{ 'option' | append: optionIndex }}"
+              >
+                {% for value in option.values %}
+                  <option
+                    value="{{ value | escape }}"
+                    {% if option.selected_value == value %}selected{% endif %}
+                  >{{ value }}</option>
+                {% endfor %}
+              </select>
+
+              <span class="option-select-arrow">
+                {%- include 'icon', id: 'arrow' -%}
+              </span>
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+    {%- endfor -%}
+
+  </div>
+{% endif %}

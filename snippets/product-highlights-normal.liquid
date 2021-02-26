@@ -1,0 +1,72 @@
+{%- comment -%}
+Product highlights normal layout
+
+@param products (optional)
+The products array to display from
+If not defined, displays onboarding products
+
+@param product_item_style
+What styling should the product image be given
+
+@param use_quickshop
+Whether to use quickshop or not
+
+@param product_count
+The amount of products available to display
+{%- endcomment -%}
+
+{%- assign loop_offset = 0 -%}
+{%- assign loop_product_count = 0 -%}
+
+{% if metaprocount > 0 %}
+<div class="product-highlights-normal-wrapper" data-product-highlights-normal>
+  {%- if relatedmetarr != blank -%}
+  {%- for prohan in relatedmetarr -%}
+  {% assign item = all_products[prohan] %}
+  {%- if item.handle != product.handle -%}
+  {%- include 'product-item',
+            product: item,
+  product_style: product_item_style,
+  use_quickshop: use_quickshop
+  -%}
+  {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if loop_product_count == product_count -%}
+  {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- else -%}
+  {%- for i in (1..product_count) -%}
+  {%- include 'product-item-onboard',
+          product_style: product_item_style -%}
+  {%- endfor -%}
+  {%- endif -%}
+</div>
+{% else %}
+{%- if product_count > 0 -%}
+<div class="product-highlights-normal-wrapper" data-product-highlights-normal>
+  {%- if products != blank -%}
+  {%- for item in products -%}
+  {%- if item.handle != product.handle -%}
+  {%- include 'product-item',
+            product: item,
+  product_style: product_item_style,
+  use_quickshop: use_quickshop
+  -%}
+  {%- assign loop_product_count = loop_product_count | plus: 1 -%}
+  {%- endif -%}
+
+  {%- if loop_product_count == product_count -%}
+  {%- break -%}
+  {%- endif -%}
+  {%- endfor -%}
+  {%- else -%}
+  {%- for i in (1..product_count) -%}
+  {%- include 'product-item-onboard',
+          product_style: product_item_style -%}
+  {%- endfor -%}
+  {%- endif -%}
+</div>
+{%- endif -%}
+{% endif %}

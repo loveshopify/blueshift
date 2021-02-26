@@ -1,0 +1,178 @@
+<div class="search-section">
+
+  <script
+    type="application/json"
+    data-section-type="static-search-results"
+    data-section-id="static-search-results">
+  </script>
+
+  {% comment %}
+    Page title
+  {% endcomment %}
+  {% if search.performed %}
+    {% assign page_title = 'search.results.title' | t %}
+    {% assign page_subtitle = 'search.results.results_count' | t,
+      count: search.results_count,
+      query: search.terms
+    %}
+  {% else %}
+    {% assign page_title = 'search.form.title' | t %}
+  {% endif %}
+
+  {% include 'masthead',
+    title: page_title,
+    subtitle: page_subtitle
+  %}
+
+  <div class="search-section-form">
+    <form class="search-form" action="/search">
+      <div class="search-form-icon">{% include 'icon', id: 'search' %}</div>
+
+      <input
+        class="search-form-input"
+        aria-label="{{ 'search.form.title' | t }}"
+        type="text"
+        placeholder="{{ 'search.form.placeholder' | t }}"
+        name="q"
+        {% unless search.performed %}autofocus{% endunless %}
+        value="{{ search.terms | escape }}">
+    </form>
+  </div>
+
+  {% paginate search.results by 10 %}
+    {% comment %}
+      Calculate number of results by type.
+    {% endcomment %}
+    {% assign product_count = 0 %}
+    {% assign article_count = 0 %}
+    {% assign page_count = 0 %}
+
+    {% for item in search.results %}
+  {% if item.object_type == 'product' and item.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+      {% if item.object_type == 'product' %}{% assign product_count = product_count | plus: 1 %}{% endif %}
+      {% if item.object_type == 'article' %}{% assign article_count = article_count | plus: 1 %}{% endif %}
+      {% if item.object_type == 'page' %}{% assign page_count = page_count | plus: 1 %}{% endif %}
+    {% endfor %}
+
+    {% comment %}
+      Calculate the number of result types.
+    {% endcomment %}
+    {% assign type_count = 0 %}
+    {% if product_count > 0 %}{% assign type_count = type_count | plus: 1 %}{% endif %}
+    {% if article_count > 0 %}{% assign type_count = type_count | plus: 1 %}{% endif %}
+    {% if page_count > 0 %}{% assign type_count = type_count | plus: 1 %}{% endif %}
+
+    <div class="search-results">
+
+      {% comment %}
+        Show tabs if there are multiple result types.
+      {% endcomment %}
+      {% if type_count > 1 %}
+        <div class="search-results-tabs">
+          {% if product_count > 0 %}
+            <a href="#search-products" class="search-results-tab">
+              {{- 'search.results.product_count' | t, count: product_count -}}
+            </a>
+          {% endif %}
+
+          {% if page_count > 0 %}
+            <a href="#search-pages" class="search-results-tab">
+              {{- 'search.results.page_count' | t, count: page_count -}}
+            </a>
+          {% endif %}
+
+          {% if article_count > 0 %}
+            <a href="#search-articles" class="search-results-tab">
+              {{- 'search.results.article_count' | t, count: article_count -}}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="search-results-groups">
+
+        {% comment %}
+          Product results
+        {% endcomment %}
+        {% if product_count > 0 %}
+          <div
+            id="search-products"
+            class="
+              search-results-group
+              search-results-group-selected
+              search-results-products
+            ">
+            {% for item in search.results %}
+  {% if item.object_type == 'product' and item.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+              {% if item.object_type != 'product' %}{% continue %}{% endif %}
+
+              <div class="search-results-product">
+                {% include 'product-item', product: item, product_style: 'cropped-medium' %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% comment %}
+          Page results
+        {% endcomment %}
+        {% if page_count > 0 %}
+          <div
+            id="search-pages"
+            class="
+              search-results-group
+              search-results-group-selected
+              search-results-pages
+            ">
+            {% for item in search.results %}
+  {% if item.object_type == 'product' and item.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+              {% if item.object_type != 'page' %}{% continue %}{% endif %}
+
+              <article class="search-result-page">
+                <a class="search-result-page-link" href="{{ item.url }}">
+                  <h1 class="search-result-page-title">{{ item.title }}</h1>
+
+                  <div class="search-result-page-summary">
+                    {{ item.content | strip_html | truncatewords: 40 }}
+                  </div>
+                </a>
+              </article>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% comment %}
+          Article results
+        {% endcomment %}
+        {% if article_count > 0 %}
+          <div
+            id="search-articles"
+            class="
+              search-results-group
+              search-results-group-selected
+              search-results-articles
+              section-blog
+            ">
+            <div class="article-excerpts" data-article-excerpts>
+              <div class="article-excerpt-masonry-item-sizer" data-article-excerpt-masonry-item-sizer></div>
+              <div class="article-excerpt-masonry-gutter-sizer" data-article-excerpt-masonry-gutter-sizer></div>
+
+              {% for item in search.results %}
+  {% if item.object_type == 'product' and item.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+                {% if item.object_type != 'article' %}{% continue %}{% endif %}
+                {%- include 'article-excerpt', article: item -%}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    {%- include 'pagination' -%}
+  {% endpaginate %}
+</div>

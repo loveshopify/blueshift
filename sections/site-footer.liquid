@@ -1,0 +1,473 @@
+<style>
+  .site-footer-item.site-footer-nav{
+    width: 100%;
+    background-color: #bee6e9;
+    padding-bottom:0;
+  }
+
+  .partners-with-background {
+    background: #fff;
+  }
+
+  .partners-with-background .inner-partner {
+    max-width: 1130px;
+    padding-bottom: 30px;
+    margin: -3px auto 0;
+  }
+
+  .inner-partner label{
+    text-align:center;
+    display: block;
+    font-size: 20px;
+    color: #042855;
+    font-weight: 700;
+    padding: 20px;
+  }
+
+  .partners-with-background ul {
+    display: none;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .total-columngd-4 .footnav-item{
+    width: 25%;
+    margin: 0 0 15px;
+  }
+  .total-columngd-4.footnav{
+    max-width: 1130px;
+    margin: 0 auto;
+  }
+  .partners-with-background ul li {
+    display: inline-block;
+    width: 20%;
+  }
+  .partners-with-background ul li img {
+    display: block;
+    width: 100%;
+    max-width: 125px;
+    margin: 0 auto;
+  }
+
+  .partners-with-background img {
+    width: 100%;
+  }
+
+  .footnav {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+    @media screen and (min-width: 768px) {
+    .inner-partner label{
+      font-size: 26px;
+      padding: 25px 20px 45px;
+    }
+    
+    .partners-with-background ul {
+      display: flex;
+    }
+  }
+</style>
+{% assign menu_count = 0 %}
+
+{% if shop.customer_accounts_enabled %}
+{% assign menu_count = menu_count | plus: 1 %}
+{% endif %}
+
+{% for block in section.blocks %}
+{% if block.type == 'menu' %}
+{% assign menu_count = menu_count | plus: 1 %}
+{% endif %}
+{% endfor %}
+
+{% assign social_count = 0 %}
+
+{%- if section.settings.enable_social -%}
+{%- if settings.social_facebook != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_twitter != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_google != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_pinterest != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_instagram != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_vimeo != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_youtube != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_medium != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_email != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+
+{%- if settings.social_rss != blank -%}
+{% assign social_count = social_count | plus: 1 %}
+{%- endif -%}
+{%- endif -%}
+
+<footer class="site-footer">
+  <div class="site-footer-item site-footer-nav">
+    <nav class="footnav footnav-count-{{ menu_count }} total-columngd-{{section.blocks.size}}">
+
+      {% for block in section.blocks %}
+      <div class="footnav-item footnav-item-{{ block.type }}" {{ block.shopify_attributes }}>
+
+        {% if block.type == 'richtext' %}
+        <div class="footnav-title">{{ block.settings.title | escape }}</div>
+        <div class="footnav-rte">{{ block.settings.content }}</div>
+        {% endif %}
+
+        {% if block.type == 'addressblock' %}
+        <div class="footnav-title">{{ block.settings.title | escape }}</div>
+        <div class="footnav-rte">{{ block.settings.content }}</div>
+        {% if block.settings.social-media %}
+        {% include 'social' %}
+        {% endif %}
+        {% endif %}
+        {% if block.type == 'newsletter' %}
+        <div class="footnav-title">{{ block.settings.title | escape }}</div>
+        <div class="footnav-rte">{{ block.settings.content }}</div> 
+        {% if section.settings.enable_newsletter or social_count > 0 %}
+          <div class="site-footer-item site-footer-social">
+            {% if section.settings.enable_newsletter %}{% include 'newsletter' %}{% endif %}
+            {% if section.settings.enable_social %}{% include 'social' %}{% endif %}
+          </div>
+        {% endif %}
+        {% include 'newsletter' %}
+        {% endif %}
+
+        {% if block.type == 'menu' %}
+        {% assign menu = linklists[block.settings.menu] %}
+        <div class="footnav-title">{{ menu.title }}</div>
+        <ul class="footnav-menu">
+          {% for link in menu.links %}
+          <li class="footnav-menu-link">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if block.type == 'customer' %}
+        {% if shop.customer_accounts_enabled %}
+        <div class="footnav-title">{{ block.settings.title | escape }}</div>
+        <ul class="footnav-menu">
+          {% if customer %}
+          <li class="footnav-menu-link">
+            <a href="/account">{{ 'footnav.account.logged_in_html' | t: user_name: customer.first_name }}</a>
+          </li>
+          <li class="footnav-menu-link">
+            {{ 'footnav.account.logout' | t | customer_logout_link }}
+          </li>
+          {% else %}
+          <li class="footnav-menu-link">
+            {{ 'footnav.account.login' | t | customer_login_link }}
+          </li>
+          {% if shop.customer_accounts_optional %}
+          <li class="footnav-menu-link">
+            {{ 'footnav.account.register' | t | customer_register_link }}
+          </li>
+          {% endif %}
+          {% endif %}
+        </ul>
+        {% endif %}
+        {% endif %}
+      </div>
+      {% endfor %}
+    </nav>
+    {% if section.settings.enable_patrers %}
+    <div class="partners-with-background">
+
+      {% if section.settings.background-image %}
+      <img src="{{ section.settings.background-image | img_url:'master' }}"
+      alt="{{ section.settings.background-image.alt }}">
+      {% endif %}
+      <div class="inner-partner">
+        <label>{{ section.settings.partner_title}}</label>
+        <ul>
+          {% for i in (1..10) %}
+          {% assign imgkey = 'partner_icon_' | append : i %}
+          {% assign imgd = section.settings[imgkey] %}
+          {% if imgd %}
+          <li>
+            <img src="{{ imgd | img_url:'125x'}}" 
+            srcset="{{ imgd | img_url: '125x' }} 1x, {{ imgd | img_url: '400x', scale: 2 }} 2x,"
+            alt="{{ imgd.alt }}">
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.enable_payment_icons and shop.enabled_payment_types.size > 0 %}
+  <div class="site-footer-item">
+    {% include 'payment' %}
+  </div>
+  {% endif %}
+  <div class="site-footer-item">
+    <div class="credits">
+      {% capture year %}
+      {{ 'now' | date: '%Y' }}
+      {% endcapture %}
+
+      {{ 'copyright_html' | t: year: year, shop_name: shop.name }}
+      {{ powered_by_link }}
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+"name": "Footer",
+"settings": [
+{
+"type": "checkbox",
+"id": "enable_newsletter",
+"label": "Enable newsletter",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "enable_social",
+"label": "Enable social accounts",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "enable_payment_icons",
+"label": "Enable payment icons",
+"default": true
+},
+{
+"type":"header",
+"content":"Partner area"
+},
+{
+"id":"enable_patrers",
+"label":"Enable partner",
+"type":"checkbox"
+},
+{
+"id":"partner_title",
+"type":"text",
+"label":"Title",
+"default":"our friends and partners"
+},
+{
+"id":"background-image",
+"type":"image_picker",
+"label":"Top image"
+},
+{
+"id":"partner_icon_1",
+"type":"image_picker",
+"label":"Partner icon 1"
+},
+{
+"id":"partner_icon_2",
+"type":"image_picker",
+"label":"Partner icon 2"
+},
+{
+"id":"partner_icon_3",
+"type":"image_picker",
+"label":"Partner icon 3"
+},
+{
+"id":"partner_icon_4",
+"type":"image_picker",
+"label":"Partner icon 4"
+},
+{
+"id":"partner_icon_5",
+"type":"image_picker",
+"label":"Partner icon 5"
+},
+{
+"id":"partner_icon_6",
+"type":"image_picker",
+"label":"Partner icon 6"
+},
+{
+"id":"partner_icon_7",
+"type":"image_picker",
+"label":"Partner icon 7"
+},
+{
+"id":"partner_icon_8",
+"type":"image_picker",
+"label":"Partner icon 8"
+},
+{
+"id":"partner_icon_9",
+"type":"image_picker",
+"label":"Partner icon 9"
+},
+{
+"id":"partner_icon_10",
+"type":"image_picker",
+"label":"Partner icon 10"
+}
+],
+"blocks": [
+{
+"type": "richtext",
+"name": "Rich text",
+"limit": 2,
+"settings": [
+{
+"id": "title",
+"type": "text",
+"label": "Heading",
+"default": "About"
+},
+{
+"id": "content",
+"type": "richtext",
+"label": "Content",
+"default": "<p>Use this space to give credit where it's due, reinforce your brand identity, shop policy, or company motto.</p>"
+}
+]
+},
+{
+"type": "newsletter",
+"name": "News letter",
+"limit": 2,
+"settings": [
+{
+"id": "title",
+"type": "text",
+"label": "Heading",
+"default": "Newsletter"
+},
+{
+"id": "content",
+"type": "richtext",
+"label": "Content",
+"default": "<p>For all the latest blue{shift} updates, follow us on Twitter and Instagram, find us on Facebook or leave your email address to sign up for our newsletter.</p>"
+}
+]
+},
+{
+"type": "addressblock",
+"name": "Address block",
+"limit": 2,
+"settings": [
+{
+"id": "title",
+"type": "text",
+"label": "Heading",
+"default": "Get in touch"
+},
+{
+"id": "content",
+"type": "richtext",
+"label": "Content",
+"default": "<p>Use this space to give credit where it's due, reinforce your brand identity, shop policy, or company motto.</p>"
+},
+{
+"id":"social-media",
+"type":"checkbox",
+"label":"Enable social media"
+}
+]
+},
+{
+"type": "menu",
+"name": "Menu",
+"limit": 6,
+"settings": [
+{
+"id": "menu",
+"type": "link_list",
+"label": "Menu"
+}
+]
+},
+{
+"type": "customer",
+"name": "Customer links",
+"limit": 1,
+"settings": [
+{
+"type": "paragraph",
+"content": "Show Log In and Register links. Ensure you've enabled customer accounts in the Checkout settings of your Shopify admin."
+},
+{
+"id": "title",
+"type": "text",
+"label": "Title",
+"default": "Account"
+}
+]
+}
+],
+"default": {
+"blocks": [
+{
+"type": "richtext",
+"settings": {}
+},
+{
+"type": "menu",
+"settings": {
+"menu": "footer"
+}
+},
+{
+"type": "customer",
+"settings": {}
+}
+]
+},
+"locales": {
+"en": {
+"footnav": {
+"about": {
+"title": "About"
+},
+"account": {
+"login": "Log in",
+"logout": "Log out",
+"register": "Register",
+"logged_in_html": "Logged in as {{ user_name }}"
+}
+},
+"copyright_html": "Copyright &copy; {{ year }} {{ shop_name }}."
+}
+}
+}
+
+{% endschema %}

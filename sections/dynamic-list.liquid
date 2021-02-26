@@ -1,0 +1,47 @@
+
+{% include 'dynamic-list' %}
+
+{% schema %}
+ {  
+   "name":"Schools We Work with",
+   "class":"section-text-block",
+   "settings":[  
+      {  
+         "id":"section-title",
+         "type":"text",
+         "label":"Section title"
+      },
+	  {  
+         "id":"section-desc",
+         "type":"textarea",
+         "label":"Description"
+      }
+   ],
+   "blocks":[  
+      {  
+         "type":"text",
+         "name":"List",
+         "settings":[  
+            {  
+               "id":"titlegd",
+               "label":"List",
+               "type":"html"
+            }
+         ]
+      }
+   ],
+   "max_blocks":4,
+   "presets":[  
+      {  
+         "category":"Other",
+         "name":"Text block"
+      }
+   ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

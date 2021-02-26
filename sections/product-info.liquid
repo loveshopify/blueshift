@@ -1,0 +1,110 @@
+{% if section.settings.show_this_section %}
+  <div class="product__info">
+    {% if section.settings.title != blank and product.metafields.accentuate.iconlist1 != blank or product.metafields.accentuate.iconlist2 or product.metafields.accentuate.iconlist3 %}
+      <h2 class="product__info-heading">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <ul class="product__info-list">
+      {% if product.metafields.accentuate.iconlist1 != blank %}
+          <li class="product__info-item">
+          <div class="product__info-item-inner">
+            <div class="product__info-icon-wrap">
+              <img src="{{ product.metafields.accentuate.communication_image }}" 
+                  class="product__info-icon">
+            </div>
+            <div class="product__info-content">
+              {{ product.metafields.accentuate.iconlist1 }}
+            </div>
+          </div>
+        </li> 
+      {% endif %}
+
+      {% if product.metafields.accentuate.iconlist2 != blank %}
+          <li class="product__info-item">
+          <div class="product__info-item-inner">
+            <div class="product__info-icon-wrap">
+              <img src="{{ product.metafields.accentuate.logistics_image }}" class="product__info-icon">
+            </div>
+            <div class="product__info-content">
+              {{ product.metafields.accentuate.iconlist2 }}
+            </div>
+          </div>
+        </li>
+      {% endif %}
+
+      {% if product.metafields.accentuate.iconlist3 != blank %}
+          <li class="product__info-item">
+          <div class="product__info-item-inner">
+            <div class="product__info-icon-wrap">
+              <img src="{{ product.metafields.accentuate.pastoral_image }}" class="product__info-icon">
+            </div>
+            <div class="product__info-content">
+              {{ product.metafields.accentuate.iconlist3 }}
+            </div>
+          </div>
+        </li>
+      {% endif %}
+    </ul>
+
+    <div class="product__info-bottom-grass"></div>
+
+    <div class="product__info-bottom">
+      <div class="product__info-bottom-inner">
+        {% if section.settings.bottom_img != blank %}
+          <div class="product__info-bottom-img-wrap">
+            <img src="{{ section.settings.bottom_img | img_url: '110x' }}"
+                  srcset="{{ section.settings.bottom_img | img_url: '110x' }} 1x, {{ section.settings.bottom_img | img_url: '110x', scale: 2 }} 2x"
+                  class="product__info-bottom-img">
+            {% if section.settings.bottom_img_txt != blank %}
+              <div class="product__info-bottom-img-text">
+                {{ section.settings.bottom_img_txt }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.bottom_content != blank %}
+          <div class="product__info-bottom-content">
+            {{section.settings.bottom_content}}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Course info",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_this_section",
+      "label": "Show product info",
+      "default": true 
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What’s included in the course"
+    },
+    {
+      "type": "richtext",
+      "id": "bottom_content",
+      "label": "Bottom content"
+    },
+    {
+      "type": "text",
+      "id": "bottom_img_txt",
+      "label": "Bottom image text",
+      "default": "Keeping it fresh"
+    },
+    {
+      "id": "bottom_img",
+      "type": "image_picker",
+      "label": "Bottom image"
+    }
+  ] 
+}
+{% endschema %}

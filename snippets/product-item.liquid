@@ -1,0 +1,126 @@
+{%- comment -%}
+  A shared product item component
+
+  @param product
+
+  @param product_style
+    What styling should the product image be given
+
+  @param use_badges
+    Whether to display product sale badges or display in-line
+
+  @param show_vendors
+    Whether to display product vendors
+
+  @param use_quickshop
+    Whether to use the quickshop or not
+{%- endcomment -%}
+
+{%- assign product_style = product_style | default: 'natural' -%}
+{%- assign use_badges = use_badges | default: true -%}
+{%- assign show_vendors = show_vendors | default: false -%}
+{%- assign on_sale = false -%}
+
+{%- for variant in product.variants -%}
+  {%- if variant.price < variant.compare_at_price -%}
+    {%- assign on_sale = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- capture price -%}
+  <span class="money" data-variant-price>
+    {{ product.price_min | money }}
+  </span>
+{%- endcapture -%}
+
+{% capture age %}
+  {% for tag in product.tags %}
+    {% if tag contains '5 to 6' %}
+      5 to 6
+    {% elsif tag contains '6 to 8' %}
+      6 to 8
+    {% elsif tag contains '7 to 9' %}
+      7 to 9
+    {% elsif tag contains '8 to 12' %}
+      8 to 12
+    {% elsif tag contains '10 to 14' %}
+      10 to 14
+    {% elsif tag contains '12 to 14' %}
+      12 to 14
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+
+<article class="
+  product-item
+  product-item-style-{{ product_style }}
+  {% unless product.featured_image %}product-item-no-image{% endunless %}
+  {% for tag in product.tags %}
+    {% if tag contains '5 to 6' %}
+      fivetosix
+    {% elsif tag contains '6 to 8' %}
+      sixtoeight
+    {% elsif tag contains '7 to 9' %}
+      seventonine
+    {% elsif tag contains '8 to 12' %}
+      eighttotwelve
+    {% elsif tag contains '10 to 14' %}
+      tentofourteen
+    {% elsif tag contains '12 to 14' %}
+      twelvetofourteen
+    {% endif %}
+  {% endfor %}
+
+                "
+  data-product-item="{{ product.id }}"
+  {%- if use_quickshop -%}data-use-quickshop{%- endif -%}>
+  <a href="{{ product.url | within: collection }}">
+    <figure class="product-item-image" data-product-item-image>
+      {%- if product.featured_image -%}
+        <img
+          alt="{{ product.featured_image.alt | escape }}"
+          {% include 'img-src', img: product.featured_image, size: '512x' %}
+        >
+      {%- else -%}
+        {%- capture index -%}
+          {%- cycle '1', '2', '3', '4', '5', '6' -%}
+        {%- endcapture -%}
+        {{ 'product-' | append: index | placeholder_svg_tag }}
+      {%- endif -%}
+      {%- if use_badges -%}
+        {%- if product.available != true -%}
+          <span class="product-item-badge">{{ 'product.item.availability.out_of_stock' | t }}</span>
+        {%- elsif on_sale -%}
+        {%- endif -%}
+      {%- endif -%}
+      <div style="position: absolute; top: 0; z-index: 9999;">
+       <span class="badge">
+         Age {{ age }}
+       </span>
+      </div>
+    </figure>
+  </a>
+
+  <h1 class="product-item-title">
+    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+  </h1>
+  {% include 'addon-info' %}
+  {% if show_vendors %}
+    <h2 class="product-item-vendor">
+      <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+    </h2>
+  {% endif %}
+
+
+
+  {%- capture product_quickshop_markup -%}
+    {%- include 'product-quickshop' -%}
+  {%- endcapture -%}
+
+  <script
+    type="application/json"
+    data-quickshop-markup>
+    {{ product_quickshop_markup | json }}
+  </script>
+</article>

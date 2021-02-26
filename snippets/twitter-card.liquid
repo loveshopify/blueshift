@@ -1,0 +1,29 @@
+{% assign template_base = template | split: '.' | first %}
+{% assign og_title = page_title  %}
+{% assign og_description = page_description | default: shop.description | default: shop.name %}
+
+{% comment %}
+  Template specific overides
+{% endcomment %}
+{% if template_base == 'product' %}
+  {% assign og_title = product.title | strip_html %}
+  {% capture twitter_image_tag %}<meta name="twitter:image" content="http:{{ product | img_url: '1024x1024' }}">{% endcapture %}
+
+{% elsif template_base == 'article' %}
+  {% assign og_title = article.title | strip_html %}
+  {% assign og_description = article.excerpt_or_content | strip_html %}
+  {% if article.image %}
+    {% capture twitter_image_tag %}<meta name="twitter:image" content="http:{{ article | img_url: '1024x1024' }}">{% endcapture %}
+  {% endif %}
+
+{% elsif template_base == 'password' %}
+  {% assign og_title = shop.name %}
+  {% assign og_description = shop.description | default: shop.name %}
+{% endif %}
+
+<meta name="twitter:site" content="{{ settings.social_twitter | split: 'twitter.com/' | last | prepend: '@' }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title }}">
+<meta name="twitter:description" content="{{ og_description }}">
+<meta name="twitter:image:alt" content="{{ og_title }}">
+{{ twitter_image_tag }}

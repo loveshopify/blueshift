@@ -1,0 +1,37 @@
+{% comment %}
+  A tweet template.
+
+  @param onboarding
+  @param username
+{% endcomment %}
+
+
+<article class="tweet">
+  <div class="tweet-content" data-tweet-content>
+    {%- if onboarding -%}
+      {{ 'onboarding.tweet_html' | t }}
+    {%- else -%}
+      <div class="tweet-content-placeholder{% if username != blank %} content-placeholder-animate{% endif %}" data-tweet-content-placeholder>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-first-start"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-first-end"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-first-line"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-second-start"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-second-end"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-second-line"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-third-start"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-third-end"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-third-line"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-fourth-start"></div>
+        <div class="tweet-content-placeholder-masker tweet-content-placeholder-fourth-end"></div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <a class="tweet-username"{% unless onboarding %}href="https://www.twitter.com/{{ username }}{% endunless %}">
+    {%- if username != blank -%}
+      {{ username | prepend: '@' }}
+    {%- else -%}
+      <div class="tweet-content-placeholder tweet-content-placeholder-username{% if username != blank %} content-placeholder-animate{% endif %}" tweet-content-placeholder></div>
+    {%- endif -%}
+  </a>
+</article>

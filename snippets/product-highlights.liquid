@@ -1,0 +1,54 @@
+{%- comment -%}
+  Product highlights component
+
+  @param collection
+    The collection to display from
+    Defaults to product's collection if none is set
+
+  @param product_item_style
+    What styling should the product image be given
+
+  @param use_quickshop
+    Whether to use quickshop or not
+
+  @param product_count
+    How many products to display
+{%- endcomment -%}
+{%- assign collection = collection | default: product.collections.first -%}
+{%- assign products = collection.products -%}
+{%- assign collection_product_count = collection.all_products_count -%}
+{%- assign actual_product_count = product_count -%}
+{% assign relatedmetarr = meta_related | split:',' %}
+{% assign metaprocount = relatedmetarr.size %}
+{%- if collection != blank -%}
+  {%- comment -%}
+    If a product is defined, we retrieved the collection from that product.
+    Therefore, we must ignore that product in the count as we do not want to display it.
+  {%- endcomment -%}
+  {%- if product -%}
+    {%- assign collection_product_count = collection_product_count | minus: 1 -%}
+  {%- endif -%}
+  {%- if collection_product_count < product_count -%}
+    {%- assign actual_product_count = collection_product_count -%}
+  {%- endif -%}
+{%- endif -%}
+<section
+  class="product-highlights product-highlights-count-{{ actual_product_count }}{% if product_emphasize %} product-highlights-emphasized{% endif %}"
+  data-product-highlights>
+  {%- include 'product-highlights-normal',
+    products: products,
+    product_item_style: product_item_style,
+    use_quickshop: use_quickshop,
+    product_count: actual_product_count,
+  	relatedmetarr:relatedmetarr,
+  	metaprocount:metaprocount
+  -%}
+  {%- include 'product-highlights-emphasized',
+    products: products,
+    product_item_style: product_item_style,
+    use_quickshop: use_quickshop,
+    product_count: actual_product_count,
+  	relatedmetarr:relatedmetarr,
+  metaprocount:metaprocount
+  -%}
+</section>

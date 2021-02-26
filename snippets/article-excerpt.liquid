@@ -1,0 +1,42 @@
+{%- comment -%}
+  @requires Section with relevant translation strings
+
+  @param article
+{%- endcomment -%}
+<article class="article-excerpt{% unless article.image %} article-excerpt-no-image{% endunless %}" data-article-excerpt>
+  {%- if article -%}
+    {%- if article.image -%}
+      <figure class="article-excerpt-image">
+        <a href="{{ article.url }}">
+          <img
+            alt="{{ article.image.alt | escape }}"
+            {% include 'img-src', img: article.image, size: 'x450' %}
+          >
+        </a>
+      </figure>
+    {%- endif -%}
+    <div class="article-excerpt-content">
+      {% comment %}<p class="article-excerpt-date">{{ article.published_at | date: format: 'short_day_month_year' }}</p>{% endcomment %}
+      <h1 class="article-excerpt-title"><a href="{{ article.url }}">{{ article.title }}</a></h1>
+      <div class="article-excerpt-rte">{{ article.excerpt }}</div>
+      <a class="article-excerpt-read-more" href="{{ article.url }}">
+        <span class="article-excerpt-read-more-text">{{ 'article.excerpt.read_more' | t }}</span>
+        <span class="article-excerpt-read-more-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+      </a>
+    </div>
+  {%- else -%}
+    <figure class="article-excerpt-image">
+      {{ 'image' | placeholder_svg_tag: 'placeholder-image' }}
+    </figure>
+
+    <div class="article-excerpt-content">
+      <p class="article-excerpt-date">{{ 'onboarding.article-excerpt.date' | t }}</p>
+      <h1 class="article-excerpt-title">{{ 'onboarding.article-excerpt.title' | t }}</h1>
+      <div class="article-excerpt-rte">{{ 'onboarding.article-excerpt.content' | t }}</div>
+      <a class="article-excerpt-read-more" href="{{ article.url }}">
+        <span class="article-excerpt-read-more-text">{{ 'article.excerpt.read_more' | t }}</span>
+        <span class="article-excerpt-read-more-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+      </a>
+    </div>
+  {%- endif -%}
+</article>

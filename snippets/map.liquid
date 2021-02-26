@@ -1,0 +1,23 @@
+{% assign map_color_bg = local_settings.directions_map_color_bg %}
+{% assign map_color_fg = local_settings.directions_map_color_fg %}
+
+{% assign map_color_a = map_color_fg %}
+{% assign map_color_b = map_color_bg | color_mix: map_color_fg, 30 %}
+{% assign map_color_c = map_color_bg | color_mix: map_color_fg, 50 %}
+{% assign map_color_d = map_color_bg | color_mix: map_color_fg, 70 %}
+{% assign map_color_e = map_color_bg | color_mix: '#ffffff', 98 %}
+{% assign map_color_f = map_color_bg | color_mix: '#000000', 50 %}
+
+<div
+  class="map"
+  data-map
+  data-map-address="{{ local_settings.directions_value }}"
+  data-map-zoom="{{ local_settings.directions-map-zoom }}"
+  data-map-color-a="{{ map_color_a }}"
+  data-map-color-b="{{ map_color_b }}"
+  data-map-color-c="{{ map_color_c }}"
+  data-map-color-d="{{ map_color_d }}"
+  data-map-color-e="{{ map_color_e }}"
+  data-map-color-f="{{ map_color_f }}">
+  <div class="map-container" data-map-container></div>
+</div>

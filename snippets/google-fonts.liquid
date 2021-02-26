@@ -1,0 +1,30 @@
+{% comment %}
+  Create a stylesheet tag for Google Fonts.
+
+  @param fonts
+         The name of the font settings to pull from, separated by a pipe. for
+         example: 'font_body|font_headings'.
+{% endcomment %}
+{%- capture google_fonts -%}
+  {% assign font_settings = fonts | split: '|' %}
+  {% assign font_request = '' %}
+  {% assign font_count = 0 %}
+
+  {% for font_setting in font_settings %}
+    {% assign font_value = settings[font_setting] %}
+
+    {% if font_value contains 'Google_' %}
+      {% assign font_segment = font_value | replace: 'Google_', '' %}
+      {% assign font_count = font_count | plus: 1 %}
+
+      {% unless font_request contains font_segment %}
+        {% assign font_request = font_request | append: '|' | append: font_segment %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+
+  {% if font_count > 0 %}
+    {{ 'https://fonts.googleapis.com/css?family=' | append: font_request | remove_first: '|' | stylesheet_tag }}
+  {% endif %}
+{%- endcapture -%}
+{{ google_fonts | strip_newlines }}

@@ -1,0 +1,83 @@
+{% assign current_product = product %}
+{% assign product_age = product.metafields.accentuate.ages %}
+
+{% capture class_age %}
+  {% if product_age contains '5 to 6' %}
+    fivetosix
+  {% elsif product_age contains '6 to 7' %}
+    sixtoseven
+  {% elsif product_age contains '6 to 8' %}
+    sixtoeight
+  {% elsif product_age contains '6 to 9' %}
+    sixtonine
+  {% elsif product_age contains '7 to 8' %}
+    seventoeigh
+  {% elsif product_age contains '7 to 9' %}
+    seventonine
+  {% elsif product_age contains '8 to 9' %}
+    eighttonine
+  {% elsif product_age contains '8 to 12' %}
+    eighttotwelve
+  {% elsif product_age contains '10+' %} 
+    tenandabove
+  {% elsif product_age contains '10 to 14' %}
+    tentofourteen
+  {% elsif product_age contains '12 to 14' %}
+    twelvetofourteen
+  {% elsif product_age contains '12 to 16' %}
+    twelvetosixteen
+  {% endif %}
+{% endcapture %}
+
+{% if product.type  == 'SHOPSTORM_HIDDEN_PRODUCT' %}
+  Product is not available
+  {% break %}
+{% endif %}
+
+{%- assign show_product_info = product.metafields.section_inclusion.product_info | default: 'enabled' -%}
+{%- assign show_product_description = product.metafields.section_inclusion.product_description | default: 'enabled' -%}
+{%- assign show_daily_camp_overview = product.metafields.section_inclusion.daily_camp_overview | default: 'enabled' -%}
+{%- assign show_video_with_text = product.metafields.section_inclusion.video_with_text | default: 'enabled' -%}
+{%- assign show_faqs = product.metafields.section_inclusion.faqs | default: 'enabled' -%}
+{%- assign show_slide_image_with_text = product.metafields.section_inclusion.slide_image_with_text | default: 'enabled' -%}
+{%- assign show_product_interested = product.metafields.section_inclusion.product_interested | default: 'enabled' -%}
+
+<div class="product {{ class_age | strip | strip_newlines }}">
+  {% section 'product-template' %}
+
+  {% if show_product_info == 'enabled' %}
+    {% section 'product-info' %}
+  {% endif %}
+
+  {% if show_product_description == 'enabled' %}
+    {% include 'product-description' %}
+  {% endif %}
+
+  {% if show_daily_camp_overview == 'enabled' %}
+    {% section 'daily-camp-overview' %}
+  {% endif %}
+
+  {% if show_video_with_text == 'enabled' %}
+    {% section 'video-with-text' %}
+  {% endif %}
+
+  {% if show_faqs == 'enabled' %}
+    {% section 'product-faqs' %}
+  {% endif %}
+
+  {% if show_slide_image_with_text == 'enabled' %}
+    {% section 'slider-image-with-text' %}
+  {% endif %}
+
+  {% if show_product_interested == 'enabled' %}
+    {% section 'product-interested' %}
+  {% endif %}
+</div>
+
+<style>
+  .site-main {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+</style>

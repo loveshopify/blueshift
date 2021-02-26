@@ -1,0 +1,51 @@
+<div class="template-account-addresses">
+  <h1 class="template-account-addresses-title">{{ 'customers.addresses.header' | t }}</h1>
+  <p class="template-account-addresses-subtitle"><a href="/account">{{ 'customers.account.header' | t }}</a></p>
+  <div class="account-address-forms">
+    {% include 'account-address-form', address: customer.new_address, active: true %}
+
+    {% paginate customer.addresses by 4 %}
+      {% for address in customer.addresses %}
+        {% include 'account-address-form', address: address, active: false %}
+      {% endfor %}
+    {% endpaginate %}
+  </div>
+
+  {% if customer.addresses.size > 0 %}
+    {% paginate customer.addresses by 4 %}
+      <div class="account-addresses">
+        <h2 class="account-address-title">{{ 'customers.addresses.addresses.heading' | t }}</h2>
+        {% for address in customer.addresses %}
+          <div class="account-address">
+            <p>
+              <span>{{ address.first_name }} {{ address.last_name }}</span>
+              {% if address.company != blank %}
+                <span>{{ address.company }}</span>
+              {% endif %}
+              {% if address.street != blank %}
+                <span>{{ address.street }}</span>
+              {% endif %}
+              {% if address.city != blank or address.province_code != blank %}
+                <span>
+                  {{ address.city }}{% if address.province_code %}, {{ address.province_code }}{% endif %}
+                </span>
+              {% endif %}
+              {% if address.country != blank or address.zip != blank %}
+                <span>{{ address.country }} {{ address.zip }}</span>
+              {% endif %}
+              {% if address.phone != blank %}
+                <span>{{ address.phone }}</span>
+              {% endif %}
+            </p>
+            {% if address == customer.default_address %}
+              <p>{{ 'customers.addresses.default_address_message' | t }}</p>
+            {% endif %}
+            <a class="button edit-address secondary" href="#" data-edit-address="{{ address.id }}">{{ 'customers.addresses.edit' | t }}</a>
+            <a class="button delete-address" href="#" data-delete-address="{{ address.id }}">{{ 'customers.addresses.delete' | t }}</a>
+          </div>
+        {% endfor %}
+        {% include 'pagination' %}
+      </div>
+    {% endpaginate %}
+  {% endif %}
+</div>

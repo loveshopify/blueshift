@@ -1,0 +1,87 @@
+<script
+  type="application/json"
+  data-section-type="static-cart"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "money_format": {{ shop.money_format | json }},
+    "button_update_shipping_title": {{ 'cart.button_update_shipping_title' | t | json }},
+    "button_update_shipping_disabled_title": {{ 'cart.button_update_shipping_disabled_title' | t | json }},
+    "money_format": {{ shop.money_with_currency_format | json }},
+    "customer_logged_in": {%- if customer -%}true{%- else -%}false{%- endif -%}
+  }
+</script>
+
+<h1 class="cart-title">{{ 'cart.title' | t }}</h1>
+<h2 class="cart-empty-message{% if cart.items.size != 0 %} cart-empty-message-hidden{% endif %}" data-cart-empty-message>{{ 'cart.empty' | t }}</h2>
+
+<form class="cart-form{% if cart.items.size == 0 %} cart-empty{% endif %}" action="/cart" method="post" data-cart-form>
+  <section class="cart-items">
+    {%- for item in cart.items -%}
+      {%- include 'cart-item', item: item -%}
+    {%- endfor -%}
+  </section>
+
+  {% comment %}
+  {% include "scm-attribute-cart" %}
+  {% endcomment %}
+  
+  {%- if section.settings.show_notes -%}
+    <section class="cart-note">
+      <textarea
+        class="cart-note-content"
+        name="note"
+        placeholder="{{ section.settings.notes_placeholder | escape }}"
+        aria-label="{{ 'cart.notes' | t }}">{{ cart.note }}</textarea>
+    </section>
+  {%- endif -%}
+  <section class="cart-totals">
+    <div class="cart-total-row">
+      <span class="cart-total-row-title">{{ 'cart.totals.subtotal_title' | t }}</span>
+      <span class="cart-total-row-value money" data-cart-subtotal>{{ cart.original_total_price | money }}</span>
+    </div>
+
+    <button
+      class="cart-form-button-checkout-no-js"
+      type="submit"
+      name="checkout">
+      {{ 'cart.button_checkout_title' | t }}
+    </button>
+  </section>
+
+  {% if additional_checkout_buttons %}
+    <div class="cart-additional-checkout-buttons">
+      {{ content_for_additional_checkout_buttons }}
+    </div>
+  {% endif %}
+
+  {%- include 'cart-menu' -%}
+</form>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "class": "section-cart",
+  "settings": [
+    {
+      "id": "show_notes",
+      "type": "checkbox",
+      "label": "Show notes",
+      "default": true
+    },
+    {
+      "id": "notes_placeholder",
+      "type": "text",
+      "label": "Notes placeholder text",
+      "default": "Write any special instructions for your shipment here"
+    },
+    {
+      "id": "shipping_calculator_default_country",
+      "type": "text",
+      "label": "Shipping calculator default country",
+      "default": "United States"
+    }
+  ]
+}
+
+{% endschema %}

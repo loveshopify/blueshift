@@ -1,0 +1,93 @@
+{% if section.settings.show_this_section and section.settings.video_url != blank or section.settings.image != blank %}
+  <div class="section-video-with-text">
+    <div class="video-with-text">
+      <div class="video-with-text__video-wrap">
+        {% if section.settings.video_url != blank %}
+          <div  class="video-with-text__video-embed" data-video-type="{{ section.settings.video_url.type }}">
+            {% if section.settings.video_url.type == 'youtube' and section.settings.video_url != blank %}
+              <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?muted=0&rel=0"
+                      frameborder="0"></iframe>
+            {% endif %}
+            {% if section.settings.video_url.type == 'vimeo' and section.settings.video_url != blank %}
+              <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?loop=0&title=0&byline=0&portrait=0" frameborder="0" id="video{{ section.id }}"></iframe>
+            {% endif %}
+
+            {% if section.settings.image != blank %}
+              <div class="video-with-text__video-image" style="background-image: url({{ section.settings.image | img_url: 'master' }});">
+                <span data-play-video>{% include 'icon', id: 'play-btn' %}</span>
+              </div>
+            {% endif %}
+          </div>
+        {% elsif section.settings.video_url == blank and section.settings.image != blank %}
+          <img src="{{ section.settings.image | img_url: '500x' }}"
+                srcset="{{ section.settings.image | img_url: '500x' }} 1x, {{ section.settings.image | img_url: '500x', scale: 2 }} 2x"
+                class="video-with-text__image">
+        {% endif %}
+      </div>
+
+      {% if section.settings.text != blank %}
+        <div class="video-with-text__content">
+          {% if section.settings.title != blank %}
+            <h2 class="video-with-text__title">{{ section.settings.title }}</h2>
+          {% endif %}
+          <div class="video-with-text__text">{{ section.settings.text }}</div>
+          {% if section.settings.link != blank %}
+            <a class="video-with-text__btn btn-link" href="{{ section.settings.link }}">{{ section.settings.btn_text | default: 'Watch' }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Video with text",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_this_section",
+        "label": "Show section video with text",
+        "default": true 
+      },
+      {
+        "id": "video_url",
+        "type": "video_url",
+        "label": "Video URL",
+        "accept": ["youtube", "vimeo"],
+        "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type":"url",
+        "id":"link",
+        "label":"link"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button text"
+      }
+    ],
+    "presets": [
+      {
+        "category": "Video",
+        "name": "Video with text"
+      }
+    ]
+  } 
+{% endschema %}

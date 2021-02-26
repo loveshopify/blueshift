@@ -1,0 +1,126 @@
+<div class="page-schools__top" style="background-image: url({{ section.settings.schools_top_bg | img_url: 'master' }})">
+  <div class="page-schools__top-inner">
+    {% if section.settings.schools_top_title != blank %}
+      <h1 class="page-schools__top-title">{{ section.settings.schools_top_title }}</h1>
+    {% endif %}
+  </div>
+</div>
+
+<div class="page-schools__content">
+  {% if section.settings.schools_title != blank %}
+    <h2 class="page-schools__title">
+      {{ section.settings.schools_title }}
+    </h2>
+  {% endif %}
+
+  {% if section.settings.schools_text != blank %}
+    <div class="page-schools__sub-title">
+      {{ section.settings.schools_text }}
+    </div>
+  {% endif %}
+
+  {% if section.settings.schools_btn_link != blank %}
+    <div class="page-schools__btn-wrap">
+      <a href="{{ section.settings.schools_btn_link }}">{{ section.settings.schools_btn_text }}</a>
+    </div>
+  {% endif %}
+</div>
+
+{% if section.blocks.size > 0 %}
+  <div class="page-schools__inner">
+    <ul class="page-schools__list">
+      {% for block in section.blocks %}
+        <li class="page-schools__item">
+          <div class="page-schools__item-logo">
+            <img src="{{ block.settings.school_logo  |  img_url: 'x100' }}" 
+              srcset="{{ block.settings.school_logo  | img_url: 'x100' }} 1x, {{ block.settings.school_logo  | img_url: 'x100', scale: 2 }} 2x"
+              alt="">
+          </div>
+          <div class="page-schools__item-details">
+            {% if block.settings.title != blank %}
+              <h3 class="page-schools__item-title">
+                {{ block.settings.title }}
+              </h3>
+            {% endif %}
+
+            {% if block.settings.school_address != blank %}
+              <div class="page-schools__item-address">
+                {{ block.settings.school_address }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.school_link != blank %}
+              <a href="{{ block.settings.school_link }}" class="page-schools__item-link">{{ 'product.find_out_more' | t }}</a>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Schools page",
+    "settings": [
+      {
+        "id": "schools_top_bg",
+        "type": "image_picker",
+        "label": "Top background image"
+      },
+      {
+        "id": "schools_top_title",
+        "type": "textarea",
+        "label": "Top title"
+      },
+      {
+        "id": "schools_title",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "schools_text",
+        "type": "richtext",
+        "label": "Text"
+      },
+      {
+        "id": "schools_btn_link",
+        "type": "url",
+        "label": "Button link"
+      },
+      {
+        "id": "schools_btn_text",
+        "type": "text",
+        "label": "Button text"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "school",
+        "name": "school",
+        "settings": [
+          {
+            "id": "school_logo",
+            "type": "image_picker",
+            "label": "School logo"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "School title"
+          },
+          {
+            "id": "school_address",
+            "type": "richtext",
+            "label": "School address"
+          },
+          {
+            "id": "school_link",
+            "type": "url",
+            "label": "School url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

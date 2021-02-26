@@ -1,0 +1,120 @@
+<style>
+  .main-block-gd.columngd-4 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .columngd-4 .block-gd {
+    display:inline-block;
+    width: 25%;
+    
+    padding: 0px 15px;
+  }
+  .columngd-4 .block-gd.last-gd {
+    border-right: none;
+  }
+  .text-content img {
+    display: block;
+    height: 4.5em;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .text-content p {
+    font-size: 14px;
+    color: #4e4d4d;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+  }
+  .block-heading {
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: 400;
+    text-align: center;
+
+  }
+  .section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    display: block;
+    color: #66CCCC;
+    letter-spacing: 0.7px;
+  }
+  .text-content { text-align: center; }
+  .text-content i {
+    font-size: 48px;
+}
+  .text-content ul {
+    text-align: left;
+    line-height: 1.5em;
+  }
+  
+  @media only screen and (max-width:767px){
+    .textblock-icon-section-{{section.id}} .columngd-4 .block-gd {
+      display:block;
+      width:100%;
+      margin-bottom: 10px;
+      border:none;
+    }
+    
+  }
+</style>  
+<div class="main-block-gd columngd-4">
+   <div class="block-gd first-gd">
+    <div class="inner-block-gd" >
+      <div class="text-content">
+        {% if product.metafields.accentuate.icon1 %}
+        <i class="{{ product.metafields.accentuate.icon1 }}" style="color:{{ product.metafields.accentuate.icon1_color }}"></i>
+        {% endif %}
+        
+        <p>{{ product.metafields.accentuate.icon1_list }}</p>
+      </div>
+    </div>
+    </div>
+
+   <div class="block-gd">
+    <div class="inner-block-gd" >
+      <div class="text-content">
+        {% if product.metafields.accentuate.icon2 %}
+        <i class="{{ product.metafields.accentuate.icon2 }}" style="color:{{ product.metafields.accentuate.icon2_color }}"></i>
+        {% endif %}
+        
+        <p>{{ product.metafields.accentuate.icon2_list }}</p>
+      </div>
+    </div>
+    </div>
+   <div class="block-gd">
+    <div class="inner-block-gd" >
+      <div class="text-content">
+        {% if product.metafields.accentuate.icon3 %}
+        <i class="{{ product.metafields.accentuate.icon3 }}" style="color:{{ product.metafields.accentuate.icon3_color }}"></i>
+        {% endif %}
+        
+        <p>{{ product.metafields.accentuate.icon3_list }}</p>
+      </div>
+    </div>
+    </div>
+   <div class="block-gd last-gd">
+    <div class="inner-block-gd" >
+      <div class="text-content">
+        {% if product.metafields.accentuate.icon4 %}
+        <i class="{{ product.metafields.accentuate.icon4 }}" style="color:{{ product.metafields.accentuate.icon4_color }}"></i>
+        {% endif %}
+        
+        <p>{{ product.metafields.accentuate.icon4_list }}</p>
+      </div>
+    </div>
+    </div>
+</div>

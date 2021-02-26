@@ -1,0 +1,198 @@
+{% capture added_to_cart_link %}
+  {% include 'icon', id: 'checkmark' %}
+  {{ 'product.added_to_cart_link_html' | t }}
+{% endcapture %}
+
+{% if section.settings.enable_menu_form %}
+  {% assign enable_inline_form = false %}
+{% else %}
+  {% assign enable_inline_form = true %}
+{% endif %}
+ 
+<script
+  type="application/json"
+  data-section-type="static-product"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "product": {{ product | json }},
+    "selected_variant": {{ product.selected_variant | json }},
+    "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }},
+    "money_format": {{ shop.money_format | json }},
+    "form_is_inline": {{ enable_inline_form | json }},
+    "text": {
+      "added_to_cart_link": {{ added_to_cart_link | json }},
+      "product_available": {{ 'product.add_to_cart.available' | t | json }},
+      "product_unavailable": {{ 'product.add_to_cart.unavailable' | t | json }}
+    }
+  }
+</script>
+
+{% if enable_inline_form %}
+  <div class="product-alert">
+    <div class="product-alert-content">
+      <div class="product-alert-dismiss">{% include 'icon', id: 'close' %}</div>
+      <div class="product-alert-message"></div>
+    </div>
+  </div>
+{% endif %}
+
+<div
+  class="product-wrapper {% if product.images.size == 0 %}product-wrapper-no-images{% endif %}"
+  data-product-wrapper
+>
+  {%- if product.images.size > 0 -%}
+    <section class="product-images" data-product-images>
+      {%- for image in product.images -%}
+        <figure
+          class="product-image"
+          data-product-image
+          data-product-image-index="{{ forloop.index0 }}"
+          data-product-image-id="{{ image.id }}"
+        >
+          <img
+            alt="{{ image.alt | escape }}"
+            {% include 'img-src', img: image, size: '1050x' %}
+          >
+        </figure>
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
+
+  <section class="product-details product-details-relative" data-product-details>
+    {% if enable_inline_form %}
+      {% include 'breadcrumbs' %}
+    {% endif %}
+
+    {% if section.settings.show_product_vendor %}
+      <h2 class="product-vendor">
+        <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+      </h2>
+    {% endif %}
+
+    <h1 class="product-title">{{ product.title }}</h1>
+    {%- include 'product-price', variant: product.selected_or_first_available_variant -%}
+
+    {% include 'product-form-nojs' %}
+
+    {% if enable_inline_form %}
+      {% include 'product-form-inline' %}
+    {% endif %}
+
+    {% if enable_inline_form and section.settings.enable_social_sharing %}
+      {% include 'share-buttons' %}
+    {% endif %}
+
+    <div class="product-rte rte">
+      {{ product.description }}
+    </div>
+  </section>
+</div>
+
+{% if enable_inline_form == false %}
+  {%- include 'product-menu' -%}
+{% endif %}
+
+{%- for block in section.blocks -%}
+  {%- assign product_count = block.settings.product-count | times: 1 -%}
+
+ {%- if collection.all_products_count > 1 -%}
+    <section class="section-related-products" {{ block.shopify_attributes }}>
+      <span class="related-products-title">{{ 'related_products.title' | t }}</span>
+      {%- include 'product-highlights',
+        product_item_style: block.settings.product_item_style,
+        use_quickshop: block.settings.enable_product_quickshop,
+        product_count: product_count,
+        product_emphasize: block.settings.product_emphasize
+      -%}
+    </section>
+  {%- endif -%}
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Product pages",
+  "class": "section-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_menu_form",
+      "label": "Enable bottom menu",
+      "default": true,
+      "info": "Displays product options and breadcrumbs in a sticky bottom menu."
+    },
+    {
+      "id": "show_product_vendor",
+      "type": "checkbox",
+      "label": "Show product vendor",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Sharing"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_social_sharing",
+      "label": "Enable social sharing",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "related_products",
+      "name": "Related products",
+      "settings": [
+        {
+          "id": "product_item_style",
+          "type": "select",
+          "label": "Product aspect ratio",
+          "info": "Using an uncropped setting will generate white space around the image to create a uniform grid without cropping your image. The background in the editor indicates the applied white space, but will not appear on your storefront.",
+          "options": [
+            { "group": "Uncropped", "value": "natural", "label": "Natural" },
+            { "group": "Uncropped", "value": "small", "label": "Short (4:3)" },
+            { "group": "Uncropped", "value": "medium", "label": "Square (1:1)" },
+            { "group": "Uncropped", "value": "large", "label": "Tall (2:3)" },
+            { "group": "Cropped", "value": "cropped-small", "label": "Short (4:3)" },
+            { "group": "Cropped", "value": "cropped-medium", "label": "Square (1:1)" },
+            { "group": "Cropped", "value": "cropped-large", "label": "Tall (2:3)" }
+          ],
+          "default": "natural"
+        },
+        {
+          "id": "enable_product_quickshop",
+          "type": "checkbox",
+          "label": "Enable product quickshop",
+          "default": false
+        },
+        {
+          "id": "product-count",
+          "type": "range",
+          "label": "Products",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "id": "product_emphasize",
+          "type": "checkbox",
+          "label": "Emphasize product",
+          "info": "Creates an alternate layout on larger screens",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "max_blocks": 1,
+  "default": {
+    "blocks": [
+      {
+        "type": "related_products",
+        "settings": {}
+      }
+    ]
+  }
+}
+
+{% endschema %}

@@ -1,0 +1,152 @@
+{% assign school_bg_top = page.metafields.school.school_bg_top %}
+{% assign school_logo = page.metafields.school.school_logo %}
+{% assign school_title = page.title %}
+{% assign school_content = page.metafields.school.school_content %}
+{% assign school_content_image = page.metafields.school.school_content_image %}
+
+<div class="page-schools__top" style="background-image: url({{ school_bg_top }})">
+  <div class="page-schools__top-inner">
+    {% if school_logo %}
+      <div class="page-schools__logo">
+        <img src="{{ school_logo }}" alt="">
+      </div>
+    {% endif %}
+    {% if school_title != blank %}
+      <h1 class="page-schools__top-title">{{ school_title }}</h1>
+    {% endif %}
+  </div>
+</div>
+
+{% if school_content != blank %}
+<div class="page-school__details">
+  <div class="page-school__details-bg">
+    <div class="page-school__details-inner">
+      <div class="page-school__details-content">
+        <div class="page-school__details-img">
+          <img src="{{ school_content_image }}" alt="">
+        </div>
+        
+        <div class="page-school__details-text">
+          {{ school_content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if page.metafields.school.testimonial_text != blank %}
+  <ul class="school__slider">
+    {% for item in page.metafields.school.testimonial_text %}
+      <li class="school__slider-slide slide-{{ forloop.index }}">
+        <div class="school__slider-inner">
+          {% if item != '' %}
+            <div class="school__slider-content">
+              {{ item }}
+            </div>
+
+            {% if page.metafields.school.testimonial_address != block %}
+              <div class="school__slider-address">
+                {{ page.metafields.school.testimonial_address[forloop.index0] }}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if page.metafields.school.school_items_heading != blank and page.metafields.school.item_text_1 != blank or page.metafields.school.item_text_2 or page.metafields.school.item_text_3 %}
+  <div class="school__info"> 
+    <h2 class="school__info-heading">{{ page.metafields.school.school_items_heading }}</h2>
+
+    <ul class="school__info-list">
+      {% if page.metafields.school.item_text_1 != blank %}
+          <li class="school__info-item">
+          <div class="school__info-item-inner">
+            <div class="school__info-icon-wrap">
+              <img src="{{ page.metafields.school.item_icon_1 }}" 
+                  class="school__info-icon">
+            </div>
+            <div class="school__info-content">
+              <h3 class="school__info-content-ttl" style="color: {{ page.metafields.school.item_color_1 }}">
+                {{ page.metafields.school.item_title_1 }}
+              </h3>
+              <div class="school__info-content-txt">
+                {{ page.metafields.school.item_text_1 }}
+              </div>
+            </div>
+          </div>
+        </li> 
+      {% endif %}
+
+      {% if page.metafields.school.item_text_2 != blank %}
+          <li class="school__info-item teachers">
+          <div class="school__info-item-inner">
+            <div class="school__info-icon-wrap">
+              <img src="{{ page.metafields.school.item_icon_2 }}" class="school__info-icon">
+            </div>
+            <div class="school__info-content">
+              <h3 class="school__info-content-ttl" style="color: {{ page.metafields.school.item_color_2 }}">
+                {{ page.metafields.school.item_title_2 }}
+              </h3>
+              <div class="school__info-content-txt">
+                {{ page.metafields.school.item_text_2 }}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endif %}
+
+      {% if page.metafields.school.item_text_3 != blank %}
+          <li class="school__info-item">
+          <div class="school__info-item-inner">
+            <div class="school__info-icon-wrap">
+              <img src="{{ page.metafields.school.item_icon_3 }}" class="school__info-icon">
+            </div>
+            <div class="school__info-content">
+              <h3 class="school__info-content-ttl" style="color: {{ page.metafields.school.item_color_3 }}">
+                {{ page.metafields.school.item_title_3 }}
+              </h3>
+              <div class="school__info-content-txt">
+                {{ page.metafields.school.item_text_3 }}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+{% endif %}
+
+{% if page.metafields.school.interested_courses != blank %}
+  <div class="interested-courses">
+    <div class="interested-courses__inner">
+      <h2 class="interested-courses__heading">
+        You may also be interested in...
+      </h2>
+        
+      <ul class="interested-courses__list">
+        {% for item in page.metafields.school.interested_courses %}
+          {% assign courses = collections[item] %}
+          {% assign courses_img = courses.image | img_url: 'master' %}
+          {% assign courses_title = courses.title %}
+
+          {% if page.metafields.school.interested_courses_image[forloop.index0] != blank %}
+            {% assign courses_img = page.metafields.school.interested_courses_image[forloop.index0] %}
+          {% endif %}
+
+          {% if page.metafields.school.interested_courses_title[forloop.index0] != blank %}
+            {% assign courses_title = page.metafields.school.interested_courses_title[forloop.index0] %}
+          {% endif %}
+
+          <li class="interested-courses__item" style="background-image: url({{ courses_img }})">
+            <h3 class="interested-courses__item-title" style="color: {{ page.metafields.school.interested_courses_color[forloop.index0] }}">{{ courses_title }}</h3>
+            <a href="{{ courses.url }}" class="interested-courses__item-link" style="background: {{ page.metafields.school.interested_courses_color[forloop.index0] }}">{{ 'product.read_more_v1' | t }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}

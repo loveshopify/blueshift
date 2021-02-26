@@ -1,0 +1,87 @@
+{% if section.settings.show_this_section and section.blocks.size > 0 %}
+  <ul class="school__slider">
+    {% for block in section.blocks %}
+      <li class="school__slider-slide slide-{{ forloop.index }}">
+        <div class="school__slider-inner">
+          {% if block.settings.text != block %}
+            <div class="school__slider-content">
+              {{ block.settings.text }}
+            </div>
+
+            {% if block.settings.address != block %}
+              <div class="school__slider-address">
+                {{ block.settings.address }}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+
+        <style>
+          .slide-{{ forloop.index }}.school__slider-slide {
+            background: {{ block.settings.bg_color }};
+          }
+
+          .slide-{{ forloop.index }} .school__slider-content {
+            color: {{ block.settings.content_color }};
+          }
+
+          .slide-{{ forloop.index }} .school__slider-address {
+            color: {{ block.settings.address_color }};
+          }
+        </style>
+      </li>
+
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "School slider",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_this_section",
+        "label": "Show this section",
+        "default": true 
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "slide", 
+        "settings": [
+           {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Color slider",
+            "default": "#84547D"
+          },
+          {
+            "id": "text",
+            "type": "richtext",
+            "label": "Content"
+          },
+          {
+            "type": "color",
+            "id": "content_color",
+            "label": "Color content",
+            "default": "#F5C644"
+          },
+          {
+            "id": "address",
+            "type": "richtext",
+            "label": "Address"
+          },
+          {
+            "type": "color",
+            "id": "address_color",
+            "label": "Color adress",
+            "default": "#fff"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

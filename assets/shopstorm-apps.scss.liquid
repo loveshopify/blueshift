@@ -1,0 +1,49 @@
+{% comment %} Section - Product Customizer {% endcomment %}
+{% comment %} PLEASE DO NOT MODIFY THIS SECTION, DOING SO MAY BREAK YOUR PRODUCT OPTIONS {% endcomment %}
+
+.product-customizer-options {
+  .option-type-checkbox_group ul, .option-type-radio ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      list-style-type: none;
+    }
+    input, label {
+      display: inline;
+    }
+  }
+  .option-type-radio ul input {
+    -webkit-appearance: radio;
+  }
+  .option-type-checkbox {
+    input, & > div, label { display: inline; }
+  }
+  .product-customizer-option-description {
+    font-size: 90%;
+  }
+  .option-required label::after { 
+     color: #ff5d5d; 
+     content: " *"; 
+  }
+  .option-type-radio ul li label::after {
+    color: initial;
+    content: initial;
+  }
+}
+.product-customizer-customizations-total, .product-customizer-selections-message {
+  color: #555;
+  opacity: 0.7;
+}
+
+{% comment %} Section - Custom {% endcomment %}
+{% comment %} Place any and all ShopStorm Apps custom CSS below this comment {% endcomment %}
+
+.product-customizer-option {
+    padding-bottom: 10px!Important;
+}
+
+.product-customizer-option input, .product-customizer-option textarea, .product-customizer-option select {
+    margin-top: 5px!important;
+    width: 100%!Important;
+}

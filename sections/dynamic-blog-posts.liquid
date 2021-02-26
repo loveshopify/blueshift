@@ -1,0 +1,74 @@
+{%- assign onboarding = true -%}
+
+{%- if section.settings.blog != blank -%}
+  {%- assign onboarding = false -%}
+{%- endif -%}
+
+<script
+  type="application/json"
+  data-section-type="dynamic-blog-posts"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "onboarding": {{ onboarding | json }}
+  }
+</script>
+
+{%- if section.settings.title != blank -%}
+  <h4 class="section-title">
+    {{ section.settings.title | escape }}
+  </h4>
+{%- endif -%}
+
+<div class="article-excerpts">
+  <div class="article-excerpt-masonry-item-sizer" data-article-excerpt-masonry-item-sizer></div>
+  <div class="article-excerpt-masonry-gutter-sizer" data-article-excerpt-masonry-gutter-sizer></div>
+  {%- if onboarding -%}
+    {%- for i in (1..2) -%}
+      {%- include 'article-excerpt' -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- for article in blogs[section.settings.blog].articles limit: 2 -%}
+      {%- include 'article-excerpt', article: article -%}
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "section-blog-posts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Blog posts"
+    },
+    {
+       "type": "blog",
+       "id": "blog",
+       "label": "Blog"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Blog posts"
+    }
+  ],
+  "locales": {
+    "en": {
+      "onboarding": {
+        "title": "Blog posts",
+        "article-excerpt": {
+          "date": "3 Nov, 1971",
+          "title": "Article title",
+          "content": "Article excerpt"
+        }
+      }
+    }
+  }
+}
+
+{% endschema %}

@@ -1,0 +1,394 @@
+<div class="courses">
+  {% if page.metafields.courses_page.page_title != blank or page.metafields.courses_page.sub_title != blank %}
+    <div class="courses-page-top">
+      {% if page.metafields.courses_page.page_title != blank %}
+        <h1 class="courses-page-top__title">{{ page.metafields.courses_page.page_title }}</h1>
+      {% endif %}
+      {% if page.metafields.courses_page.sub_title != blank %}
+        <div class="courses-page-top__sub-title">{{ page.metafields.courses_page.sub_title }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="courses__inner">
+    {% if page.metafields.courses_page.heading != blank %}
+      <h2 class="courses__heading">{{ page.metafields.courses_page.heading }}</h2>
+    {% endif %}
+
+
+    {% if page.metafields.courses_page.location!= blank %}
+      {% assign location_list = page.metafields.courses_page.location %}
+
+      <div class="courses__tabs">
+        <div class="courses__tabs-filter">
+          {% comment %} <p class="courses__tabs-filter-heading">Select camp location and date</p> {% endcomment %}
+
+          
+            {% comment %} <select
+              class="option-select-input selectric-init filter-location"
+              name=""
+            >
+              {% for location in location_list %}
+                <option
+                  value="{{ location | handle }}"
+                  {% if forloop.first %}selected{% endif %}
+                >{{ location }}</option>
+              {% endfor %}
+            </select> {% endcomment %}
+              
+            {% comment %} <select
+              class="option-select-input selectric-init filter-date"
+              name=""
+            >
+              {% assign filter_date_list = '' %}
+              {% for location in location_list %}
+                {% assign date_list = page.metafields.courses_page.dates[forloop.index0] | split: ';' %}
+                {% for date in date_list %}
+                  {% unless filter_date_list contains date %}
+                    {% assign filter_date_list = filter_date_list | append: date | append: ',' %}
+                    <option
+                      value="{{ date | handle }}"
+                    >{{ date }}</option>
+                  {% endunless %}
+                {% endfor %}
+              {% endfor %}
+              <option
+              value="all"
+              selected
+              >{{ 'product.all_dates' | t }}</option>
+            </select> {% endcomment %}
+
+            {% comment %} <a href="#" id="filterCourses" class="filter-courses-btn">{{ 'product.apply_filter' | t }}</a> {% endcomment %}
+
+          {% comment %} {% if page.metafields.courses_page.sub_filter_text != blank %}
+            <div class="courses__tabs-filter-sub-text">{{ page.metafields.courses_page.sub_filter_text }}</div>
+          {% endif %} {% endcomment %}
+        </div>
+
+        <div class="courses__tabs-sticky">
+          <ul class="courses__tabs-caption">
+            {% for location in location_list %}
+              <li {% if forloop.first %}class="active"{% endif %} data-location="{{ location | handle }}">
+                {{ location }} 
+                {% if location_list.size > 1 %}
+                  <span class="arrow-down">{% include 'icon', id: 'arrow' %}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+
+          {% for location in location_list %}
+            {% assign link_to_map = page.metafields.courses_page.link_to_map[forloop.index0] %}
+            {% assign location_address = page.metafields.courses_page.location_address[forloop.index0] %}
+            {% assign location_description = page.metafields.courses_page.location_description[forloop.index0] %}
+            {% assign location_address_2 = page.metafields.courses_page.location_address_2[forloop.index0] %}
+            {% assign location_description_2 = page.metafields.courses_page.location_description_2[forloop.index0] %}
+
+            {% comment %} Additional text for date columns {% endcomment %}
+            {% assign text_for_date_column_1 = page.metafields.courses_page.text_for_date_column_1[forloop.index0] %}
+            {% assign text_for_date_column_2 = page.metafields.courses_page.text_for_date_column_2[forloop.index0] %}
+            {% assign text_for_date_column_3 = page.metafields.courses_page.text_for_date_column_3[forloop.index0] %}
+            {% assign text_for_date_column_4 = page.metafields.courses_page.text_for_date_column_4[forloop.index0] %}
+            {% assign text_for_date_column_5 = page.metafields.courses_page.text_for_date_column_5[forloop.index0] %}
+            {% assign text_for_date_column_6 = page.metafields.courses_page.text_for_date_column_6[forloop.index0] %}
+            {% comment %} End additional text for date columns {% endcomment %}
+
+            <div class="courses__tabs-content courses__tabs-content-top {% if forloop.first %}active{% endif %}" data-location="{{ location |handle }}">
+              
+              {% if location_address != blank or location_address_2 != blank or location_description != blank or location_description_2 != blank %} 
+                <div class="courses__town-description-wrap"> 
+                  {% if location_address %}  
+                    <a href="{{ link_to_map | default: '#' }}" class="courses__town-location mobile">{{ location_address }}</a>
+                    <a href="#" class="courses__town-location desc" data-modal-id="popup-map">{{ location_address }}</a>
+                  {% endif %}
+
+                  {% if location_description %}
+                    <div class="courses__town-description">{{ location_description }}</div>
+                  {% endif %}
+
+                  {% if location_address_2 %}  
+                    <a href="{{ link_to_map | default: '#' }}" class="courses__town-location mobile">{{ location_address_2 }}</a>
+                    <a href="#" class="courses__town-location desc" data-modal-id="popup-map">{{ location_address_2 }}</a>
+                  {% endif %}
+
+                  {% if location_description_2 %}
+                    <div class="courses__town-description">{{ location_description_2 }}</div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <div class="courses__tabs-filter-title">Filter camp by date</div>
+
+              <div class="courses__tabs-filter-inner">
+                <select
+                  class="option-select-input selectric-init filter-date"
+                  name=""
+                >
+                    {% assign date_list = page.metafields.courses_page.dates[forloop.index0] | split: ';' %}
+                    {% for date in date_list %}
+                        <option
+                          value="{{ date | handle }}"
+                        >
+                          {{ date }} 
+                          {% case forloop.index %}
+                            {% when 1 %}
+                              {% if text_for_date_column_1 != blank %}
+                                <span>{{ text_for_date_column_1 }}</span>
+                              {% endif %}
+                            {% when 2 %}
+                              {% if text_for_date_column_2 != blank %}
+                                <span>{{ text_for_date_column_2 }}</span>
+                              {% endif %}
+                            {% when 3 %}
+                              {% if text_for_date_column_3 != blank %}
+                                <span>{{ text_for_date_column_3 }}</span>
+                              {% endif %}
+                            {% when 4 %}
+                              {% if text_for_date_column_4 != blank %}
+                                <span>{{ text_for_date_column_4 }}</span>
+                              {% endif %}
+                            {% when 5 %}
+                              {% if text_for_date_column_5 != blank %}
+                                <span>{{ text_for_date_column_5 }}</span>
+                              {% endif %}
+                            {% when 6 %}
+                              {% if text_for_date_column_6 != blank %}
+                                <span>{{ text_for_date_column_6 }}</span>
+                              {% endif %}
+                          {% endcase %}
+                        </option>
+                    {% endfor %}
+                  <option
+                  value="all"
+                  selected
+                  >{{ 'product.all_dates' | t }}</option>
+                </select>
+              </div>
+
+              <div class="courses__list">
+                <div class="courses__item courses__list-head">
+                  <div class="courses__item-details"></div>
+                  {% for date in date_list %} 
+                    <div class="courses__item-date">
+                      <span>{{ date }}</span>
+
+                      {% case forloop.index %}
+                        {% when 1 %}
+                          {% if text_for_date_column_1 != blank %}
+                            <span>{{ text_for_date_column_1 }}</span>
+                          {% endif %}
+                        {% when 2 %}
+                          {% if text_for_date_column_2 != blank %}
+                            <span>{{ text_for_date_column_2 }}</span>
+                          {% endif %}
+                        {% when 3 %}
+                          {% if text_for_date_column_3 != blank %}
+                            <span>{{ text_for_date_column_3 }}</span>
+                          {% endif %}
+                        {% when 4 %}
+                          {% if text_for_date_column_4 != blank %}
+                            <span>{{ text_for_date_column_4 }}</span>
+                          {% endif %}
+                        {% when 5 %}
+                          {% if text_for_date_column_5 != blank %}
+                            <span>{{ text_for_date_column_5 }}</span>
+                          {% endif %}
+                        {% when 6 %}
+                          {% if text_for_date_column_6 != blank %}
+                            <span>{{ text_for_date_column_6 }}</span>
+                          {% endif %}
+                      {% endcase %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+  
+        {% for location in location_list %}
+          {% assign location_hanlde = location | handle %}
+          {% assign date_list = page.metafields.courses_page.dates[forloop.index0] | split: ';' %}
+          {% assign courses_list = collections[page.metafields.courses_page.collection[forloop.index0]].products %}
+          
+          <div class="courses__tabs-content {% if forloop.first %}active{% endif %}" data-location="{{ location |handle }}">
+            <div class="courses__list">
+              {% for course in courses_list %}
+                {% comment %} {% assign current_course_location_list = course.metafields.accentuate.town | handle %} {% endcomment %}
+                {% assign current_course_desc = course.metafields.accentuate.tagline %}
+                {% assign currnet_course_age = course.metafields.accentuate.ages %}
+                {% assign currnet_course_icon = course.metafields.accentuate.product_icon %}
+                {% capture class_age %}
+                  {% if currnet_course_age contains '5 to 6' %}
+                    fivetosix
+                  {% elsif currnet_course_age contains '6 to 7' %}
+                    sixtoseven
+                  {% elsif currnet_course_age contains '6 to 8' %}
+                    sixtoeight
+                  {% elsif currnet_course_age contains '6 to 9' %}
+                    sixtonine
+                  {% elsif currnet_course_age contains '7 to 8' %}
+                    seventoeigh
+                  {% elsif currnet_course_age contains '7 to 9' %}
+                    seventonine
+                  {% elsif currnet_course_age contains '8 to 9' %}
+                    eighttonine
+                  {% elsif currnet_course_age contains '8 to 12' %}
+                    eighttotwelve
+                  {% elsif currnet_course_age contains '10+' %} 
+                    tenandabove
+                  {% elsif currnet_course_age contains '10 to 14' %}
+                    tentofourteen
+                  {% elsif currnet_course_age contains '12 to 14' %}
+                    twelvetofourteen
+                  {% elsif currnet_course_age contains '12 to 16' %}
+                    twelvetosixteen
+                  {% endif %}
+                {% endcapture %}
+
+                {% assign locations_with_dates = course.metafields.product.location_dates | split: ';' %}
+                {% assign current_date_list_soldout = course.metafields.accentuate.sold_out_data %}
+                {% assign current_date_list = blank %}
+                
+                {% if locations_with_dates.size > 0 %}
+                  {% for item in locations_with_dates %}
+                    {% assign current_location = item | split: ':' | first | handle %} 
+                   
+                    {% if location_hanlde == current_location %}
+                      {% assign current_date_list = item | split: ':' | last %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+
+                {% if current_date_list != blank %}
+                  <div class="courses__item js-courses__item {{ class_age | strip | strip_newlines }}" data-date="{{ current_date_list | handle }}"> 
+                    <div class="courses__item-details">
+                      <a href="{{ course.url }}" class="courses__item-icon">
+                        {% if currnet_course_icon != blank %}
+                          <img src="{{ currnet_course_icon }}">
+                        {% endif %}
+                      </a>
+                      <div class="courses__item-details-inner">
+                        <a href="{{ course.url }}" class="courses__item-title">{{ course.title }}</a>
+                        <div class="courses__item-age">{{ 'product.age' | t }}: {{ currnet_course_age }}</div>
+                        {% if current_date_list != blank %}
+                          <div class="courses__item-date-list">{{ current_date_list }}</div>
+                        {% endif %}
+                        <div class="courses__item-desc">{{ current_course_desc | truncate: 140 }}</div>
+                        <div class="courses__item-desc courses__item-desc-mobile">{{ current_course_desc | truncate: 100 }}</div>
+                        <a href="{{ course.url }}" class="courses__item-link">{{ 'product.read_more' | t }}</a>
+                      </div>
+                    </div>
+                    <div class="courses__item-date courses__item-date-mobile">
+                      <a href="{{ course.url }}" class="courses__item-badge">
+                        <span>{{ 'product.book_now' | t }}</span>
+                      </a>
+                      <div class="courses__item-price">
+                        <div>{{ 'product.item.price.prices_from' | t }}</div>
+                        <div>
+                          {% if course.price_min < course.price_max %}
+                            {{ course.price_min | money | remove: '.00' }} to {{ course.price_max | money | remove: '.00' }}
+                          {% else %}  
+                            {{ course.price | money | remove: '.00' }}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    {% for date in date_list %} 
+                      {% assign date_handle = date | handle %}
+                      <div class="courses__item-date">
+                        {% assign current_date_list = current_date_list | handle %}
+                        {% if current_date_list contains date_handle %}
+
+                          {% assign current_date_list_soldout = current_date_list_soldout | handle %}
+                          {% if current_date_list_soldout contains date_handle %}
+                            <span class="courses__item-badge sold-out">
+                              <span>{{ 'product.sold_out' | t }}</span>
+                            </span>
+                            <div class="courses__item-price">
+                              <div>{{ 'product.item.price.prices_from' | t }}</div>
+                              <div>
+                                {% if course.price_min < course.price_max %}
+                                  {{ course.price_min | money | remove: '.00' }} to {{ course.price_max | money | remove: '.00' }}
+                                {% else %}  
+                                  {{ course.price | money | remove: '.00' }}
+                                {% endif %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <a href="{{ course.url }}" class="courses__item-badge">
+                              <span>{{ 'product.book_now' | t }}</span>
+                            </a>
+                            <div class="courses__item-price">
+                              <div>{{ 'product.item.price.prices_from' | t }}</div>
+                              <div>
+                                {% if course.price_min < course.price_max %}
+                                  {{ course.price_min | money | remove: '.00' }} to {{ course.price_max | money | remove: '.00' }}
+                                {% else %}  
+                                  {{ course.price | money | remove: '.00' }}
+                                {% endif %}
+                              </div>
+                            </div>
+                          {% endif %}
+                        {% else %}  
+                          <div class="courses__item-badge no-course">
+                            <span>{{ 'product.no_course' | t }}</span>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            {% if page.metafields.courses_page.bottom_text != blank %}
+              <div class="courses__bottom-text">{{ page.metafields.courses_page.bottom_text }}</div>
+            {% endif %}
+            {% comment %} {% if page.metafields.courses_page.bottom_link != blank %}
+              <a href="{{ page.metafields.courses_page.bottom_link }}" class="courses__bottom-link">{{ 'product.find_out_more' | t }}</a>
+            {% endif %} {% endcomment %}
+          </div>  
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div3>
+
+  <div id='popup-map' class="modal-box">
+    <a href="#" class="btn btn-small js-modal-close">Close</a>
+    {{ pages['our-locations'].content }}
+  </div>
+<style>
+  {% if section.settings.bg-top != blank %}
+    .courses-page-top {
+      background-image: url({{ section.settings.bg-top | img_url: 'master' }});
+    }
+  {% endif %}
+  {% if section.settings.bg-top-mobile != blank %}
+    @media screen and (max-width: 960px) {
+      .courses-page-top {
+        background-image: url({{ section.settings.bg-top-mobile | img_url: 'master' }});
+      }
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Courses",
+  "class": "section-courses",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg-top",
+      "label": "Background top"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg-top-mobile",
+      "label": "Background top"
+    }
+  ]
+}
+{% endschema %}

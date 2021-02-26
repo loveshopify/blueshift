@@ -1,0 +1,92 @@
+{% if section.settings.show_this_section and section.blocks.size > 0 %}
+  <ul class="slider-image-with-text">
+    {% for block in section.blocks %}
+      <li class="slider-image-with-text__slide slider-image-with-text__slide-{{ block.id }} {% if block.settings.image == blank %}only-text{% endif %} {% if block.settings.text == blank %}only-image{% endif %}">
+        <div class="slider-image-with-text__inner">
+          {% if block.settings.text != blank %}
+            <div class="slider-image-with-text__content">
+              <div class="slider-image-with-text__text">{{ block.settings.text }}</div>
+              {% if block.settings.sub_text != blank %}
+                <span class="slider-image-with-text__sub-text">{{  block.settings.sub_text }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if block.settings.image != blank %}
+            <div class="slider-image-with-text__image"> 
+                <img {% include 'img-src', img: block.settings.image, size: '1024x' %} alt="">
+            </div>
+          {% endif %}
+        </div>
+        
+        <style>
+          .slider-image-with-text__slide-{{ block.id }} {
+            background-color: {{ block.settings.color-1 }};
+          }
+
+          .slider-image-with-text__slide-{{ block.id }}.only-image,
+          .slider-image-with-text__slide-{{ block.id }}:before {
+            background-color: {{ block.settings.color-2 }};
+          }
+        </style>
+      </li>
+
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Slide image with text",
+    "class": "section-slider-image-with-text",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_this_section",
+        "label": "Show slider",
+        "default": true 
+      }
+    ],
+    "blocks":[
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "richtext", 
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "sub_text",
+            "label": "Sub text"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "color",
+            "id": "color-1",
+            "label": "Color 1",
+            "default": "#7EC2A2"
+          },
+          {
+            "type": "color",
+            "id": "color-2",
+            "label": "Color 2",
+            "default": "#84547d"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Slider",
+        "name": "Slider image with text"
+      }
+    ]
+  } 
+{% endschema %}

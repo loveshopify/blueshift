@@ -1,0 +1,79 @@
+{% if section.settings.show_this_section %}
+  {% assign questions = product.metafields.product_faq.question %}
+  {% assign answers = product.metafields.product_faq.answer %}
+
+  <div class="product__faqs">
+    {% if section.settings.title != blank %}
+      <h2 class="product__faqs-title">{{ section.settings.title }}</h2>
+    {% endif %}
+    <div class="product__faqs-inner">
+      <ul class="product__faqs-list">
+        {% if questions.size > 0 %}
+          {% for question in questions %}
+            <li class="product__faqs-item">
+              <span class="product__faqs-toggle">
+                <span class="plus">{% include 'icon' id:'plus' %}</span>
+                <span class="minus">{% include 'icon' id:'minus' %}</span>
+              </span>
+              <div class="product__faqs-question">{{ question }}</div>
+              <div class="product__faqs-answer" style="display: none">{{ answers[forloop.index0] }}</div>
+            </li>
+          {% endfor %}
+        {% else %}
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              {% if block.settings.title != blank and block.settings.answer != blank %}
+                <li class="product__faqs-item">
+                  <span class="product__faqs-toggle">
+                    <span class="plus">{% include 'icon' id:'plus' %}</span>
+                    <span class="minus">{% include 'icon' id:'minus' %}</span>
+                  </span>
+                  <div class="product__faqs-question">{{ block.settings.title }}</div>
+                  <div class="product__faqs-answer" style="display: none">{{ block.settings.answer }}</div>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_this_section",
+      "label": "Show FAQs",
+      "default": true 
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAQs:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Add faq",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question"
+        },
+		    {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,524 @@
+<!doctype html>
+<!--[if IE 9]><html class="ie9 no-js"><![endif]-->
+<!--[if !IE]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta name="p:domain_verify" content="65defc41bb052b412eb4b9b698a4a6ac"/>
+  <meta charset="utf-8">
+  <meta name="cmsmagazine" content="a39ef97fd1d4cf6d3e103f0ff48ea4f6"/>
+  <meta name="it-rating" content="it-rat-c2fb848de4ce4a9d8631b1558f63157d"/>
+
+{{ 'activecampaign.js' | asset_url | script_tag }}
+  
+<meta name="ahrefs-site-verification" content="3a20fb4af521197231953bd5f541c069c078dada08dfa2f55352a9bdef7a947e">  
+  
+  <title>
+    {{- page_title -}}
+
+    {%- if current_tags -%}
+    {%- assign meta_tags = current_tags | join: ', ' %}
+    {{ 'title.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+
+    {%- if current_page != 1 -%}
+    {{- 'title.page' | t: page: current_page -}}
+    {%- endif -%}
+
+    {%- unless page_title contains shop.name -%}
+    {{- 'title.shop' | t: shop: shop.name -}}
+    {%- endunless -%}
+  </title>
+
+  {% if page_description != blank %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% if settings.favicon != blank %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+
+  {%- include 'open-graph' -%}
+  {%- include 'twitter-card' -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width">
+
+  {{ content_for_header }}
+
+  {% include 'bold-common' %}
+
+
+  <script>
+    document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,'js');
+    if(window.Shopify&&window.Shopify.designMode)document.documentElement.className+=' in-theme-editor';
+  </script>
+
+  {% include 'google-fonts', fonts: 'font_title|font_body|font_label' %}
+
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.2/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+
+  {{ 'upswatch.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'shopstorm-apps.scss.css' | asset_url | stylesheet_tag }}
+  {% include 'shopstorm-scripttags' %}
+  {% include 'scm-attribute-head' %}
+  {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+  {{ 'dynamic.css' | asset_url | stylesheet_tag }}
+  {{ 'selectric.css' | asset_url | stylesheet_tag }}
+  <!-- Hotjar Tracking Code for www.blueshiftcoding.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1031233,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <!-- Global site tag (gtag.js) - Google Ads: 800006063 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-800006063"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-800006063');
+</script>
+  {% include "loyaltylion" %}
+</head>
+<body class="page-template-{{ template | replace: '_', '-' }} template-{{ template | replace: '_', '-' | replace: '.', '-' }}">
+  {% if template contains 'password' %}
+  <main class="site-main">
+    {{ content_for_layout }}
+  </main>
+  {% else %}
+  {% section 'static-header' %}
+  {% if template contains "index" %}
+    {% section 'top-banner' %}
+  {% endif %}
+  {% comment %} 
+    {% section 'static-meganav' %}
+    {% section 'static-contactbar' %}
+  {% endcomment %}
+  <main class="site-main">
+    {{ content_for_layout }}
+  </main>
+  {% section 'site-footer' %}
+  {% endif %}
+  {%- if template contains 'cart' -%}
+  {{ '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js' | script_tag }}
+  {{ '/services/javascripts/countries.js' | script_tag }}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {%- endif -%}
+  {%- if template contains 'customer' -%}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {%- endif -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "blueshift coding",
+    "url": "https://blueshiftcoding.com/",
+    "address": "Alfred Road, Notting Hill",
+    "sameAs": [
+      "https://www.facebook.com/blueshiftcoding/",
+      "https://twitter.com/blueshiftcoding"
+    ]
+  }
+</script>
+
+  <script src="{{ 'handy.js' | asset_url }}"
+          data-scripts
+          data-shopify-api-url="{{ 'api.jquery.js' | shopify_asset_url }}"
+          data-shopify-cart-url="{{ 'jquery.cart.js' | asset_url }}"
+          data-shopify-currencies="//cdn.shopify.com/s/javascripts/currencies.js"
+          data-shopify-jquery-currencies="{{ 'jquery.currencies.min.js' | asset_url }}"
+          data-shopify-qrcode="{{ 'vendor/qrcode.js' | shopify_asset_url }}"
+          ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.2/owl.carousel.min.js"></script>
+  {{ 'TweenMax.min.js' | asset_url | script_tag }}
+  {{ 'CSSPlugin.js' | asset_url | script_tag }}
+  {{ 'TextPlugin.js' | asset_url | script_tag }}
+  {{ 'rocket.js' | asset_url | script_tag }}
+  {{ 'slick.min.js' | asset_url | script_tag }}
+  {{ 'jquery.selectric.min.js' | asset_url | script_tag }}
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.css" rel="stylesheet" type="text/css">
+
+  <script>
+    jQuery(document).ready(function(){
+      $('#accordion h3').click(function() {
+        $(this).next().toggle();
+        return false;
+      }).next().hide();
+    });
+
+    {% comment %}
+    $(function() {
+      $( "#accordion" ).accordion({
+        collapsible: false,
+        heightStyle: "content"
+      });
+    } );
+    {% endcomment %}
+  </script>
+  {% include 'structured-data' %}
+  <script>
+    $('.owl-carousel').owlCarousel({
+      loop:true,
+      margin:10,
+      nav:true,
+      items:1
+    });
+  </script>
+
+  <script>
+  /* Product Tag Filters - Good for any number of filters on any type of collection pages */
+  var collFilters = jQuery('.coll-filter');
+  collFilters.change(function() {
+    var newTags = [];
+    collFilters.each(function() {
+      if (jQuery(this).val()) {
+        newTags.push(jQuery(this).val());
+      }
+    });
+    if (newTags.length) {
+      var query = newTags.join('+');
+      window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('/' + 'tag', '/' + query);
+    }
+    else {
+      {% if collection.handle %}
+      window.location.href = '/collections/{{ collection.handle }}';
+      {% elsif collection.products.first.type == collection.title %}
+      window.location.href = '{{ collection.title | url_for_type }}';
+      {% elsif collection.products.first.vendor == collection.title %}
+      window.location.href = '{{ collection.title | url_for_vendor }}';
+      {% endif %}
+    }
+  });
+  </script>
+  <script>
+  /* Product Tag Filters - Good for any number of filters on any type of collection pages */
+  var collFilters = jQuery('.tagged');
+  collFilters.change(function() {
+    var newTags = [];
+    collFilters.each(function() {
+      if (jQuery(this).val()) {
+        newTags.push(jQuery(this).val());
+      }
+    });
+    if (newTags.length) {
+      var query = newTags.join('+');
+      window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('/' + 'tag', '/' + query);
+    }
+    else {
+      {% if collection.handle %}
+      window.location.href = '/collections/{{ collection.handle }}';
+      {% elsif collection.products.first.type == collection.title %}
+      window.location.href = '{{ collection.title | url_for_type }}';
+      {% elsif collection.products.first.vendor == collection.title %}
+      window.location.href = '{{ collection.title | url_for_vendor }}';
+      {% endif %}
+    }
+  });
+</script>
+
+
+  <script>
+    $(function()
+      {
+      var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+      $('a[data-modal-id]').click(function(e) {
+        e.preventDefault();
+        $("body").append(appendthis);
+        $(".modal-overlay").fadeTo(500, 0.7);
+        //$(".js-modalbox").fadeIn(500);
+        var modalBox = $(this).attr('data-modal-id');
+        $('#'+modalBox).fadeIn($(this).data());
+
+        $(".modal-box").css({
+          top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+          left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+        });
+
+        if ($('#popup-map iframe').length > 0 && !$('#popup-map iframe').hasClass('reloaded')) {
+          $('#popup-map iframe').addClass('reloaded').get(0).src += ""
+        }
+      });
+      $(".js-modal-close, .modal-overlay").click(function() {
+        $(".modal-box, .modal-overlay").fadeOut(500, function()
+        {
+          $(".modal-overlay").remove();
+        });
+		return false;
+      });
+      $(window).resize(function()
+      {
+        $(".modal-box").css({
+          top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+          left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+        });
+      });
+      $(window).resize();
+
+
+      $("#next").click(function()
+      {
+        var error = 0;
+        $(".modal-body .input_field").each(function()
+        {
+          if((this.value) == "")
+          {
+            $(this).css('border','solid 1px red');
+            error = 1;
+          }
+          else
+          {
+            $(this).css('border','solid 1px #e6e6e6');
+          }          
+        });
+
+        $('.input_checkbox').each(function(){
+          if(this.checked == false)
+          {
+            error = 1;
+          }
+        });
+
+        if(error == 1)
+        {
+          $(".error_msg").fadeIn('slow');
+          setTimeout(function(){ $(".error_msg").fadeOut('slow'); }, 4000);
+        }
+        else
+        {
+          $('.step_1,.foo_1').hide();
+          $('.step_2,.foo_2').show();
+        }
+        return false;
+      });
+
+      $('#addtocart').click(function(e){
+        console.log('here');
+        var error = 0;
+        $(".modal-body .input_field").each(function()
+        {
+          if((this.value) == "")
+          {
+            $(this).css('border','solid 1px red');
+            error = 1;
+          }
+          else
+          {
+            $(this).css('border','solid 1px #e6e6e6');
+          }          
+        });
+
+        $('.input_checkbox').each(function(){
+          if(this.checked == false)
+          {
+            error = 1;
+          }
+        });
+
+        if(error == 1)
+        {
+          $(".error_msg").fadeIn('slow');
+          e.preventDefault();
+          e.stopPropagation();
+        } else {
+          $(this).hide();
+        $(".loader_gif").show();
+        e.preventDefault();
+        var dataval= $(this).closest('.product-form-inline').serialize();
+        var upsell = $('.unsell_prod .grid__item .me ').val();
+        $('.upsell-grid select option:selected').each(function()
+        {
+          var vf =$(this).val();
+          console.log(vf);
+          if(vf !== undefined )
+            addp(vf);
+        });
+        $.ajax(
+          {
+            type:"post",
+            dataType: "json",
+            url: '/cart/add.js',
+            data:dataval,
+            success: function(data){
+
+            }
+          });
+        function addp(v)
+        {
+          $.ajax({
+            type:"post",
+            dataType: "json",
+            async:false,
+            url: '/cart/add.js',
+            data:{quantity:1,id:v},
+            success: function(data)
+            {
+            }
+          });
+        }
+        $(document).ajaxStop(function()
+        {
+          window.location.href = '/cart';
+        });          
+        }
+      });
+
+      $("#back").click(function()
+      {
+        $('.step_2,.foo_2').hide();
+        $('.step_1,.foo_1').show();
+        return false;
+      });
+
+// pt form
+$("#showfirst").click(function() {
+	var error = 0;
+	$(".pttest .input_field").each(function() {
+		if ((this.value) == "") {
+			$(this).css('border', 'solid 1px red');
+			error = 1;
+		} else {
+			$(this).css('border', 'solid 1px #e6e6e6');
+		}
+	});
+	if (error == 1) {
+		$(".error_msg").fadeIn('slow');
+		setTimeout(function() {
+			$(".error_msg").fadeOut('slow');
+		}, 4000);
+	}else
+    {
+    }
+	return false;
+});
+      
+$('.pttest input[type="text"]').bind('keyup change', function() {
+	// get elements that are empty.
+	var empty = $('.pttest input[type="text"], select').map(function(index, el) {
+		return !$(el).val().length ? el : null;
+	}).get();
+	// could also be placed outside of the function
+	var number = $('#showfirst');
+	var atc = $('#shownext');
+	// check if there are any empty elements, if there are none, show numbers, else hide number.
+	!empty.length ? number.hide() : number.show();
+	!empty.length ? atc.show() : atc.hide();
+});      
+// end pt form      
+      
+
+      
+      $('#shownext').on('click',function(e)
+      {
+        $(this).hide();
+        $(".loader_gif").show();
+        e.preventDefault();
+        var dataval= $(this).closest('.product-form-inline').serialize();
+        var upsell = $('.unsell_prod .grid__item .me ').val();
+        $('.upsell-grid select option:selected').each(function()
+        {
+          var vf =$(this).val();
+          console.log(vf);
+          if(vf !== undefined )
+            addp(vf);
+        });
+        $.ajax(
+          {
+            type:"post",
+            dataType: "json",
+            url: '/cart/add.js',
+            data:dataval,
+            success: function(data){
+
+            }
+          });
+        function addp(v)
+        {
+          $.ajax({
+            type:"post",
+            dataType: "json",
+            async:false,
+            url: '/cart/add.js',
+            data:{quantity:1,id:v},
+            success: function(data)
+            {
+            }
+          });
+        }
+        $(document).ajaxStop(function()
+        {
+          window.location.href = '/cart';
+        });
+      });
+
+      $(".upsell_variants .available label").click(function()
+      {
+        var vid = $(this).data('val');
+        $(".v-"+vid).trigger('click');
+      });
+
+    });
+  </script>
+  <script>
+  $('.slider-for').slick({
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    arrows: true,
+    fade: true
+  });
+  $('.slider-nav').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: '.slider-for',
+    dots: true,
+    centerMode: true,
+    focusOnSelect: true
+  });
+
+    $(document).ready(function(){
+      $('.thumbnails a.thumb').on('click',function(e){
+        e.preventDefault();
+        var img = $(this).attr('href');
+        console.log(img);
+        $('.thumbnails a.thumb').removeClass('active');
+        $(this).addClass('active');
+        $('#bigimage img').attr('src',img);
+      });
+    });
+
+    $('.slideshow-slide').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: false,
+      prevArrow:"<button type='button' class='slick-prev pull-left'><svg viewBox='0 0 100 100' style='visibility: visible;'><path d='M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z' class='arrow'></path></svg></button>",
+      nextArrow:"<button type='button' class='slick-next pull-right'><svg viewBox='0 0 100 100' style='visibility: visible;'><path d='M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z' class='arrow' transform='translate(100, 100) rotate(180) '></path></svg></button>"
+    });
+  </script>
+  <script src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+  <script>require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us7.list-manage.com","uuid":"e6b6b8918e95a5173590ef583","lid":"c567b7a12a"}) })</script>
+
+  <script>
+  window.addEventListener('load',function(){
+    jQuery('[href="/pages/holiday-camps"]').click(function(){
+       gtag('event', 'conversion', {'send_to': 'AW-800006063/m3EFCJnI4pABEK-_vP0C'});
+    })
+  })
+</script>
+</body>
+</html>
+ 

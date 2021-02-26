@@ -1,0 +1,35 @@
+<form class="product-form-nojs" method="post" action="/cart/add">
+ 
+  {% if product.has_only_default_variant %}
+    <input name="id" value="{{ product.selected_or_first_available_variant.id }}" type="hidden">
+  {% else %}
+    <div class="product-form-nojs-variants">
+      <select class="product-form-nojs-variants-select" name="id">
+        {% for variant in product.variants %}
+          <option value="{{ variant.id }}">
+            {{ variant.title }} - {{ variant.price | money }}
+          </option>
+        {% endfor%}
+      </select>
+
+      <span class="product-form-nojs-variants-select-arrow">
+        {%- include 'icon', id: 'arrow' -%}
+      </span>
+    </div>
+  {% endif %}
+  {% include 'product-customizer' %}
+  <input
+    class="product-form-nojs-quantity"
+    type="number"
+    min="1"
+    name="quantity"
+    value="1"
+  />
+
+  <button
+    class="product-form-nojs-atc-button"
+    type="submit"
+  >
+    {{ 'product.add_to_cart.available' | t }}
+  </button>
+</form>

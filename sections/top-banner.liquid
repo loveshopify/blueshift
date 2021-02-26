@@ -1,0 +1,62 @@
+<div class="section-top-banner__image">
+  {% if section.settings.banner_title != blank %}
+  <div class="section-top-banner__inner">
+    <h1 class="section-top-banner__title">{{ section.settings.banner_title }}</h1>
+
+    {% if section.settings.btn_link != blank %}
+      <a href="{{ section.settings.btn_link }}" class="section-top-banner__link btn-link">{{ section.settings.btn_text }}</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<style>
+  {% if section.settings.banner_image != blank %}
+    .section-top-banner__image {
+      background-image: url({{ section.settings.banner_image | img_url: 'master' }});
+    }
+  {% endif %}
+
+  {% if section.settings.banner_image_mobile != blank %}
+    @media screen and (max-width: 450px) {
+      .section-top-banner__image {
+        background-image: url({{ section.settings.banner_image_mobile | img_url: 'master' }});
+      }
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+  {
+    "name": "Top banner",
+    "class": "section-top-banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "banner_title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Image mobile"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image_mobile",
+        "label": "Image"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "Url"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button text",
+        "default": "Find out more"
+      }
+    ]
+  } 
+{% endschema %}

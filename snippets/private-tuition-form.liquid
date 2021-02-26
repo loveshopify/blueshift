@@ -1,0 +1,64 @@
+<div class="grouped">
+  <p class="line-item-property__field">
+    <label for="childs-name">Child's Name</label><br>
+    <input required class="input_field required" id="childs-name" type="text" name="properties[Child's Name]">
+  </p>
+  <p class="line-item-property__field">
+    <label for="childs-date-of-birth">Child's Date of Birth</label><br>
+    {% comment %}
+    <span>Please use date format DD/MM/YYYY</span><br>
+    {% endcomment %}
+    <input required class="input_field required" id="childs-date-of-birth" type="text" name="properties[Child's Date of Birth]" placeholder="Please use date format DD/MM/YYYY">
+  </p>
+</div>
+<div class="grouped" style="margin-bottom: -25px;">
+  <p class="line-item-property__field">
+    <label for="childs-school">Child's School</label><br>
+    <input class="" id="childs-school" type="text" name="properties[Child's School]">
+  </p>
+  <p class="line-item-property__field">
+    <label for="parentcarer-email-address">Parent/Carer Email Address</label><br>
+    <input required class="input_field required" id="parentcarer-email-address" type="text" name="properties[Parent/Carer Email Address]">
+  </p>
+</div>
+
+<p class="line-item-property__field"><br>
+  <label for="parentcarer-contact-phone-number">Parent/Carer Contact Phone Number</label><br>
+  <input required class="input_field required" id="parentcarer-contact-phone-number" type="text" name="properties[Parent/Carer Contact Phone Number]">
+</p>
+<div class="line-item-property__field">
+  <label>Previous Coding Experience</label><br>
+  <span>If your child has any previous coding experience, let us know here</span><br>
+  <div class="option-values">
+    <div class="option-select">
+      <select class="input_field option-select-input" id="previous-coding-experience" name="properties[Previous Coding Experience]">
+        <option value="No beginner level">No beginner level</option>
+        <option value="Yes intermediate level">Yes intermediate level</option>
+        <option value="Yes advanced level">Yes advanced level</option>
+      </select> <span class="option-select-arrow"><svg height="10" style="visibility: visible;" viewbox="0 0 6 10" width="6" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535" fill="currentColor" fill-rule="evenodd"></path></svg></span>
+    </div>
+  </div>
+</div>
+<p class="line-item-property__field">
+  <label for="medical-notes">Medical Notes</label><br>
+  <span>If your child has any special medical or dietary requirements, please let us know here</span><br>
+  <textarea required class=" required" id="medical-notes" name="properties[Medical Notes]"></textarea>
+</p>
+<div class="line-item-property__field">
+  <label>Do you consent for your child to be photographed?</label><br>
+  <span>We take photos and videos at our camps which are shared with parents and occasionally used for marketing purposes. If you'd rather your child was not photographed, please let us know here.</span><br>
+  <div class="option-values">
+    <div class="option-select">
+      <select class="input_field option-select-input" id="do-you-consent-for-your-child-to-be-photographed" name="properties[Do you consent for your child to be photographed?]">
+        <option value="Yes">Yes, my child can be photographed</option>
+        <option value="No">No, I'd rather my child was not photographed</option>
+      </select> <span class="option-select-arrow"><svg height="10" style="visibility: visible;" viewbox="0 0 6 10" width="6" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535" fill="currentColor" fill-rule="evenodd"></path></svg></span>
+    </div>
+  </div>
+</div>
+<!-- <p class="line-item-property__field">
+  <label for="how-did-you-hear-about-blueshift">How did you hear about blue{shift}?</label><br>
+  <input class="input_field" id="how-did-you-hear-about-blueshift" type="text" name="properties[How did you hear about blue{shift}?]">
+</p> -->

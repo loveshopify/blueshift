@@ -1,0 +1,62 @@
+{%- assign onboarding = true -%}
+
+{%- if section.settings.title != blank or section.settings.access_token != blank -%}
+  {%- assign onboarding = false -%}
+{%- endif -%}
+
+<script
+  type="application/json"
+  data-section-type="dynamic-instagram"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "onboarding": {{ onboarding | json }},
+    "photoCount": 8,
+    "accessToken": {{ section.settings.access_token | json }},
+    "locale": {{ shop.locale | json }}
+  }
+</script>
+
+<h4 class="section-title">
+  {%- if onboarding -%}
+    {{ 'onboarding.title' | t }}
+  {%- else -%}
+    {{ section.settings.title | escape }}
+  {%- endif -%}
+</h4>
+
+{% include 'instagram', onboarding: onboarding %}
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "class": "section-instagram",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Instagram feed"
+    },
+    {
+      "type": "text",
+      "id": "access_token",
+      "label": "Instagram access token",
+      "info": "[Instagram access token generator](http://instagram.pixelunion.net/)"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Social Media",
+      "name": "Instagram feed"
+    }
+  ],
+  "locales": {
+    "en": {
+      "onboarding": {
+        "title": "Instagram feed"
+      }
+    }
+  }
+}
+{% endschema %}

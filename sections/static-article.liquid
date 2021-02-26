@@ -1,0 +1,190 @@
+{%- capture article_publication_info -%}
+  <div class="article-publication-info">
+    <span class="article-date">{{ article.published_at | date: format: 'short_day_month_year' }}</span>
+    <span class="article-publication-info-seperator">&middot;</span>
+    <span class="article-author">{{ 'article.author' | t: author: article.author }}</span>
+    {%- if article.tags.size > 0 -%}
+      <span class="article-publication-info-seperator">&middot;</span>
+      {%- for tag in article.tags -%}
+        <span class="article-tag">
+          {{ tag | link_to_tag: tag }}
+          {%- unless forloop.last -%},{%- endunless -%}
+        </span>
+      {%- endfor -%}
+    {%- endif -%}
+
+    {% if article.comments_enabled? %}
+      <span class="article-publication-info-seperator">&middot;</span>
+      <a href="#comments" class="article-comment-count">{{ 'article.comments_count' | t: count: article.comments_count }}</a>
+    {% endif %}
+  </div>
+{%- endcapture -%}
+
+<div class="article-wrapper">
+  {%- if article.image -%}
+    <figure class="article-image">
+      <img
+        {% include 'img-src', img: article.image, size: 'x1100' %}
+      >
+    </figure>
+  {%- endif -%}
+
+  <article class="article">
+    {{ article_publication_info }}
+    <h1 class="article-title">{{ article.title }}</h1>
+    {{ article_publication_info }}
+    <div class="article-rte rte">{{ article.content }}</div>
+    {%- if section.settings.enable_social_sharing -%}
+      {%- include 'share-buttons' -%}
+    {%- endif -%}
+    {%- if blog.previous_article or blog.next_article -%}
+      <nav class="article-pagination">
+        {% if blog.previous_article %}
+          <a class="article-pagination-previous-post" href="{{ blog.previous_article }}">
+            <span class="article-pagination-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+            <span class="article-pagination-previous-text">{{ 'article.pagination.previous' | t }}</span>
+          </a>
+        {% endif %}
+
+        <a class="article-pagination-blog" href="{{ blog.url }}">
+          <span class="article-pagination-blog-text">{{ 'article.pagination.blog' | t }}</span>
+        </a>
+
+        {% if blog.next_article %}
+          <a class="article-pagination-next-post" href="{{ blog.next_article }}">
+            <span class="article-pagination-next-text">{{ 'article.pagination.next' | t }}</span>
+            <span class="article-pagination-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+          </a>
+        {% endif %}
+      </nav>
+    {%- endif -%}
+
+    {% if article.comments_enabled? %}
+      <aside class="comments">
+
+        {% if article.comments_count > 0 %}
+          <div class="comments-list">
+
+            <h1 class="comments-list-title">
+              <a name="comments">{{ 'article.comments.title' | t }}</a>
+            </h1>
+
+            {% paginate article.comments by 10 %}
+              {% for comment in article.comments %}
+                <article class="comment" id="comment-{{ comment.id }}">
+                  <div class="comment-publication-info">
+                    <h1 class="comment-author">{{ comment.author }}</h1>
+                    <span class="comment-publication-info-separator">&mdash;</span>
+                    <a href="{{ comment.url }}" class="comment-date">{{ comment.created_at | date: format: 'short_day_month_year' }}</a>
+                  </div>
+                  <div class="comment-rte">{{ comment.content }}</div>
+                </article>
+              {% endfor %}
+
+              {% if paginate.previous or paginate.next %}
+                {% include 'pagination' %}
+              {% endif %}
+
+            {% endpaginate %}
+          </div>
+        {% endif %}
+
+        <div class="comments-submit">
+          <h2 class="comment-form-title">
+            {%- if article.comments_count > 0 -%}
+              {{ 'article.comments.leave_a_comment' | t }}
+            {%- else -%}
+              <a name="comments">{{ 'article.comments.leave_a_comment' | t }}</a>
+            {%- endif -%}
+          </h2>
+
+          {% form article %}
+
+            {% if form.posted_successfully? %}
+              <p>
+              {% if blog.moderated? %}
+                {{ 'article.comments.comment_pending' | t }}
+              {% else %}
+                {{ 'article.comments.comment_success' | t }}
+              {% endif %}
+              </p>
+            {% endif %}
+
+            {% if form.errors %}
+              <p class="error-message">{{ 'article.comments.comment_error' | t }}</p>
+            {% endif %}
+
+            <div class="input-wrapper {% if form.errors contains 'author' %}error{% endif %}">
+              <label
+                class="visually-hidden"
+                for="comment-name">
+                {{ 'general.form.name' | t }} {{ form.errors.messages['author'] }}
+              </label>
+              <input
+                class="input-field"
+                id="comment-name"
+                name="comment[author]"
+                type="text"
+                placeholder="{{ 'general.form.name_placeholder' | t }}"
+                value="{{ form.author }}">
+            </div>
+
+            <div class="input-wrapper {% if form.errors contains 'email' %}error{% endif %}">
+              <label
+                class="visually-hidden"
+                for="comment-email">
+                {{ 'general.form.email' | t }} {{ form.errors.messages['email'] }}
+              </label>
+              <input
+                class="input-field"
+                id="comment-email"
+                name="comment[email]"
+                type="email"
+                placeholder="{{ 'general.form.email_placeholder' | t }}"
+                value="{{ form.email }}">
+            </div>
+
+            <div class="input-wrapper {% if form.errors contains 'body' %}error{% endif %}">
+              <label
+                class="visually-hidden"
+                for="comment-body">
+                {{ 'general.form.message' | t }} {{ form.errors.messages['body'] }}
+              </label>
+              <textarea
+                class="input-field"
+                name="comment[body]"
+                id="comment-body"
+                placeholder="{{ 'general.form.message_placeholder' | t }}">{{ form.body }}</textarea>
+            </div>
+
+            <div class="input-wrapper">
+              <input type="submit" class="button" value="{{ 'article.comments.submit' | t }}">
+            </div>
+
+          {% endform %}
+        </div>
+
+      </aside>
+    {% endif %}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Article pages",
+  "class": "section-article",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sharing"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_social_sharing",
+      "label": "Enable social sharing",
+      "default": false
+    }
+  ]
+}
+
+{% endschema %}

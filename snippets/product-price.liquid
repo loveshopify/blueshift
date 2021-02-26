@@ -1,0 +1,16 @@
+{% comment %}
+  A shared price component, with compare at price, and regular price
+
+  @param variant
+{% endcomment %}
+<div>
+</div>
+<div class="product-price">
+  <span class="money money-compare-at{% if variant.compare_at_price == blank %} money-compare-at-hidden{% endif %}" data-variant-compare-at-price>
+    {{ variant.compare_at_price | money }}
+  </span>
+
+  <span class="money" data-variant-price>
+    {{ variant.price | money }}
+  </span>
+</div>

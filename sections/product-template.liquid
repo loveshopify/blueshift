@@ -1,0 +1,150 @@
+{% assign current_product = product %}
+{% capture added_to_cart_link %}
+{% include 'icon', id: 'checkmark' %}
+{{ 'product.added_to_cart_link_html' | t }}
+{% endcapture %}
+{% assign product_icon = current_product.metafields.accentuate.product_icon %}
+{% assign current_variant = current_product.selected_or_first_available_variant %}
+{% assign featured_image = current_product.featured_image %}
+{% assign enable_inline_form = true %}
+
+<script
+        type="application/json"
+        data-section-type="static-product"
+        data-section-id="{{ section.id }}"
+        data-section-data>
+  {
+    "product": {{ current_product | json }},
+    "selected_variant": {{ current_product.selected_variant | json }},
+    "selected_or_first_available_variant": {{ current_variant | json }},
+    "money_format": {{ shop.money_format | json }},
+    "form_is_inline": {{ enable_inline_form | json }},
+    "text": { 
+      "added_to_cart_link": {{ added_to_cart_link | json }},
+      "product_available": {{ 'product.add_to_cart.book_now' | t | json }},
+      "product_unavailable": {{ 'product.add_to_cart.unavailable' | t | json }}
+    }
+  }
+</script>
+
+<div class="product__top" style="background-image: url({{ featured_image | img_url: 'master' }})">
+  <div class="product__top-inner">
+    {% if product_icon != blank %}
+      <div class="product__top-icon courses__item-icon">
+        <img src="{{ product_icon }}">
+      </div>
+    {% endif %}
+    <h1 class="product__top-title">{{ current_product.title }}</h1>
+  </div>
+</div>
+
+<div class="product__inner" data-product-details>
+  <div class="product__details">
+    <div class="product__title">
+      <h2>{{ current_product.title }}</h2>
+    </div>
+    <div class="product__short-desc">{{ current_product.metafields.accentuate.tagline }}</div>
+    
+    
+    <ul class="product__details-list">
+      {% if current_product.metafields.accentuate.ages != blank %}
+        <li class="product__details-item">
+          <div class="product__details-item-ttl">{{ 'product.age' | t }}</div>
+          <div class="product__details-item-txt">{{ current_product.metafields.accentuate.ages }}</div>
+        </li>
+      {% endif %}
+      {% if current_product.metafields.accentuate.level != blank %}
+        <li class="product__details-item">
+          <div class="product__details-item-ttl">{{ 'product.level' | t }}</div>
+          <pre class="product__details-item-txt">{{ current_product.metafields.accentuate.level }}</pre>
+        </li>
+      {% endif %}
+      {% if current_product.metafields.accentuate.date != blank or current_product.metafields.accentuate.shortdesc != blank %}
+        <li class="product__details-item">
+          <div class="product__details-item-ttl">{{ 'product.date' | t }}</div>
+          <div class="product__details-item-txt">
+            <div>{{ current_product.metafields.accentuate.date }}</div>
+          {{ current_product.metafields.accentuate.shortdesc }}</pre>
+          </div>
+        </li>
+      {% endif %}
+ 
+  
+      <li class="product__details-item">
+        <div class="product__details-item-ttl">{{ 'product.price' | t }}</div>
+        <div class="product__details-item-txt">
+          <span class="money money-compare-at{% if current_variant.compare_at_price == blank %} money-compare-at-hidden{% endif %}" data-variant-compare-at-price>
+            {{ current_variant.compare_at_price | money }}
+          </span>
+
+          <span class="money" data-variant-price>
+            {{ current_variant.price | money }}
+          </span>
+        </div>
+      </li>
+      {% if current_product.metafields.accentuate.location != blank %}
+        <li class="product__details-item">
+          <div class="product__details-item-ttl">{{ 'product.location' | t }}</div>
+          <pre class="product__details-item-txt">{{ current_product.metafields.accentuate.location }}</pre>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class="product__form">
+    <div class="product__form-title">Select booking details</div>
+    <form class="product-form-inline" method="post" action="/cart/add" data-product-form-inline>
+      {% include 'modal-pop-up' %}
+
+      <div class="product__options">
+        {% unless current_product.has_only_default_variant %}
+          {% for option in current_product.options_with_values %}
+            {% assign optionIndex = forloop.index %}
+            <select
+              class="option-select-input selectric-init"
+              name=""
+              tabindex="0"
+              data-product-option="{{ 'option' | append: optionIndex }}"
+            >
+              {% for value in option.values %}
+                <option
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}selected{% endif %}
+                >{{ value }}</option>
+              {% endfor %}
+            </select>
+        {% endfor %}
+      </div>
+
+
+        <select name="id" style="display:none" data-variants>
+          {% for variant in current_product.variants %}
+            <option value="{{ variant.id }}">
+              {{ variant.title }} - {{ variant.price | money }}
+            </option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <input name="id" type="hidden" value="{{ current_product.selected_or_first_available_variant.id }}">
+      {% endunless %}
+
+      <div class="product-form-inline-atc"> 
+        <a class="js-open-modal btn product-form-inline-atc-button" href="#" data-modal-id="popup1">{{ 'product.add_to_cart.available' | t }}</a>
+        <button type="button" class="product-form-inline-atc-button" style="display: none">{{ 'product.add_to_cart.unavailable' | t }}</button>
+      </div>
+    </form>
+
+    {% if current_product.metafields.accentuate.additional_block_content != blank %}
+      <div class="additional-block">
+        {% if current_product.metafields.accentuate.additional_block_heading != blank %}
+          <div class="additional-block__heading">
+            {{ current_product.metafields.accentuate.additional_block_heading }}
+          </div>
+        {% endif %}
+        <div class="additional-block__content">
+          {{ current_product.metafields.accentuate.additional_block_content }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

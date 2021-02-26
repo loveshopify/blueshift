@@ -1,0 +1,138 @@
+{% if section.settings.show_this_section %}
+  <div class="product-daily-camp">
+    {% if section.settings.title != blank %}
+      <h2 class="product-daily-camp-title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="product-daily-camp-inner">
+      <div class="product-daily-camp-content">
+        {% if product.metafields.detailed.schedule_title != blank %}
+          <h3>{{ product.metafields.detailed.schedule_title }}</h3>
+        {% endif %}
+        {% if product.metafields.detailed.schedule != blank %}
+          {{ product.metafields.detailed.schedule }}
+        {% endif %}
+      </div>
+
+      <div class="product-daily-camp-form">
+        <div class="product-daily-camp-form__inner">
+          {% if section.settings.form_text != blank %}
+            <div class="product-daily-camp-form__text">
+              {{ section.settings.form_text }}
+            </div>
+          {% endif %}
+
+
+          <div>
+            <script src="https://www.powr.io/powr.js?platform=shopify"></script><div class="powr-contact-form" id="c3593dbf_1561010220"></div>
+          </div>
+
+          {%- comment -%}
+            {% form 'contact' %}
+              {% if form.posted_successfully? %}
+                <p class="success-message">
+                  {{ 'contact.form.success' | t  }}
+                </p>
+              {% else %}
+                {% if form.errors %}
+                  {{ form.errors | default_errors }}
+                {% endif %}
+
+                <input
+                    id="contact-email"
+                    type="text"
+                    value="{{ form.email }}"
+                    name="contact[email]"
+                    placeholder="Email*"
+                    required
+                    class="input-field {% if form.errors contains 'email' %}error{% endif %}">
+
+                <input
+                    id="contact-name"
+                    type="text"
+                    value="{{ form.name }}"
+                    name="contact[name]"
+                    placeholder="Name"
+                    class="input-field"> 
+
+                <input
+                    id="contact-name"
+                    type="hidden"
+                    value="{{ product.title }}"
+                    name="contact[course]"
+                    class="input-field">
+
+                  <input class="contact-form-submit" type="submit" value="{{ 'contact.form.submit' | t }}">
+              {% endif %}
+            {% endform %}
+          {%- endcomment -%}
+        </div>
+
+        {% if section.settings.form_content_txt != blank %}
+        <div class="product-daily-camp-form__content-wrap">
+          {% if section.settings.icon != blank %}
+            <div class="product-daily-camp-form__content-icon">
+              <img src="{{ section.settings.icon |  img_url: '82x' }}" 
+              srcset="{{ section.settings.icon | img_url: '82x' }} 1x, {{ section.settings.icon | img_url: '164x', scale: 2 }} 2x"
+              alt="">
+            </div>
+          {% endif %}
+          <div class="product-daily-camp-form__content">
+            {% if section.settings.form_content_title != blank %}
+              <h4>
+                {{ section.settings.form_content_title }}
+              </h4>
+            {% endif %}
+            <div>
+              {{ section.settings.form_content_txt }}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{ 
+  "name": "Daily camp overview",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_this_section",
+      "label": "Show daily camp overview",
+      "default": true 
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Daily camp overview"
+    },
+    {
+      "type": "richtext",
+      "id": "form_text",
+      "label": "Form text",
+      "default": "<p>To download a weekly timetable please enter your name and email address below:</p>"
+    },
+    {
+      "id": "icon",
+      "type": "image_picker",
+      "label": "Form content icon"
+    },
+    {
+      "type": "text",
+      "id": "form_content_title",
+      "label": "Form content heading",
+      "default": "Friday fun!"
+    },
+    {
+      "type": "richtext",
+      "id": "form_content_txt",
+      "label": "Form content content",
+      "default": "<p>Meet the teacher on Friday and connect with the teacher and live updates via Class Dojo.</p>"
+    } 
+  ]
+}
+{% endschema %}

@@ -1,0 +1,285 @@
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="static-header"
+  data-section-data>
+  {
+    "settings": {{ section.settings | json }},
+    "currency": {
+      "enable": {{ settings.enable_currency_converter | default: false }},
+      "shopCurrency": {{ shop.currency | json }},
+      "defaultCurrency": {{ settings.currency_converter_default | default: shop.currency | json }},
+      "displayFormat": {{ settings.currency_display_format | json }},
+      "moneyFormat": {{ shop[settings.currency_display_format] | default: shop.money_format | strip_html | json }},
+      "moneyFormatNoCurrency": {{ shop.money_format | strip_html | json }},
+      "moneyFormatCurrency": {{ shop.money_with_currency_format | strip_html | json }}
+    }
+  }
+</script>
+
+<div class="site-actions-wrap">
+   {% comment %}
+    Site Actions (Currency selector, account link, cart, and search)
+  {% endcomment %}
+  <div class="site-actions">
+    {% if section.settings.phone != blank %}
+      <a href="tel:{{ section.settings.phone | replace: ' ', '' }}" class="site-actions-phone">
+        <span>{{ section.settings.phone }}</span>
+        {% include 'icon', id: 'phone' %}
+      </a>
+    {% endif %}
+
+    {% if section.settings.email != blank %}
+      <a href="mailto:{{ section.settings.email }}" class="site-actions-email">
+        <span>{{ section.settings.email }}</span>
+        {% include 'icon', id: 'email' %}
+      </a>
+    {% endif %}
+
+    {% if settings.enable_currency_converter %}
+      <div class="site-actions-currency">
+        <select
+          class="site-actions-currency-select"
+          name="currencies"
+          data-currency-converter>
+          {% capture supported_currencies %}USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK{% endcapture %}
+          {% assign store_currencies = settings.currency_converter_currencies | split: ' ' %}
+          <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+          {% for code in store_currencies %}
+            {% if code != shop.currency and supported_currencies contains code %}
+              <option value="{{ code }}">{{ code }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+
+    {% if shop.customer_accounts_enabled %}
+      <div class="site-actions-account">
+        {% if customer %}
+          <a href="/account">{{ 'header.account.title' | t }}</a>
+        {% else %}
+          {{ 'header.account.login' | t | customer_login_link }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="site-actions-cart">
+      <a href="/cart" aria-label="{{ 'cart.view_cart' | t }}">
+        {% include 'icon', id: 'bag' %}
+        <span class="site-actions-cart-label" data-cart-item-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+
+    <div class="site-actions-search">
+      <a href="/search" aria-label="{{ 'search.form.title' | t }}">{% include 'icon', id: 'search' %}</a>
+    </div>
+  </div>
+</div>
+
+<div class="site-header-wrapper">
+  <div class="mobilenav-toggle">
+    {% include 'icon', id: 'mobilenav-toggle' %}
+    <a class="mobilenav-toggle-link" href="#site-mobilenav" data-mobilenav-toggle></a>
+  </div>
+
+  {% comment %}
+    Site Logo
+  {% endcomment %}
+  <a class="site-logo" href="/">
+    <h1 class="site-logo-header">
+      {% if section.settings.logo or section.settings.mobile_logo %}
+        {% assign desktop_logo = section.settings.logo | default: section.settings.mobile_logo %}
+        {% capture desktop_logo_size %}x{{ section.settings.logo_width | default: 160 | times: 2 }}{% endcapture %}
+        <img
+          class="site-logo-image"
+          alt="{{ shop.name | escape }}"
+          {% if section.settings.logo_width != blank %}
+            style="max-width: {{ section.settings.logo_width }}px"
+          {% endif %}
+          src="{{ desktop_logo | img_url: desktop_logo_size }}">
+
+        {% assign mobile_logo = section.settings.mobile_logo | default: section.settings.logo %}
+        {% capture mobile_logo_size %}x{{ section.settings.mobile_logo_width | default: 80 | times: 2 }}{% endcapture %}
+        <img
+          class="site-logo-image-mobile"
+          alt="{{ shop.name | escape }}"
+          {% if section.settings.mobile_logo_width != blank %}
+            style="max-width: {{ section.settings.mobile_logo_width }}px"
+          {% endif %}
+          src="{{ mobile_logo | img_url: mobile_logo_size }}">
+      {% else %}
+        <div class="site-logo-text">{{ shop.name }}</div>
+      {% endif %}
+    </h1>
+  </a>
+
+  {% comment %}
+    Desktop Navigation
+  {% endcomment %}
+  <nav class="site-navigation">
+    {% include 'navmenu',
+      menu: section.settings.menu,
+      depth: 1,
+      max_depth: 3
+    %}
+
+    <div class="site-navigation-overlay"></div>
+  </nav>
+
+  {% comment %}
+    Site Actions (Currency selector, account link, cart, and search)
+  {% endcomment %}
+  <div class="site-actions-mobile">
+    {% if settings.enable_currency_converter %}
+      <div class="site-actions-currency">
+        <select
+          class="site-actions-currency-select"
+          name="currencies"
+          data-currency-converter>
+          {% capture supported_currencies %}USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK{% endcapture %}
+          {% assign store_currencies = settings.currency_converter_currencies | split: ' ' %}
+          <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+          {% for code in store_currencies %}
+            {% if code != shop.currency and supported_currencies contains code %}
+              <option value="{{ code }}">{{ code }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+
+    {% if shop.customer_accounts_enabled %}
+      <div class="site-actions-account">
+        {% if customer %}
+          <a href="/account">{{ 'header.account.title' | t }}</a>
+        {% else %}
+          {{ 'header.account.login' | t | customer_login_link }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="site-actions-cart">
+      <a href="/cart" aria-label="{{ 'cart.view_cart' | t }}">
+        {% include 'icon', id: 'bag' %}
+        <span class="site-actions-cart-label" data-cart-item-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% comment %}
+  Mobile Navigation
+{% endcomment %}
+<div id="site-mobilenav" class="mobilenav">
+  <div class="mobilenav-panel" data-mobilenav-animator>
+    <div class="mobilenav-panel-content">
+      <form class="mobilenav-search" action="/search">
+        <div class="mobilenav-search-icon">{% include 'icon', id: 'search' %}</div>
+
+        <input
+          class="mobilenav-search-input"
+          aria-label="{{ 'search.form.title' | t }}"
+          type="text"
+          placeholder="{{ 'search.form.placeholder' | t }}"
+          name="q"
+          value="{{ search.terms | escape }}">
+
+        <a class="mobilenav-search-cancel">{{ 'search.form.cancel' | t }}</a>
+      </form>
+
+      <div class="mobilenav-meganav" data-meganav-mobile-target></div>
+
+      <nav class="mobilenav-navigation">
+        {% include 'navmenu',
+          menu: section.settings.menu,
+          depth: 1,
+          max_depth: 3
+        %}
+        <ul class="navmenu">
+          <li class="navmenu-item">
+            <a class="navmenu-link navmenu-link-phone" href="tel:{{ section.settings.phone | replace: ' ', '' }}">{% include 'icon', id: 'phone' %} {{ section.settings.phone }}</a>
+          </li>
+          <li class="navmenu-item">
+            <a class="navmenu-link navmenu-link-email" href="mailto:{{ section.settings.email }}">{% include 'icon', id: 'email' %} {{ section.settings.email }}</a>
+          </li>
+        </ul>
+      </nav>
+
+      
+    </div>
+
+    <div class="mobilenav-contactbar" data-contactbar-mobile-target></div>
+  </div>
+
+  <div
+    class="mobilenav-overlay"
+    data-mobilenav-animator
+    aria-label="{{ 'general.form.close' | t}}">
+    {% include 'icon', id: 'close' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "site-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "id": "logo",
+      "type": "image_picker",
+      "label": "Logo image",
+      "info": "400 x 200px .png recommended"
+    },
+    {
+      "id": "logo_width",
+      "type": "text",
+      "label": "Custom logo width (in pixels)"
+    },
+    {
+      "id": "mobile_logo",
+      "type": "image_picker",
+      "label": "Mobile logo image",
+      "info": "An optional logo to display on mobile. 400 x 200px .png recommended."
+    },
+    {
+      "id": "mobile_logo_width",
+      "type": "text",
+      "label": "Custom mobile logo width (in pixels)"
+    },
+    {
+      "type": "header",
+      "content": "Phone"
+    },
+    {
+      "id": "phone",
+      "type": "text",
+      "label": "Phone"
+    },
+    {
+      "type": "header",
+      "content": "Email"
+    },
+    {
+      "id": "email",
+      "type": "text",
+      "label": "Email"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "id": "menu",
+      "type": "link_list",
+      "label": "Main menu",
+      "default": "main-menu"
+    }
+  ]
+}
+
+{% endschema %}

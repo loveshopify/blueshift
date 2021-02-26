@@ -1,0 +1,28 @@
+{% schema %}
+{
+    "name": "Page Studio page",
+    "settings": [
+      {
+        "type": "page",
+        "id": "pagestudio_page",
+        "label": "Page"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Page Studio page",
+        "category": "Page Studio"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+{%- assign page = pages[section.settings.pagestudio_page] -%}
+
+<link href="//d2gkxpfclqno3n.cloudfront.net/pagestudio/blocks.css?v=2&shop={{ shop.permanent_domain }}" rel="stylesheet" type="text/css"/><script src="//d2gkxpfclqno3n.cloudfront.net/pagestudio/assets/shared/js/pagestudio.dist.js"></script><div class="studioengine">{{ page.content }}</div>

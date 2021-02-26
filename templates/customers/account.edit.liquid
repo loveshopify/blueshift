@@ -1,0 +1,24 @@
+<div class="page-content template-account-register">
+    <h1 class="template-account-register-title">Edit Your Account</h1>
+    <form id="account-form" action="//ca.secomapp.com/api/account" method="post">
+        <input type="hidden" name="id" value="{{customer.id}}">
+        <input type="hidden" name="shop" value="blue-shift-education.myshopify.com">
+
+                    <div class="input-wrapper ca-attr ca-account ca-hide">
+                <label class="ca-label ca-input-label ca-text-label ca-code-first_name input-label " for="first_name">First Name</label>
+
+<input class="ca-value ca-input ca-text ca-code-first_name input-field "  type="text" name="first_name" id="first_name" value="{{customer.first_name}}" placeholder="First Name"/>
+
+            </div>
+                    <div class="input-wrapper ca-attr ca-account ca-hide">
+                <label class="ca-label ca-input-label ca-text-label ca-code-last_name input-label " for="last_name">Last Name</label>
+
+<input class="ca-value ca-input ca-text ca-code-last_name input-field "  type="text" name="last_name" id="last_name" value="{{customer.last_name}}" placeholder="Last Name"/>
+
+            </div>
+                <div class="input-wrapper">
+            <input class="button" type="submit" value="Update">
+            <p><a href="/account" class="cancel">Back to Account</a></p>
+        </div>
+    </form>
+</div>

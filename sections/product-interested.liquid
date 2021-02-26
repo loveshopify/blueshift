@@ -1,0 +1,71 @@
+{% if section.settings.show_this_section %}
+  {% assign current_product = product %}
+  {% assign current_product_age = product.metafields.accentuate.ages | handle %}
+
+  {% for c in current_product.collections %}
+    {% if c.title != 'Home page' and c.all_products_count > 2 or c.title != 'All' %}
+      {% assign collection = c %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if collection %}
+    {% assign count = 0 %}
+    <div class="product__interested">
+      <div class="product__interested-inner">
+        <h2 class="product__interested-title">You may also be interested in:</h2>
+        <ul class="product__interested-list">
+          {% for p in collection.products %}
+            {% assign product_age = p.metafields.accentuate.ages | handle %}
+            {% if product_age contains current_product_age and count < 4 %}
+              {% if p.handle != current_product.handle and p.metafields.accentuate.town contains current_product.metafields.accentuate.town or current_product.metafields.accentuate.town contains p.metafields.accentuate.town %}
+                {% assign count = count | plus: 1 %}
+                <li class="product__interested-item">
+                  <a href="{{ p.url }}" class="product__interested-icon courses__item-icon"> 
+                    {% assign product_icon = p.metafields.accentuate.product_icon %}
+                    {% if product_icon %}
+                        <img src="{{ product_icon }}">
+                    {% endif %}
+                  </a>
+                  <div class="product__interested-content">
+                    <div class="product__interested-content-wrap">
+                      <h3 class="product__interested-content-title">{{ p.title }}, <span class="product__interested-content-age">{{ 'product.age' | t }} {{ p.metafields.accentuate.ages }}</span></h3>
+                      <div class="product__interested-content-desc">{{ p.metafields.accentuate.tagline | truncate: 80 }}</div>
+                    </div>
+                    <div class="product__interested-content-btn-wrap">
+                      <a href="{{ p.url }}" class="btn product__interested-content-link">{{ 'product.read_more_v1' | t }}</a>
+                    </div>
+                  </div>
+                </li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% if section.settings.url != blank %} 
+          <div class="product__interested-view-more-wrap">
+            <a href="{{ section.settings.url }}" class="btn">{{ 'product.view_all_courses' | t }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product interested",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_this_section",
+      "label": "Show product interested",
+      "default": true 
+    },
+    {
+      "type": "url",
+      "id": "url",  
+      "label": "Link"
+    }
+  ]
+}
+{% endschema %}

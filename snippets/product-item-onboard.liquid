@@ -1,0 +1,40 @@
+{%- comment -%}
+  A shared product item component
+
+  @param product
+
+  @param product_style
+    What styling should the product image be given
+{%- endcomment -%}
+
+{%- assign product_style = product_style | default: 'natural' -%}
+{%- assign on_sale = false -%}
+
+{%- capture price -%}
+  <span class="money" data-variant-price>
+    {{ 0 | money }}
+  </span>
+{%- endcapture -%}
+
+<article class="
+  product-item
+  product-item-style-{{ product_style }}
+  {% unless product.featured_image %}product-item-no-image{% endunless %}"
+  data-product-item>
+  <a href="{{ product.url }}">
+    <figure class="product-item-image" data-product-item-image>
+        {%- capture index -%}
+            {%- cycle '1', '2', '3', '4', '5', '6' -%}
+        {%- endcapture -%}
+        {{ 'product-' | append: index | placeholder_svg_tag }}
+    </figure>
+  </a>
+
+  <h1 class="product-item-title">
+    <a href="">{{ 'product.onboard.title' | t}}</a>
+  </h1>
+
+  <div class="product-price product-item-price">
+    {{ price }}
+  </div>
+</article>

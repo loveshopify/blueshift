@@ -1,0 +1,196 @@
+<script
+  type="application/json"
+  data-section-type="static-collection"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "shop_url": {{ shop.url | replace_first: 'http:' | json }},
+    "collection_handle": {{ collection.handle | json }},
+    "sort_by": {{ collection.sort_by | default: collection.default_sort_by | json }},
+    "text": {
+      "refine": {{ 'collection.refine.button_title' | t | json }},
+      "apply": {{ 'general.form.apply' | t | json }},
+      "cancel": {{ 'general.form.cancel' | t | json }}
+    }
+  }
+</script>
+
+{%- assign paginate_by = section.settings.products-per-page -%}
+
+{%- paginate collection.products by paginate_by -%}
+  <div
+    class="collection-grid
+      collection-grid-uninit
+      product-item-style-{{ section.settings.product_item_style }}"
+    data-collection-grid>
+    <header
+      class="
+        collection-header
+        {% unless collection.image %}collection-header-no-image{% endunless %}
+      "
+      data-collection-header>
+      {%- if collection.image -%}
+        <figure class="collection-image">
+          <img
+            alt="{{ collection.image.alt | escape }}"
+            {% include 'img-src', img: collection.image, size: '600x' %}
+          >
+        </figure>
+      {%- endif -%}
+      <div class="collection-header-info">
+        <h1 class="collection-title">{{ collection.title }}</h1>
+        {%- if collection.description -%}
+          <div class="collection-header-description">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+    </header>
+
+    {%- if collection.products.size == 0 -%}
+      <p class="collection-empty">
+        {%- if collection.all_products_count == 0 -%}
+          {{ 'collection.empty' | t }}
+        {%- else -%}
+          {{ 'collection.tags_empty' | t }}
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    {%- for product in collection.products  -%}
+  {% if product.object_type == 'product' and product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+      {%- assign index_based_on_page = paginate.current_offset | plus: forloop.index -%}
+
+      <div
+        class="collection-grid-item"
+        data-collection-grid-item>
+        {%-
+          include 'product-item',
+          product_style: section.settings.product_item_style,
+          product_cropped: section.settings.product_item_crop,
+          use_quickshop: section.settings.enable_product_quickshop,
+          show_vendors: section.settings.show_product_vendors
+        -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- assign block_index = block.settings.index | times: 1 -%}
+        {%- if block.settings.collection == blank or block.settings.collection == collection.handle -%}
+          {%- if block_index == index_based_on_page -%}
+            {%- assign advertisement = block -%}
+            <div class="collection-grid-item collection-grid-item-advertisement" {{ block.shopify_attributes }} data-collection-grid-item>
+              <p class="collection-grid-item-advertisement-text">{{ advertisement.settings.text | escape }}</p>
+              <a class="collection-grid-item-advertisement-link" href="{{ advertisement.settings.link }}">
+                <span class="collection-grid-item-advertisement-link-text">{{ advertisement.settings.link_text | escape }}</span>
+                <span class="collection-grid-item-advertisement-link-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+
+    {%- unless paginate.next -%}
+      {%- for block in section.blocks -%}
+        {%- assign block_index = block.settings.index | times: 1 -%}
+        {%- if block.settings.collection == collection.handle and block_index > index_based_on_page -%}
+          {%- assign advertisement = block -%}
+          <div class="collection-grid-item collection-grid-item-advertisement" {{ block.shopify_attributes }} data-collection-grid-item>
+            <p class="collection-grid-item-advertisement-text">{{ advertisement.settings.text }}</p>
+            <a class="collection-grid-item-advertisement-link" href="{{ advertisement.settings.link }}">
+              <span class="collection-grid-item-advertisement-link-text">{{ advertisement.settings.link_text | escape }}</span>
+              <span class="collection-grid-item-advertisement-link-arrow">{%- include 'icon', id: 'arrow' -%}</span>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endunless -%}
+  </div>
+
+  {%- include 'pagination' -%}
+{%- endpaginate -%}
+
+{%- include 'collection-menu' -%}
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "class": "section-collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products-per-page",
+      "label": "Products per page",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "id": "product_item_style",
+      "type": "select",
+      "label": "Product aspect ratio",
+      "info": "Using an uncropped setting will generate white space around the image to create a uniform grid without cropping your image. The background in the editor indicates the applied white space, but will not appear on your storefront.",
+      "options": [
+        { "group": "Uncropped", "value": "natural", "label": "Natural" },
+        { "group": "Uncropped", "value": "small", "label": "Short (4:3)" },
+        { "group": "Uncropped", "value": "medium", "label": "Square (1:1)" },
+        { "group": "Uncropped", "value": "large", "label": "Tall (2:3)" },
+        { "group": "Cropped", "value": "cropped-small", "label": "Short (4:3)" },
+        { "group": "Cropped", "value": "cropped-medium", "label": "Square (1:1)" },
+        { "group": "Cropped", "value": "cropped-large", "label": "Tall (2:3)" }
+      ],
+      "default": "natural"
+    },
+    {
+      "id": "enable_product_quickshop",
+      "type": "checkbox",
+      "label": "Enable product quickshop",
+      "default": false
+    },
+    {
+      "id": "show_product_vendors",
+      "type": "checkbox",
+      "label": "Show product vendors",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ad",
+      "name": "Promotion",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection",
+          "info": "Unless specified, promotion will appear on all collection pages"
+        },
+        {
+          "id": "index",
+          "type": "text",
+          "label": "Display after X products",
+          "default": "10"
+        },
+        {
+          "id": "text",
+          "type": "textarea",
+          "label": "Text",
+          "default": "Promotion text"
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "label": "Link"
+        },
+        {
+          "id": "link_text",
+          "type": "text",
+          "label": "Link text",
+          "default": "More info here"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

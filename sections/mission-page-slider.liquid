@@ -1,0 +1,128 @@
+{% if section.blocks.size > 0 %}
+<div class="main-slider-block">
+  <div class="new-main-slider">
+    {% for block in section.blocks %}
+    <div class="new-slider">
+      {% if block.settings.image != blank %}
+      <div class="slider-image {% if block.settings.layout == 'left' %}slide-block-right{% endif %}"><img alt="" src="{{block.settings.image | img_url: '1280x'}}"></div>
+      {% endif %}
+      <div class="slider-info {% if block.settings.layout == 'left' %}slide-block-left{% endif %}">
+        {% if block.settings.title != blank %}
+        <h2 class="slider-title" {% if block.settings.text_color != blank %}style="color: {{ block.settings.text_color }};"{% endif %}>{{block.settings.title}}</h2>
+        {% endif %}
+        {% if block.settings.text != blank %}
+        <div class="slider-text" {% if block.settings.text_color != blank %}style="color: {{ block.settings.text_color }};"{% endif %}>{{block.settings.text}}</div>
+        {% endif %}
+        {% if block.settings.link_text != blank and block.settings.link != blank %}
+        <a class="slider-link" href="{{block.settings.link}}">
+          <span class="slider-link-text">{{block.settings.link_text}}</span>
+          <span class="slider-link-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10">
+            <path fill="currentColor" fill-rule="evenodd" d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535"></path>
+            </svg></span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+<!--     <div class="new-slider">
+      <div class="slider-image slide-block-right"><img alt="" src="//cdn.shopify.com/s/files/1/2521/2146/files/boy_MINIS_22-min_1280x.jpeg?v=1524497638"></div>
+      <div class="slider-info slide-block-left">
+        <h2 class="slider-title">Our Mission</h2>
+        <div class="slider-text"><p>Our aim is to enable and encourage children aged 5 to 14 to be digital creators and support their parents and teachers. We want to inspire all children, whether they're naturally inclined to learn to code or not, about the things they can make and do with code.</p></div>
+        <a class="slider-link" href="">
+          <span class="slider-link-text">Slide link</span>
+          <span class="slider-link-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10">
+            <path fill="currentColor" fill-rule="evenodd" d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535"></path>
+            </svg></span>
+        </a></div>
+    </div>
+    <div class="new-slider">
+      <div class="slider-image" ><img alt="" src="//cdn.shopify.com/s/files/1/2521/2146/files/girl_happy_laptop_5-min_1280x.jpeg"></div>
+      <div class="slider-info">
+        <h2 class="slider-title">Our Mission</h2>
+        <div class="slider-text"><p>Our aim is to enable and encourage children aged 5 to 14 to be digital creators and support their parents and teachers. We want to inspire all children, whether they're naturally inclined to learn to code or not, about the things they can make and do with code.</p></div>
+        <a class="slider-link" href="">
+          <span class="slider-link-text">Slide link</span>
+          <span class="slider-link-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10">
+            <path fill="currentColor" fill-rule="evenodd" d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535"></path>
+            </svg></span>
+        </a></div>
+    </div> -->
+  </div>
+  <button class="pp" type="button" aria-label="previous"><svg viewBox="0 0 100 100" style="visibility: visible;"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+  <button class="nn" type="button" aria-label="next"><svg viewBox="0 0 100 100" style="visibility: visible;"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+</div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "New Slider",
+    "settings": [],
+	"blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+        {
+          "id": "layout",
+          "type": "select",
+          "label": "Text layout",
+          "info": "Only affects desktop devices and tablets in landscape mode",
+          "options": [
+            {              
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "info": "Only affects desktop devices and tablets in landscape mode",
+          "default": "#292929"
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": "Heading",
+          "default": "Slide"
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": "Text",
+          "default": "<p>Introduce customers to your shop with lifestyle imagery and product photography.</p>"
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "label": "Link"
+        },
+        {
+          "id": "link_text",
+          "type": "text",
+          "label": "Link text",
+          "default": "Slide link"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

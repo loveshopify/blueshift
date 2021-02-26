@@ -1,0 +1,208 @@
+<style>
+  .textblock-section-{{section.id}}  .main-block-gd.columngd-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+  .textblock-section-{{section.id}}  .columngd-4 .block-gd:hover {
+    opacity: 0.7;
+  }
+  .textblock-section-{{section.id}} a {
+    text-decoration: none;  
+  }
+  .textblock-section-{{section.id}}  h3.b-heading a {
+    color: #000;
+    text-transform: lowercase;
+    letter-spacing: 0.7px;
+    text-decoration: none;
+    margin: 0;
+  }
+  .textblock-section-{{section.id}}  h3.b-heading {
+    font-size: 24px;
+    line-height: 35px;
+    color: #1A3856;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0 0 5px;
+  }
+  .textblock-section-{{section.id}} .b-content {
+    font-weight: 700;
+  
+    strong {
+      display: inline-block;
+      font-size: 23px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+  }
+  .textblock-section-{{section.id}}  .inner-block-gd {
+    padding: 10px 10px 20px 20px;
+  }
+  .textblock-section-{{section.id}} .main-block-gd.columngd-4 p {
+    margin: 0px;
+    white-space: pre-wrap;
+  }
+  @media only screen and (max-width:959px){
+    .textblock-section-{{section.id}}  .main-block-gd.columngd-4 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+    .textblock-section-{{section.id}} h3.b-heading {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .textblock-section-{{section.id}} .b-content strong {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+
+</style>
+<section data-section-id="{{section.id}}" class="textblock-section-{{section.id}}">
+  <div class="main-block-gd columngd-{{ section.blocks.size }}">
+    {% for block in section.blocks %}
+      {% if block.settings.titlegd != blank %}
+
+        <div class="textblock-{{ block.id }} block-gd {% if forloop.first %}first-gd{% endif %} {% if forloop.last %}last-gd{% endif %}">
+<a href="{% if block.settings.link%}{{block.settings.link}}{% else%}javascript:void(){% endif %}">
+          <div class="inner-block-gd" >
+            <div class="text-content">
+              <h3 class="b-heading">{{ block.settings.titlegd | strip_html }}</h3>
+              {% if block.settings.sub_titlegd != blank %}
+                <div class="b-content">{{ block.settings.sub_titlegd }}</div>
+              {% endif %}
+            </div>
+          </div>
+          </a>
+        </div>
+
+      {% endif %}
+      <style>
+      .textblock-{{ block.id }} {
+          color:{{ block.settings.color }};
+          background:{{block.settings.background}};
+      }
+
+      .textblock-{{ block.id }} a {
+        color:{{ block.settings.color }};
+        text-align: left;
+      }
+
+      .textblock-{{ block.id }}:hover {
+        background:{{block.settings.hover_background}};
+      }
+
+      .textblock-{{ block.id }} .b-content {
+        font-size: {{ block.settings.font_size }}px;
+        line-height: {{ block.settings.line_height }}px;
+      }
+
+      @media only screen and (max-width:959px){
+        .textblock-{{ block.id }} .b-content {
+          font-size: 16px;
+          line-height: 18px;
+        }
+      }
+      </style>
+    {% endfor %}
+  </div>
+
+</section>
+{% schema %}
+{
+   "name":"Text block",
+   "class":"section-text-block",
+   "settings":[
+      {
+         "id":"section-title",
+         "type":"text",
+         "label":"Section titile"
+      }
+   ],
+   "blocks":[
+      {
+         "type":"text",
+         "name":"Text",
+         "settings":[
+            {
+               "id":"titlegd",
+               "label":"Title",
+               "type":"richtext"
+            },
+            {
+              "id":"sub_titlegd",
+              "label":"Sub title",
+              "type":"richtext"
+            },
+            {
+               "id":"background",
+               "label":"Background",
+               "type":"color"
+            },
+            {
+               "id":"hover_background",
+               "label":"Hover Background",
+               "type":"color"
+            },
+            {
+               "id":"color",
+               "label":"Font color",
+               "type":"color"
+            },
+            {
+              "type": "select",
+              "id": "font_size",
+              "label": "Font size",
+              "options": [
+                {
+                  "value": "16",
+                  "label": "16"
+                },
+                {
+                  "value": "24",
+                  "label": "24"
+                }
+              ],
+              "default": "24",
+              "info": "24"
+            },
+             {
+              "type": "select",
+              "id": "line_height",
+              "label": "Font size",
+              "options": [
+                {
+                  "value": "18",
+                  "label": "18"
+                },
+                {
+                  "value": "30",
+                  "label": "30"
+                }
+              ],
+              "default": "30",
+              "info": "30"
+            },
+            {
+               "id":"link",
+               "label":"link",
+               "type":"url"
+            }
+         ]
+      }
+   ],
+   "max_blocks":4,
+   "presets":[
+      {
+         "category":"Other",
+         "name":"Text block"
+      }
+   ]
+}
+
+{% endschema %}

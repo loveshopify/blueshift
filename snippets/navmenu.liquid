@@ -1,0 +1,37 @@
+{% comment %}
+  @param menu LinkedList
+         The menu handle to look up.
+
+  @param depth Number
+         The starting depth to use for the class names.
+
+  @param max_depth Number
+         The maximum depth to traverse.
+
+  @param is_submenu Bool
+         Add submenu classes
+{% endcomment %}
+
+<ul class="navmenu navmenu-depth-{{ depth }} {% if is_submenu %}navmenu-submenu{% endif %}">
+  {% assign is_submenu = false %}
+
+  {% for link in linklists[menu].links %}
+    {% assign d = depth | plus: 1 %}
+
+    {% if d > max_depth or linklists[link.handle] == blank %}
+      <li class="navmenu-item navmenu-id-{{ link.handle }}">
+        <a class="navmenu-link" href="{{ link.url }}">{{ link.title }}</a>
+      </li>
+    {% else %}
+      <li class="navmenu-item navmenu-item-parent navmenu-id-{{ link.handle }}" data-nav-trigger>
+        <a class="navmenu-link navmenu-link-parent" href="{{ link.url }}">{{ link.title }}</a>
+        {% include 'navmenu',
+          menu: link.handle,
+          depth: d,
+          max_depth: max_depth,
+          is_submenu: true
+        %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

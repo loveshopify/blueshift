@@ -1,0 +1,123 @@
+<style>
+  .block-data {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .inline-block-gd {
+    display: inline-block;
+    vertical-align: top;
+    width:33%;
+  }
+
+  .inline-block-gd p {
+  padding: 0px 40px;
+  }
+
+  .block-data .inline-block-gd img {
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+  section.image-gd-section-{{section.id}} {
+    text-align: center;
+  }
+  .block-data h4 {
+    margin-top: 5px;
+  }
+  .block-data h3 {
+    margin-bottom: 0px;
+  }
+  section.image-gd-section-{{section.id}} h2.section-title {
+    text-transform: capitalize;
+    color: #042855;
+        font-size: 24px;
+  }
+  @media only screen and (max-width:767px){
+    .inline-block-gd {
+      width:50%;
+    }
+  }
+    @media only screen and (max-width:480px){
+    .inline-block-gd {
+      width:100%;
+    }
+  }
+</style>
+
+{% if section.blocks.size > 0 %}
+<section data-section-id="{{section.id}}" class="image-gd-section-{{section.id}}">
+  <h2 class="section-title">{{ section.settings.title | escape }}</h2>
+  <div class="block-data">
+    {% for block in section.blocks %}
+    <div class="inline-block-gd">
+      <img src="{{ block.settings.image | img_url:'x240' }}">
+      <h3>{{ block.settings.title }}</h3>
+      <h4>{{ block.settings.subtitle }}</h4>
+      <p>{{ block.settings.content }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% schema %}
+{
+"name": "Images with text",
+"settings": [
+{
+"id":"title",
+"label":"Section title",
+"type":"text",
+"default":"In the office"
+}
+],
+"blocks": [
+{
+"type": "image",
+"name": "Images",
+"settings": [
+{
+"id": "image",
+"type": "image_picker",
+"label": "Image"
+},
+{
+"id": "title",
+"type": "text",
+"label": "Title"
+},
+{
+"id": "subtitle",
+"type": "text",
+"label": "Sub-Title"
+},
+{
+"id": "content",
+"type": "html",
+"label": "Content"
+}
+]
+}
+],
+"presets": [
+{
+"category": "Image",
+"name": "Images with text"
+}
+]
+}
+{% endschema %}

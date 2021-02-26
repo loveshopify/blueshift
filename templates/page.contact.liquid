@@ -1,0 +1,93 @@
+<article class="page">
+  {% include 'masthead',
+    title: page.title,
+    subtitle: page_subtitle
+  %}
+
+  {% unless page.content == blank %}
+    <div class="page-content rte">
+      {{ page.content }}
+    </div>
+  {% endunless %}
+
+  <div class="page-contact">
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <p class="success-message">
+          {{ 'contact.form.success' | t  }}
+        </p>
+      {% else %}
+
+        {% if form.errors %}
+          {{ form.errors | default_errors }}
+        {% endif %}
+
+        <div class="input-wrapper">
+          <label for="contact-name">{{ 'contact.form.name' | t }}</label>
+          <input
+            id="contact-name"
+            type="text"
+            value="{{ form.name }}"
+            name="contact[name]"
+            class="input-field {% if form.errors contains 'name' %}error{% endif %}">
+        </div>
+
+        <div class="input-wrapper">
+          <label for="contact-email">{{ 'contact.form.email' | t }}</label>
+          <input
+            id="contact-email"
+            type="text"
+            value="{{ form.email }}"
+            name="contact[email]"
+            class="input-field {% if form.errors contains 'email' %}error{% endif %}">
+        </div>
+
+        <div class="input-wrapper">
+          <label for="contact-phone">{{ 'contact.form.phone' | t }}</label>
+          <input
+            id="contact-phone"
+            type="tel"
+            value="{{ form.phone }}"
+            name="contact[phone]"
+            class="input-field {% if form.errors contains 'phone' %}error{% endif %}">
+        </div>
+
+        <div class="input-wrapper">
+          <label for="contact-school">{{ 'contact.form.school' | t }}</label>
+          <input
+            id="contact-school"
+            type="text"
+            value="{{ form.school }}"
+            name="contact[school]"
+            class="input-field {% if form.errors contains 'school' %}error{% endif %}">
+        </div>
+
+        <div class="select-wrapper">
+          <label for="contact-interest">{{ 'contact.form.interest' | t }}</label>
+          <select id="contact-interest"
+                  name="contact[interest]"
+                  class="input-field {% if form.errors contains 'interest' %}error{% endif %}">
+            <option>Workshop</option>
+            <option>Club</option>
+            <option>Camp</option>
+            <option>Private tuition</option>
+            <option>Other</option>
+          </select>
+        </div>
+     
+        <div class="input-wrapper">
+          <label for="contact-message">{{ 'contact.form.message' | t }}</label>
+          <textarea
+            id="contact-message"
+            name="contact[comments]"
+            class="input-field {% if form.errors contains 'comments' %}error{% endif %}"
+          >{{ form.comments }}</textarea>
+        </div>
+
+        <input class="contact-form-submit" type="submit" value="{{ 'contact.form.submit' | t }}">
+      {% endif %}
+    {% endform %}
+
+    <div class="page-contact-contactbar" data-contactbar-page-target></div>
+  </div>
+</article>

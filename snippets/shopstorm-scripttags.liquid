@@ -1,0 +1,8 @@
+{%- comment -%} version: 1 {%- endcomment -%}
+{%- comment -%} PLEASE DO NOT MODIFY THIS FILE, DOING SO MAY BREAK YOUR SHOPSTORM APPS {%- endcomment -%}
+
+{%- for key_value in shop.metafields.shopstorm -%}
+  {%- if key_value.first contains 'script_' -%}
+    <script async src="{{ key_value.last }}"></script>
+  {%- endif -%}
+{%- endfor -%}

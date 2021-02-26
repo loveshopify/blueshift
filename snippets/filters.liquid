@@ -1,0 +1,79 @@
+
+{% comment %}
+<div class="filter-filters">
+  <div class="clearfix filter">
+    {% for block in section.blocks %}
+     <select class="coll-filter">
+       {% assign tags = block.settings.tag_list | split: ',' %}
+        <option value="">{{ block.settings.title }}</option>
+        {% assign counter = 0 %}
+        {% assign countergd = 0 %}
+        {% for t in tags %}
+        {% assign tag = t | strip %}
+        {% assign tag_value = tag | handleize %}
+        {% if current_tags contains tag %}
+        {% assign countergd = countergd | plus:1 %}
+         <option value="{{ tag_value }}" selected>{{ tag }}</option>
+        {% else %}
+        {% if collection.tags contains tag %}
+        <option value="{{ tag_value }}">
+          {{ tag }}
+       </option>
+        {% assign counter = counter | plus:1 %}
+        {% assign countergd = countergd | plus:1 %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+     </select>
+    {% endfor %}
+  </div>
+</div>
+{% endcomment %}
+
+<style>
+.collection-header-no-image .collection-header-info {
+  width: 100% !important;
+}
+.option-values {
+  width: 15%;
+  display: inline-block; 
+}
+
+@media screen and (max-width: 500px) {
+  .option-values {
+    width: 45%;
+  }
+}
+</style>
+
+<div style="margin: 20px 0px;">
+{% for block in section.blocks %}
+<div class="option-values">
+ <div class="option-select">
+   <select class="option-select-input tagged">
+     {% assign tags = block.settings.tag_list | split: ',' %}
+      <option value="">{{ block.settings.title }}</option>
+      {% assign counter = 0 %}
+      {% assign countergd = 0 %}
+      {% for t in tags %}
+      {% assign tag = t | strip %}
+      {% assign tag_value = tag | handleize %}
+      {% if current_tags contains tag %}
+      {% assign countergd = countergd | plus:1 %}
+       <option value="{{ tag_value }}" selected>{{ tag }}</option>
+      {% else %}
+      {% if collection.tags contains tag %}
+      <option value="{{ tag_value }}">
+        {{ tag }}
+     </option>
+      {% assign counter = counter | plus:1 %}
+      {% assign countergd = countergd | plus:1 %}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+   </select> <span class="option-select-arrow"><svg height="10" style="visibility: visible;" viewbox="0 0 6 10" width="6" xmlns="http://www.w3.org/2000/svg">
+   <path d="M5.138 5.344l.004-.54L.005 9.457.567 10l5.138-4.652L6 5.08l-.29-.27L.57 0 0 .535" fill="currentColor" fill-rule="evenodd"></path></svg></span>
+ </div>
+</div>
+{% endfor %}
+</div>

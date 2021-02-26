@@ -1,0 +1,45 @@
+<script
+  type="application/json"
+  data-section-type="static-blog"
+  data-section-id="{{ section.id }}">
+</script>
+
+<h1 class="page-title">
+  {{ blog.title }}
+</h1>
+<p class="blog-rss-feed">
+  {%- assign rss_url = blog.url | append: '.atom' -%}
+  {%- include 'social-link', id: 'rss', title: 'RSS', url: rss_url  -%}
+  <a href="{{ rss_url }}" target="_blank">{{ 'blog.rss_feed' | t }}</a>
+</p>
+
+{%- paginate blog.articles by section.settings.posts-per-page -%}
+  <div class="article-excerpts" data-article-excerpts>
+    <div class="article-excerpt-masonry-item-sizer" data-article-excerpt-masonry-item-sizer></div>
+    <div class="article-excerpt-masonry-gutter-sizer" data-article-excerpt-masonry-gutter-sizer></div>
+    {%- for article in blog.articles -%}
+      {%- include 'article-excerpt', article: article -%}
+    {%- endfor -%}
+  </div>
+
+  {%- include 'pagination' -%}
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog pages",
+  "class": "section-blog",
+  "settings": [
+    {
+      "type": "range",
+      "id": "posts-per-page",
+      "label": "Posts per page",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "default": 4
+    }
+  ]
+}
+
+{% endschema %}

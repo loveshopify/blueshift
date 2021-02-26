@@ -1,0 +1,44 @@
+<div id="popup1" class="modal-box">
+  <header>
+    <h3>Please fill out these details</h3>
+    <a href="#" class="btn btn-small js-modal-close">X</a>
+  </header>
+  <div class="modal-body">
+    <div class="step_1">
+    {% if template == 'product' %}
+      {% include 'custom-product-form' %}
+    {% elsif template.suffix == 'popup2' %}
+      {% include 'custom-product-form2' %}
+    {% elsif template.suffix == 'popup3' %}
+      {% include 'custom-product-form3' %}
+    {% endif %}
+    </div>
+    <div class="step_2">
+      {% include 'custom-upsell-form' %}
+    </div>
+  </div>
+  <footer>
+    <div class="foo_1">
+      <h3 class="error_msg">* All fields are required.</h3>
+      {% if product.metafields.accentuate.noupsell %}
+      <span class="next_span">
+        <a href="#addtocart" id="addtocart">Add to cart</a>
+        <img class="loader_gif" src="{{'loader.gif' | asset_url}}" width="50">
+      </span>
+      {% else %}
+      <span class="next_span">
+        <a href="#next" id="next">Next &raquo;</a>
+      </span>
+      {% endif %}
+    </div>
+    <div class="foo_2">
+      <span class="back_span">
+        <a href="#back" id="back">&laquo; Back</a>
+      </span>
+      <span class="addtocart_span">
+        <a href="#addtocart" id="addtocart">Add to cart</a>
+        <img class="loader_gif" src="{{'loader.gif' | asset_url}}" width="50">
+      </span>
+    </div>
+  </footer>
+</div>
